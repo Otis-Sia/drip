@@ -3,7 +3,7 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import { useCart } from '@/lib/cartContext';
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 
 const products: Record<string, {
   id: string;
@@ -198,29 +198,41 @@ function ProductContent() {
   const id = searchParams.get('id') ?? '';
   const product = products[id];
   const { addItem } = useCart();
+  const [added, setAdded] = useState(false);
+
+  const handleAdd = () => {
+    addItem({ id: product.id, name: product.name, category: product.category, description: product.description });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
 
   if (!product) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center pt-20">
         <div className="text-center">
+          <div className="text-5xl mb-4">🔍</div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Product not found</h2>
-          <Link href="/shop" className="text-blue-700 hover:underline">Back to Shop</Link>
+          <Link href="/shop" className="text-cyan-600 hover:text-cyan-500 font-semibold">Back to Shop</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Breadcrumb */}
-      <div className="bg-white border-b border-gray-200">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3">
-          <div className="flex items-center gap-2 text-sm text-gray-500">
-            <Link href="/shop" className="hover:text-blue-700">Shop</Link>
-            <span>/</span>
-            <Link href="/shop/products" className="hover:text-blue-700">Products</Link>
-            <span>/</span>
-            <span className="text-gray-900 font-medium">{product.name}</span>
+      <div className="bg-white border-b border-gray-100 pt-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+          <div className="flex items-center gap-2 text-sm text-gray-400 font-medium">
+            <Link href="/shop" className="hover:text-cyan-600 transition-colors">Shop</Link>
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            <Link href="/shop/products" className="hover:text-cyan-600 transition-colors">Products</Link>
+            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+            <span className="text-gray-900">{product.name}</span>
           </div>
         </div>
       </div>
@@ -228,58 +240,64 @@ function ProductContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid lg:grid-cols-3 gap-12">
           {/* Product Info */}
-          <div className="lg:col-span-2 space-y-8">
-            <div>
-              <div className="bg-blue-100 text-blue-700 text-xs font-medium px-3 py-1 rounded-full mb-4 inline-block">{product.category}</div>
-              <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-4">{product.name}</h1>
-              <p className="text-gray-600 text-lg leading-relaxed">{product.longDescription}</p>
+          <div className="lg:col-span-2 space-y-10">
+            <div className="animate-fadeInUp">
+              <div className="badge mb-4">{product.category}</div>
+              <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 tracking-tight">{product.name}</h1>
+              <p className="text-gray-500 text-lg leading-relaxed">{product.longDescription}</p>
             </div>
 
             {/* Specs */}
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Technical Specifications</h2>
-              <div className="bg-white rounded-xl border border-gray-200 overflow-hidden">
+            <div className="animate-fadeInUp delay-100">
+              <h2 className="text-xl font-bold text-gray-900 mb-5">Technical Specifications</h2>
+              <div className="card overflow-hidden !rounded-2xl">
                 {product.specs.map((spec, i) => (
-                  <div key={spec.label} className={`flex items-center px-6 py-3 ${i % 2 === 0 ? 'bg-gray-50' : 'bg-white'}`}>
-                    <span className="w-1/2 text-sm font-medium text-gray-700">{spec.label}</span>
-                    <span className="w-1/2 text-sm text-gray-600">{spec.value}</span>
+                  <div key={spec.label} className={`flex items-center px-6 py-4 ${i % 2 === 0 ? 'bg-[#f8fafc]' : 'bg-white'}`}>
+                    <span className="w-1/2 text-sm font-semibold text-gray-700">{spec.label}</span>
+                    <span className="w-1/2 text-sm text-gray-500">{spec.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Use Cases */}
-            <div>
-              <h2 className="text-xl font-bold text-gray-900 mb-4">Ideal For</h2>
-              <ul className="space-y-2">
-                {product.useCases.map(useCase => (
-                  <li key={useCase} className="flex items-start gap-3">
-                    <span className="text-cyan-600 mt-0.5">✓</span>
-                    <span className="text-gray-700">{useCase}</span>
-                  </li>
+            <div className="animate-fadeInUp delay-200">
+              <h2 className="text-xl font-bold text-gray-900 mb-5">Ideal For</h2>
+              <div className="grid sm:grid-cols-2 gap-3">
+                {product.useCases.map((useCase) => (
+                  <div key={useCase} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
+                    <span className="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                    <span className="text-gray-600 text-sm">{useCase}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
             </div>
           </div>
 
           {/* CTA Sidebar */}
           <div className="lg:col-span-1">
-            <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 sticky top-20">
+            <div className="card p-7 sticky top-24 !rounded-2xl animate-slideRight">
               <h3 className="font-bold text-gray-900 text-lg mb-2">Interested in this product?</h3>
-              <p className="text-gray-600 text-sm mb-6">Add it to your quote cart and our team will prepare a customized proposal for your organization.</p>
+              <p className="text-gray-500 text-sm mb-7 leading-relaxed">Add it to your quote cart and our team will prepare a customized proposal for your organization.</p>
               <button
-                onClick={() => addItem({ id: product.id, name: product.name, category: product.category, description: product.description })}
-                className="w-full bg-blue-800 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors mb-3"
+                onClick={handleAdd}
+                id="product-add-to-cart"
+                className={`w-full font-semibold px-6 py-3.5 rounded-xl transition-all duration-300 mb-3 ${
+                  added
+                    ? 'bg-emerald-500 text-white'
+                    : 'btn-primary !w-full !rounded-xl'
+                }`}
               >
-                Add to Quote Cart
+                {added ? '✓ Added to Quote Cart' : 'Add to Quote Cart'}
               </button>
-              <Link href="/contact" className="block text-center border border-blue-700 text-blue-700 hover:bg-blue-50 font-medium px-6 py-3 rounded-lg transition-colors text-sm">
+              <Link href="/contact" className="block text-center border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm">
                 Contact Us Directly
               </Link>
-              <div className="mt-6 pt-6 border-t border-gray-100">
-                <div className="flex flex-wrap gap-1">
-                  {product.tags.map(tag => (
-                    <span key={tag} className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+              <div className="mt-7 pt-7 border-t border-gray-100">
+                <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-3">Tags</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="badge-tag">{tag}</span>
                   ))}
                 </div>
               </div>
@@ -293,7 +311,11 @@ function ProductContent() {
 
 export default function ProductDescriptionPage() {
   return (
-    <Suspense fallback={<div className="min-h-screen flex items-center justify-center"><p className="text-gray-500">Loading...</p></div>}>
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="animate-pulse text-gray-400 font-medium">Loading product...</div>
+      </div>
+    }>
       <ProductContent />
     </Suspense>
   );

@@ -38,10 +38,14 @@ export default function CheckoutPage() {
 
   if (items.length === 0 && !submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
-          <Link href="/shop" className="text-blue-700 hover:underline">Browse products</Link>
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center pt-20">
+        <div className="text-center animate-fadeIn">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-4xl mx-auto mb-6">
+            📋
+          </div>
+          <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
+          <p className="text-gray-500 mb-6">Add products before requesting a quote.</p>
+          <Link href="/shop" className="btn-secondary">Browse products</Link>
         </div>
       </div>
     );
@@ -49,16 +53,20 @@ export default function CheckoutPage() {
 
   if (submitted) {
     return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-        <div className="max-w-md w-full text-center bg-white rounded-2xl p-10 shadow-sm border border-gray-200">
-          <div className="text-6xl mb-6">✅</div>
+      <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 pt-20">
+        <div className="max-w-md w-full text-center card p-12 !rounded-3xl animate-scaleIn">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-500 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-emerald-500/20">
+            ✓
+          </div>
           <h2 className="text-3xl font-black text-gray-900 mb-3">Quote Request Submitted!</h2>
-          <p className="text-gray-600 mb-8">Thank you, {form.name}. Our team will review your request and send a detailed proposal to <strong>{form.email}</strong> within 1 business day.</p>
+          <p className="text-gray-500 mb-8 leading-relaxed">
+            Thank you, <strong>{form.name}</strong>. Our team will review your request and send a detailed proposal to <strong>{form.email}</strong> within 1 business day.
+          </p>
           <div className="space-y-3">
-            <Link href="/" className="block bg-blue-800 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+            <Link href="/" className="btn-secondary block" id="checkout-back-home">
               Back to Home
             </Link>
-            <Link href="/shop" className="block border border-blue-700 text-blue-700 hover:bg-blue-50 font-medium px-6 py-3 rounded-lg transition-colors">
+            <Link href="/shop" className="btn-outline-dark block" id="checkout-browse-more">
               Browse More Products
             </Link>
           </div>
@@ -68,13 +76,13 @@ export default function CheckoutPage() {
   }
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-900 to-indigo-700 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-2">Request for Quotation</div>
-          <h1 className="text-3xl md:text-4xl font-black mb-2">Complete Your Quote Request</h1>
-          <p className="text-blue-100">Fill in your details and we&apos;ll prepare a customized proposal for you.</p>
+      <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Request for Quotation</div>
+          <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Complete Your Quote Request</h1>
+          <p className="text-blue-100/70 font-light">Fill in your details and we&apos;ll prepare a customized proposal for you.</p>
         </div>
       </div>
 
@@ -82,63 +90,78 @@ export default function CheckoutPage() {
         <div className="grid lg:grid-cols-5 gap-10">
           {/* Form */}
           <div className="lg:col-span-3">
-            <div className="bg-white rounded-2xl p-8 border border-gray-200 shadow-sm">
-              <h2 className="text-xl font-bold text-gray-900 mb-6">Contact Information</h2>
+            <div className="card p-8 !rounded-2xl animate-fadeInUp">
+              <h2 className="text-xl font-bold text-gray-900 mb-7">Contact Information</h2>
               <form onSubmit={handleSubmit} className="space-y-5">
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Full Name <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Full Name <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="text"
                     value={form.name}
-                    onChange={e => setForm({ ...form, name: e.target.value })}
-                    className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.name ? 'border-red-400' : 'border-gray-300'}`}
+                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    className={`input-field ${errors.name ? 'error' : ''}`}
                     placeholder="Juan dela Cruz"
+                    id="checkout-name"
                   />
-                  {errors.name && <p className="text-red-500 text-xs mt-1">{errors.name}</p>}
+                  {errors.name && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.name}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Email Address <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Email Address <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="email"
                     value={form.email}
-                    onChange={e => setForm({ ...form, email: e.target.value })}
-                    className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.email ? 'border-red-400' : 'border-gray-300'}`}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    className={`input-field ${errors.email ? 'error' : ''}`}
                     placeholder="juan@company.com"
+                    id="checkout-email"
                   />
-                  {errors.email && <p className="text-red-500 text-xs mt-1">{errors.email}</p>}
+                  {errors.email && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.email}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Phone Number <span className="text-red-500">*</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Phone Number <span className="text-red-500">*</span>
+                  </label>
                   <input
                     type="tel"
                     value={form.phone}
-                    onChange={e => setForm({ ...form, phone: e.target.value })}
-                    className={`w-full border rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.phone ? 'border-red-400' : 'border-gray-300'}`}
+                    onChange={(e) => setForm({ ...form, phone: e.target.value })}
+                    className={`input-field ${errors.phone ? 'error' : ''}`}
                     placeholder="+63 912 345 6789"
+                    id="checkout-phone"
                   />
-                  {errors.phone && <p className="text-red-500 text-xs mt-1">{errors.phone}</p>}
+                  {errors.phone && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.phone}</p>}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Company / Organization <span className="text-gray-400 text-xs font-normal">(optional)</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Company / Organization <span className="text-gray-400 text-xs font-normal">(optional)</span>
+                  </label>
                   <input
                     type="text"
                     value={form.company}
-                    onChange={e => setForm({ ...form, company: e.target.value })}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onChange={(e) => setForm({ ...form, company: e.target.value })}
+                    className="input-field"
                     placeholder="Your Company, Inc."
+                    id="checkout-company"
                   />
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">Additional Message <span className="text-gray-400 text-xs font-normal">(optional)</span></label>
+                  <label className="block text-sm font-semibold text-gray-700 mb-2">
+                    Message / Requirements <span className="text-gray-400 text-xs font-normal">(optional)</span>
+                  </label>
                   <textarea
                     value={form.message}
-                    onChange={e => setForm({ ...form, message: e.target.value })}
+                    onChange={(e) => setForm({ ...form, message: e.target.value })}
                     rows={4}
-                    className="w-full border border-gray-300 rounded-lg px-4 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 resize-none"
+                    className="input-field resize-none"
                     placeholder="Describe your specific requirements, timeline, or any questions..."
+                    id="checkout-message"
                   />
                 </div>
-                <button type="submit" className="w-full bg-blue-800 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+                <button type="submit" className="btn-primary w-full !py-3.5 !rounded-xl text-base" id="checkout-submit">
                   Submit Quote Request
                 </button>
               </form>
@@ -147,32 +170,39 @@ export default function CheckoutPage() {
 
           {/* Order Summary */}
           <div className="lg:col-span-2">
-            <div className="bg-white rounded-2xl p-6 border border-gray-200 shadow-sm sticky top-20">
-              <h3 className="font-bold text-gray-900 mb-4">Quote Summary</h3>
-              <div className="space-y-3 mb-4">
-                {items.map(item => (
-                  <div key={item.id} className="flex gap-2">
+            <div className="card p-7 sticky top-24 !rounded-2xl animate-slideRight">
+              <h3 className="font-bold text-gray-900 text-lg mb-5">Quote Summary</h3>
+              <div className="space-y-4 mb-5">
+                {items.map((item) => (
+                  <div key={item.id} className="flex gap-3">
                     <div className="flex-1">
-                      <p className="text-sm font-medium text-gray-900">{item.name}</p>
-                      <p className="text-xs text-gray-500">{item.category}</p>
+                      <p className="text-sm font-semibold text-gray-900">{item.name}</p>
+                      <p className="text-xs text-gray-400 mt-0.5">{item.category}</p>
                     </div>
-                    <span className="text-sm text-gray-600">× {item.quantity}</span>
+                    <span className="text-sm text-gray-500 font-medium">× {item.quantity}</span>
                   </div>
                 ))}
               </div>
-              <div className="border-t border-gray-100 pt-4">
-                <div className="flex justify-between font-semibold">
+              <div className="border-t border-gray-100 pt-5">
+                <div className="flex justify-between font-bold">
                   <span className="text-gray-700">Total Items</span>
-                  <span className="text-blue-800">{itemCount}</span>
+                  <span className="text-cyan-600 text-lg">{itemCount}</span>
                 </div>
               </div>
-              <div className="mt-4 bg-blue-50 rounded-xl p-4">
-                <p className="text-blue-800 text-xs font-medium mb-1">What happens next?</p>
-                <ul className="text-blue-700 text-xs space-y-1">
-                  <li>✓ We review your request</li>
-                  <li>✓ Prepare a customized proposal</li>
-                  <li>✓ Send to your email within 24 hours</li>
-                  <li>✓ Schedule a consultation call</li>
+              <div className="mt-6 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-5">
+                <p className="text-[#1e3a5f] text-xs font-bold mb-2 uppercase tracking-wider">What happens next?</p>
+                <ul className="space-y-2">
+                  {[
+                    'We review your request',
+                    'Prepare a customized proposal',
+                    'Send to your email within 24 hours',
+                    'Schedule a consultation call',
+                  ].map((step) => (
+                    <li key={step} className="text-cyan-700/80 text-xs flex items-start gap-2 font-medium">
+                      <span className="w-4 h-4 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-[9px] font-bold flex-shrink-0 mt-0.5">✓</span>
+                      {step}
+                    </li>
+                  ))}
                 </ul>
               </div>
             </div>

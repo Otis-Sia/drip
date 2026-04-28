@@ -7,50 +7,74 @@ export default function CartPage() {
   const { items, removeItem, updateQuantity, clearCart, itemCount } = useCart();
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-900 to-indigo-700 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-2">Quote Cart</div>
-          <h1 className="text-3xl md:text-4xl font-black mb-2">Your Quote Request</h1>
-          <p className="text-blue-100">{itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your quote cart is empty'}</p>
+      <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Quote Cart</div>
+          <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Quote Request</h1>
+          <p className="text-blue-100/70 font-light">
+            {itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your quote cart is empty'}
+          </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {items.length === 0 ? (
-          <div className="text-center py-16">
-            <div className="text-6xl mb-6">📋</div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Your quote cart is empty</h2>
-            <p className="text-gray-600 mb-8">Browse our products and add items to request a quote.</p>
-            <Link href="/shop" className="bg-blue-800 hover:bg-blue-700 text-white font-semibold px-8 py-3 rounded-lg transition-colors inline-block">
+          <div className="text-center py-20 animate-fadeIn">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-4xl mx-auto mb-6">
+              📋
+            </div>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Your quote cart is empty</h2>
+            <p className="text-gray-500 mb-8">Browse our products and add items to request a quote.</p>
+            <Link href="/shop" className="btn-secondary" id="cart-browse-link">
               Browse Products
+              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
             </Link>
           </div>
         ) : (
-          <div className="grid lg:grid-cols-3 gap-8">
+          <div className="grid lg:grid-cols-3 gap-10">
             {/* Cart Items */}
             <div className="lg:col-span-2 space-y-4">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-6">
                 <h2 className="text-xl font-bold text-gray-900">Items for Quote</h2>
-                <button onClick={clearCart} className="text-red-500 hover:text-red-700 text-sm font-medium">
+                <button onClick={clearCart} className="text-red-500 hover:text-red-600 text-sm font-semibold transition-colors" id="cart-clear-all">
                   Clear All
                 </button>
               </div>
-              {items.map(item => (
-                <div key={item.id} className="bg-white rounded-xl p-6 border border-gray-200 flex flex-col sm:flex-row gap-4">
+              {items.map((item) => (
+                <div key={item.id} className="card !rounded-2xl p-6 flex flex-col sm:flex-row gap-5 animate-fadeIn">
                   <div className="flex-1">
-                    <div className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-0.5 rounded-full inline-block mb-2">{item.category}</div>
+                    <div className="badge mb-2">{item.category}</div>
                     <h3 className="font-bold text-gray-900 mb-1">{item.name}</h3>
-                    <p className="text-gray-600 text-sm">{item.description}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
                   </div>
-                  <div className="flex items-center gap-4">
-                    <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden">
-                      <button onClick={() => updateQuantity(item.id, item.quantity - 1)} className="px-3 py-1.5 text-gray-600 hover:bg-gray-100 font-medium">−</button>
-                      <span className="px-4 py-1.5 text-gray-900 font-medium min-w-[2.5rem] text-center">{item.quantity}</span>
-                      <button onClick={() => updateQuantity(item.id, item.quantity + 1)} className="px-3 py-1.5 text-gray-600 hover:bg-gray-100 font-medium">+</button>
+                  <div className="flex items-center gap-4 flex-shrink-0">
+                    <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-white">
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        className="px-3.5 py-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors"
+                      >
+                        −
+                      </button>
+                      <span className="px-4 py-2 text-gray-900 font-semibold min-w-[2.5rem] text-center text-sm border-x border-gray-200">
+                        {item.quantity}
+                      </span>
+                      <button
+                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        className="px-3.5 py-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors"
+                      >
+                        +
+                      </button>
                     </div>
-                    <button onClick={() => removeItem(item.id)} className="text-red-400 hover:text-red-600 text-sm">Remove</button>
+                    <button
+                      onClick={() => removeItem(item.id)}
+                      className="text-red-400 hover:text-red-500 text-sm font-medium transition-colors"
+                    >
+                      Remove
+                    </button>
                   </div>
                 </div>
               ))}
@@ -58,30 +82,30 @@ export default function CartPage() {
 
             {/* Summary */}
             <div className="lg:col-span-1">
-              <div className="bg-white rounded-2xl p-6 shadow-sm border border-gray-200 sticky top-20">
-                <h3 className="font-bold text-gray-900 text-lg mb-4">Quote Summary</h3>
+              <div className="card p-7 sticky top-24 !rounded-2xl">
+                <h3 className="font-bold text-gray-900 text-lg mb-5">Quote Summary</h3>
                 <div className="space-y-3 mb-6">
-                  {items.map(item => (
+                  {items.map((item) => (
                     <div key={item.id} className="flex justify-between text-sm">
-                      <span className="text-gray-700 flex-1">{item.name}</span>
-                      <span className="text-gray-500 ml-2">× {item.quantity}</span>
+                      <span className="text-gray-600 flex-1 font-medium">{item.name}</span>
+                      <span className="text-gray-400 ml-2">× {item.quantity}</span>
                     </div>
                   ))}
                 </div>
-                <div className="border-t border-gray-100 pt-4 mb-6">
-                  <div className="flex justify-between font-semibold">
+                <div className="border-t border-gray-100 pt-5 mb-6">
+                  <div className="flex justify-between font-bold">
                     <span className="text-gray-900">Total Items</span>
-                    <span className="text-blue-800">{itemCount}</span>
+                    <span className="text-cyan-600 text-lg">{itemCount}</span>
                   </div>
                 </div>
-                <Link href="/shop/checkout" className="block bg-blue-800 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors text-center mb-3">
+                <Link href="/shop/checkout" className="btn-primary block text-center mb-3 !rounded-xl !py-3.5" id="cart-proceed-checkout">
                   Proceed to Request Quote
                 </Link>
-                <Link href="/shop" className="block text-center text-blue-700 hover:text-blue-600 text-sm font-medium">
+                <Link href="/shop" className="block text-center text-cyan-600 hover:text-cyan-500 text-sm font-semibold transition-colors">
                   ← Continue Browsing
                 </Link>
-                <div className="mt-6 pt-4 border-t border-gray-100">
-                  <p className="text-gray-500 text-xs text-center">Our team will review your request and provide a detailed proposal within 1 business day.</p>
+                <div className="mt-7 pt-5 border-t border-gray-100">
+                  <p className="text-gray-400 text-xs text-center leading-relaxed">Our team will review your request and provide a detailed proposal within 1 business day.</p>
                 </div>
               </div>
             </div>

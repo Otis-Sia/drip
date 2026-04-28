@@ -21,6 +21,8 @@ const services = [
       'Security operations center (SOC) training',
     ],
     outcomes: 'Organizations typically see a 70% reduction in successful phishing attempts within 6 months of our training programs.',
+    gradient: 'from-cyan-500/10 to-blue-500/10',
+    iconBg: 'from-cyan-50 to-blue-50',
   },
   {
     icon: '💡',
@@ -36,6 +38,8 @@ const services = [
       'Custom LMS content development',
     ],
     outcomes: 'Our clients report a 45% improvement in employee productivity and a measurable reduction in IT support tickets after program completion.',
+    gradient: 'from-amber-500/10 to-orange-500/10',
+    iconBg: 'from-amber-50 to-orange-50',
   },
   {
     icon: '🖥️',
@@ -51,6 +55,8 @@ const services = [
       'IT governance and policy development',
     ],
     outcomes: 'Clients achieve an average 30% reduction in IT-related security incidents within 12 months of implementing our recommended architecture.',
+    gradient: 'from-indigo-500/10 to-purple-500/10',
+    iconBg: 'from-indigo-50 to-purple-50',
   },
   {
     icon: '🗄️',
@@ -66,6 +72,8 @@ const services = [
       'Database security audits',
     ],
     outcomes: 'Our data management implementations have helped clients achieve full regulatory compliance and recover from ransomware attacks with zero data loss.',
+    gradient: 'from-emerald-500/10 to-teal-500/10',
+    iconBg: 'from-emerald-50 to-teal-50',
   },
 ];
 
@@ -73,48 +81,63 @@ export default function ServicesPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-900 to-indigo-700 text-white py-16 md:py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-3">Our Services</div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6">Comprehensive Digital Security Solutions</h1>
-          <p className="text-blue-100 max-w-3xl mx-auto text-lg leading-relaxed">
+      <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-24 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">Our Services</div>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Comprehensive Digital Security Solutions</h1>
+          <p className="text-blue-100/80 max-w-3xl mx-auto text-lg leading-relaxed font-light animate-fadeInUp delay-100">
             From training your people to securing your systems, DRIP delivers end-to-end digital security services tailored to your organization&apos;s unique needs.
           </p>
         </div>
       </section>
 
       {/* Services */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-16">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 space-y-20">
         {services.map((service, index) => (
-          <section key={service.title} className={`grid md:grid-cols-2 gap-12 items-start ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}>
+          <section
+            key={service.title}
+            id={`service-${service.title.toLowerCase().replace(/\s+/g, '-')}`}
+            className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-start ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}
+          >
             <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-              <div className="text-5xl mb-4">{service.icon}</div>
-              <div className="text-cyan-600 font-semibold text-sm uppercase tracking-wide mb-2">{service.tagline}</div>
-              <h2 className="text-3xl font-bold text-gray-900 mb-4">{service.title}</h2>
-              <div className="bg-red-50 border-l-4 border-red-400 p-4 rounded-r-lg mb-6">
-                <p className="text-gray-700 text-sm font-medium">The Challenge</p>
-                <p className="text-gray-600 text-sm mt-1">{service.problem}</p>
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center text-4xl mb-5`}>
+                {service.icon}
               </div>
-              <p className="text-gray-600 leading-relaxed mb-6">{service.approach}</p>
-              <div className="bg-green-50 border border-green-200 rounded-xl p-4">
-                <p className="text-green-800 font-semibold text-sm mb-1">✓ Proven Results</p>
-                <p className="text-green-700 text-sm">{service.outcomes}</p>
+              <div className="section-label">{service.tagline}</div>
+              <h2 className="text-3xl font-bold text-gray-900 mb-5">{service.title}</h2>
+
+              {/* Problem */}
+              <div className="bg-red-50/80 border-l-4 border-red-400/80 p-5 rounded-r-xl mb-6">
+                <p className="text-red-800/80 text-sm font-semibold mb-1">The Challenge</p>
+                <p className="text-gray-600 text-sm leading-relaxed">{service.problem}</p>
+              </div>
+
+              <p className="text-gray-500 leading-relaxed mb-6">{service.approach}</p>
+
+              {/* Outcomes */}
+              <div className="bg-emerald-50/80 border border-emerald-200/50 rounded-2xl p-5">
+                <p className="text-emerald-700 font-semibold text-sm mb-1 flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs">✓</span>
+                  Proven Results
+                </p>
+                <p className="text-emerald-600/80 text-sm leading-relaxed">{service.outcomes}</p>
               </div>
             </div>
+
             <div className={index % 2 === 1 ? 'md:col-start-1 md:row-start-1' : ''}>
-              <div className="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-2xl p-8">
-                <h3 className="font-bold text-gray-900 mb-4">What&apos;s Included</h3>
-                <ul className="space-y-3">
-                  {service.features.map(feature => (
+              <div className={`bg-gradient-to-br ${service.gradient} rounded-3xl p-8 border border-gray-100/50`}>
+                <h3 className="font-bold text-gray-900 mb-5 text-lg">What&apos;s Included</h3>
+                <ul className="space-y-3.5">
+                  {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <span className="text-cyan-600 mt-0.5 font-bold">✓</span>
-                      <span className="text-gray-700 text-sm">{feature}</span>
+                      <span className="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
                     </li>
                   ))}
                 </ul>
                 <div className="mt-8">
-                  <Link href="/contact" className="bg-blue-800 hover:bg-blue-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors block text-center text-sm">
-                    Request a Consultation
+                  <Link href="/contact" className="btn-secondary block text-center" id={`service-cta-${index}`}>
+                    Request a Quote
                   </Link>
                 </div>
               </div>
@@ -124,15 +147,15 @@ export default function ServicesPage() {
       </div>
 
       {/* CTA */}
-      <section className="py-16 bg-gradient-to-r from-blue-900 to-indigo-700 text-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h2 className="text-3xl font-bold mb-4">Not Sure Where to Start?</h2>
-          <p className="text-blue-100 mb-8 max-w-xl mx-auto">Our experts will assess your current security posture and recommend the right combination of services for your needs.</p>
+      <section className="gradient-cta text-white py-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Not Sure Where to Start?</h2>
+          <p className="text-blue-200/70 mb-10 max-w-xl mx-auto text-lg font-light">Our experts will assess your current security posture and recommend the right combination of services for your needs.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-8 py-3 rounded-lg transition-colors">
+            <Link href="/contact" className="btn-primary !px-10 !py-3.5 text-base" id="services-cta-assessment">
               Schedule a Free Assessment
             </Link>
-            <Link href="/shop" className="border-2 border-white text-white hover:bg-white hover:text-blue-900 font-semibold px-8 py-3 rounded-lg transition-colors">
+            <Link href="/shop" className="btn-outline !px-10 !py-3.5 text-base" id="services-cta-products">
               Browse Products
             </Link>
           </div>

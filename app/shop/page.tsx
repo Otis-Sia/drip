@@ -13,6 +13,7 @@ const categories = [
     icon: '🖥️',
     description: 'Physical security devices and network protection hardware for your infrastructure.',
     count: 2,
+    gradient: 'from-cyan-50 to-blue-50',
   },
   {
     id: 'training',
@@ -20,6 +21,7 @@ const categories = [
     icon: '📚',
     description: 'Comprehensive cybersecurity and digital literacy training packages.',
     count: 2,
+    gradient: 'from-amber-50 to-orange-50',
   },
   {
     id: 'software',
@@ -27,6 +29,7 @@ const categories = [
     icon: '💻',
     description: 'Software licenses, monitoring tools, and managed security services.',
     count: 2,
+    gradient: 'from-indigo-50 to-purple-50',
   },
   {
     id: 'consulting',
@@ -34,6 +37,7 @@ const categories = [
     icon: '🎯',
     description: 'Expert consulting engagements for security assessments and compliance.',
     count: 2,
+    gradient: 'from-emerald-50 to-teal-50',
   },
 ];
 
@@ -100,33 +104,49 @@ export default function ShopPage() {
   return (
     <div>
       {/* Hero */}
-      <section className="bg-gradient-to-br from-blue-900 to-indigo-700 text-white py-16 md:py-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-3">Product Catalog</div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6">Security Solutions for Every Need</h1>
-          <p className="text-blue-100 max-w-2xl mx-auto text-lg mb-8">
+      <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-20 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
+          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">Product Catalog</div>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Security Solutions for Every Need</h1>
+          <p className="text-blue-100/80 max-w-2xl mx-auto text-lg mb-10 font-light animate-fadeInUp delay-100">
             Browse our curated catalog of cybersecurity products and solutions. All products are available via quote request.
           </p>
-          <Link href="/shop/products" className="bg-cyan-500 hover:bg-cyan-400 text-white font-semibold px-8 py-3 rounded-lg transition-colors inline-block">
+          <Link href="/shop/products" className="btn-primary !px-10 !py-3.5 text-base animate-fadeInUp delay-200" id="shop-browse-all">
             Browse All Products
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
           </Link>
         </div>
       </section>
 
       {/* Categories */}
-      <section className="py-16 bg-white">
+      <section className="py-20 bg-white mesh-gradient">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">Product Categories</h2>
-            <p className="text-gray-600">Explore our solutions by category</p>
+          <div className="text-center mb-14">
+            <div className="section-label">Categories</div>
+            <h2 className="section-title mx-auto">Product Categories</h2>
+            <p className="section-subtitle mx-auto">Explore our solutions by category</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {categories.map(cat => (
-              <Link key={cat.id} href={`/shop/products?category=${cat.id}`} className="bg-gray-50 rounded-xl p-6 hover:bg-blue-50 hover:border-blue-200 border border-transparent transition-all group">
-                <div className="text-4xl mb-4">{cat.icon}</div>
-                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-blue-800">{cat.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{cat.description}</p>
-                <span className="text-blue-700 text-sm font-medium">{cat.count} products →</span>
+            {categories.map((cat) => (
+              <Link
+                key={cat.id}
+                href={`/shop/products?category=${cat.id}`}
+                id={`shop-cat-${cat.id}`}
+                className="card p-7 group"
+              >
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                  {cat.icon}
+                </div>
+                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#1e3a5f] transition-colors">{cat.title}</h3>
+                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{cat.description}</p>
+                <span className="text-cyan-600 text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                  {cat.count} products
+                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </span>
               </Link>
             ))}
           </div>
@@ -134,29 +154,33 @@ export default function ShopPage() {
       </section>
 
       {/* All Products */}
-      <section className="py-16 bg-gray-50">
+      <section className="py-20 bg-[#f8fafc]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-10">
+          <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-12">
             <div>
-              <h2 className="text-3xl font-bold text-gray-900">All Products</h2>
-              <p className="text-gray-600 mt-1">{featuredProducts.length} products available</p>
+              <h2 className="section-title !mb-2">All Products</h2>
+              <p className="text-gray-500">{featuredProducts.length} products available</p>
             </div>
-            <Link href="/shop/products" className="border border-blue-700 text-blue-700 hover:bg-blue-700 hover:text-white font-medium px-4 py-2 rounded-lg text-sm transition-colors">
+            <Link href="/shop/products" className="btn-outline-dark !text-sm !py-2.5 !px-5" id="shop-view-filters">
               View with Filters
             </Link>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map(product => (
-              <div key={product.id} className="bg-white rounded-xl p-6 border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all flex flex-col">
-                <div className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full mb-4 inline-block w-fit">{product.category}</div>
+            {featuredProducts.map((product) => (
+              <div key={product.id} className="card p-6 flex flex-col">
+                <div className="badge mb-4 w-fit">{product.category}</div>
                 <h3 className="font-bold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-4 flex-1">{product.description}</p>
-                <div className="flex flex-wrap gap-1 mb-4">
-                  {product.tags.map(tag => (
-                    <span key={tag} className="bg-gray-100 text-gray-600 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                <p className="text-gray-500 text-sm mb-4 flex-1 leading-relaxed">{product.description}</p>
+                <div className="flex flex-wrap gap-1.5 mb-5">
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="badge-tag">{tag}</span>
                   ))}
                 </div>
-                <Link href={`/shop/product-description?id=${product.id}`} className="bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors text-center block">
+                <Link
+                  href={`/shop/product-description?id=${product.id}`}
+                  className="btn-secondary block text-center !text-sm !py-2.5"
+                  id={`shop-product-${product.id}`}
+                >
                   Request Quote
                 </Link>
               </div>
@@ -166,18 +190,20 @@ export default function ShopPage() {
       </section>
 
       {/* Quote Info */}
-      <section className="py-12 bg-white border-t border-gray-100">
+      <section className="py-16 bg-white border-t border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-3 gap-8 text-center">
+          <div className="grid md:grid-cols-3 gap-10 text-center">
             {[
               { icon: '📋', title: 'Request a Quote', desc: 'Add products to your quote cart and submit a request. Our team will respond within 24 hours.' },
               { icon: '🤝', title: 'Custom Solutions', desc: 'Need something specific? We tailor every solution to your exact requirements.' },
               { icon: '⚡', title: 'Fast Response', desc: 'Our sales team is available Mon–Fri 8am–6pm PHT to assist with your inquiries.' },
-            ].map(item => (
-              <div key={item.title} className="flex flex-col items-center">
-                <span className="text-4xl mb-3">{item.icon}</span>
+            ].map((item) => (
+              <div key={item.title} className="flex flex-col items-center group">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                  {item.icon}
+                </div>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-600 text-sm">{item.desc}</p>
+                <p className="text-gray-500 text-sm leading-relaxed max-w-xs">{item.desc}</p>
               </div>
             ))}
           </div>

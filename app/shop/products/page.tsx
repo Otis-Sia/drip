@@ -76,41 +76,59 @@ const categories = ['All', 'Hardware Solutions', 'Training & Education', 'Softwa
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
+  const [addedId, setAddedId] = useState<string | null>(null);
   const { addItem } = useCart();
 
-  const filtered = allProducts.filter(p => {
+  const handleAdd = (product: typeof allProducts[0]) => {
+    addItem({ id: product.id, name: product.name, category: product.category, description: product.description });
+    setAddedId(product.id);
+    setTimeout(() => setAddedId(null), 1500);
+  };
+
+  const filtered = allProducts.filter((p) => {
     const matchCat = selectedCategory === 'All' || p.category === selectedCategory;
     const matchSearch = !search || p.name.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-[#f8fafc]">
       {/* Header */}
-      <div className="bg-gradient-to-br from-blue-900 to-indigo-700 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-cyan-300 font-semibold text-sm uppercase tracking-wide mb-2">Product Catalog</div>
-          <h1 className="text-3xl md:text-4xl font-black mb-4">All Products</h1>
-          <p className="text-blue-100">Browse and request quotes for our cybersecurity solutions</p>
+      <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Product Catalog</div>
+          <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">All Products</h1>
+          <p className="text-blue-100/70 font-light">Browse and request quotes for our cybersecurity solutions</p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
         {/* Filters */}
         <div className="flex flex-col md:flex-row gap-4 mb-8">
-          <input
-            type="text"
-            placeholder="Search products..."
-            value={search}
-            onChange={e => setSearch(e.target.value)}
-            className="border border-gray-300 rounded-lg px-4 py-2 text-sm flex-1 focus:outline-none focus:ring-2 focus:ring-blue-500 bg-white"
-          />
+          <div className="relative flex-1">
+            <svg className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+              <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input
+              type="text"
+              placeholder="Search products..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              id="products-search-input"
+              className="input-field !pl-10"
+            />
+          </div>
           <div className="flex flex-wrap gap-2">
-            {categories.map(cat => (
+            {categories.map((cat) => (
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-full text-sm font-medium transition-colors ${selectedCategory === cat ? 'bg-blue-800 text-white' : 'bg-white text-gray-700 border border-gray-300 hover:border-blue-400'}`}
+                id={`filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
+                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
+                  selectedCategory === cat
+                    ? 'bg-[#1e3a5f] text-white shadow-md'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-cyan-300 hover:text-[#1e3a5f]'
+                }`}
               >
                 {cat}
               </button>
@@ -118,38 +136,48 @@ export default function ProductsPage() {
           </div>
         </div>
 
-        <p className="text-gray-600 text-sm mb-6">{filtered.length} product{filtered.length !== 1 ? 's' : ''} found</p>
+        <p className="text-gray-500 text-sm mb-8 font-medium">
+          {filtered.length} product{filtered.length !== 1 ? 's' : ''} found
+        </p>
 
         {/* Product Grid */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-          {filtered.map(product => (
-            <div key={product.id} className="bg-white rounded-xl border border-gray-200 hover:shadow-md hover:border-blue-300 transition-all flex flex-col overflow-hidden">
+          {filtered.map((product) => (
+            <div key={product.id} className="card flex flex-col overflow-hidden">
               <div className="p-6 flex-1">
-                <div className="bg-blue-100 text-blue-700 text-xs font-medium px-2 py-1 rounded-full mb-3 inline-block">{product.category}</div>
+                <div className="badge mb-3 w-fit">{product.category}</div>
                 <h3 className="font-bold text-gray-900 mb-2">{product.name}</h3>
-                <p className="text-gray-600 text-sm mb-4">{product.description}</p>
-                <ul className="space-y-1 mb-4">
-                  {product.features.map(f => (
-                    <li key={f} className="text-xs text-gray-600 flex items-start gap-1">
-                      <span className="text-cyan-600 mt-0.5">✓</span> {f}
+                <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.description}</p>
+                <ul className="space-y-2 mb-4">
+                  {product.features.map((f) => (
+                    <li key={f} className="text-xs text-gray-500 flex items-start gap-2">
+                      <span className="w-4 h-4 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">✓</span>
+                      {f}
                     </li>
                   ))}
                 </ul>
-                <div className="flex flex-wrap gap-1">
-                  {product.tags.map(tag => (
-                    <span key={tag} className="bg-gray-100 text-gray-500 text-xs px-2 py-0.5 rounded-full">{tag}</span>
+                <div className="flex flex-wrap gap-1.5">
+                  {product.tags.map((tag) => (
+                    <span key={tag} className="badge-tag">{tag}</span>
                   ))}
                 </div>
               </div>
               <div className="p-4 pt-0 space-y-2">
-                <Link href={`/shop/product-description?id=${product.id}`} className="block text-center border border-blue-700 text-blue-700 hover:bg-blue-50 text-sm font-medium px-4 py-2 rounded-lg transition-colors">
+                <Link
+                  href={`/shop/product-description?id=${product.id}`}
+                  className="block text-center border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
+                >
                   View Details
                 </Link>
                 <button
-                  onClick={() => addItem({ id: product.id, name: product.name, category: product.category, description: product.description })}
-                  className="w-full bg-blue-800 hover:bg-blue-700 text-white text-sm font-medium px-4 py-2 rounded-lg transition-colors"
+                  onClick={() => handleAdd(product)}
+                  className={`w-full text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300 ${
+                    addedId === product.id
+                      ? 'bg-emerald-500 text-white'
+                      : 'btn-secondary !w-full !text-sm'
+                  }`}
                 >
-                  Add to Quote
+                  {addedId === product.id ? '✓ Added to Cart' : 'Add to Quote'}
                 </button>
               </div>
             </div>
@@ -157,9 +185,13 @@ export default function ProductsPage() {
         </div>
 
         {filtered.length === 0 && (
-          <div className="text-center py-16">
-            <p className="text-gray-500 text-lg">No products found matching your criteria.</p>
-            <button onClick={() => { setSearch(''); setSelectedCategory('All'); }} className="mt-4 text-blue-700 font-medium hover:underline">
+          <div className="text-center py-20">
+            <div className="text-5xl mb-4">🔍</div>
+            <p className="text-gray-400 text-lg mb-2">No products found matching your criteria.</p>
+            <button
+              onClick={() => { setSearch(''); setSelectedCategory('All'); }}
+              className="text-cyan-600 font-semibold hover:text-cyan-500 transition-colors"
+            >
               Clear filters
             </button>
           </div>

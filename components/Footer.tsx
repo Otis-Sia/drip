@@ -2,65 +2,92 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer className="bg-blue-900 text-gray-200 mt-auto">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+    <footer id="main-footer" className="bg-[#0a1929] text-gray-300 mt-auto relative overflow-hidden">
+      {/* Decorative gradient */}
+      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-cyan-500/40 to-transparent" />
+      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-cyan-900/10 to-transparent pointer-events-none" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
           {/* Company Info */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="bg-cyan-500 text-white font-black text-xl px-3 py-1 rounded-md">DRIP</div>
+            <div className="flex items-center gap-3 mb-5">
+              <div className="bg-gradient-to-br from-cyan-500 to-cyan-600 text-white font-black text-xl px-3.5 py-1.5 rounded-lg shadow-lg shadow-cyan-500/20">
+                DRIP
+              </div>
             </div>
-            <p className="text-gray-400 text-sm leading-relaxed">
+            <p className="text-gray-500 text-sm leading-relaxed mb-6">
               Digital Resources &amp; Informatics Professionals. Empowering organizations with cutting-edge cybersecurity and digital solutions.
             </p>
+            <div className="flex gap-3">
+              {[
+                { name: 'LinkedIn', icon: 'in' },
+                { name: 'Facebook', icon: 'f' },
+                { name: 'X', icon: '𝕏' },
+              ].map((s) => (
+                <a
+                  key={s.name}
+                  href="#"
+                  title={s.name}
+                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-cyan-400 hover:bg-cyan-500/10 hover:border-cyan-500/30 transition-all duration-300 text-sm font-bold"
+                >
+                  {s.icon}
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2 text-sm">
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Quick Links</h3>
+            <ul className="space-y-3 text-sm">
               {[['/', 'Home'], ['/about', 'About'], ['/services', 'Services'], ['/shop', 'Shop'], ['/contact', 'Contact']].map(([href, label]) => (
-                <li key={href}><Link href={href} className="text-gray-400 hover:text-cyan-300 transition-colors">{label}</Link></li>
+                <li key={href}>
+                  <Link href={href} className="text-gray-500 hover:text-cyan-400 transition-colors duration-200 flex items-center gap-2">
+                    <span className="w-1 h-1 rounded-full bg-cyan-500/50" />
+                    {label}
+                  </Link>
+                </li>
               ))}
             </ul>
           </div>
 
           {/* Services */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Services</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Cybersecurity Training</li>
-              <li>Digital Literacy Programs</li>
-              <li>IT Consulting</li>
-              <li>Data Management</li>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Services</h3>
+            <ul className="space-y-3 text-sm">
+              {['Cybersecurity Training', 'Digital Literacy Programs', 'IT Consulting', 'Data Management'].map((s) => (
+                <li key={s} className="text-gray-500 flex items-center gap-2">
+                  <span className="w-1 h-1 rounded-full bg-cyan-500/50" />
+                  {s}
+                </li>
+              ))}
             </ul>
           </div>
 
           {/* Contact */}
           <div>
-            <h3 className="text-white font-semibold mb-4">Contact Us</h3>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li className="flex items-start gap-2">
-                <span className="text-cyan-400 mt-0.5">✉</span>
-                <span>info@dripph.com</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-cyan-400 mt-0.5">☎</span>
-                <span>+63 (2) 8123-4567</span>
-              </li>
-              <li className="flex items-start gap-2">
-                <span className="text-cyan-400 mt-0.5">⌂</span>
-                <span>Metro Manila, Philippines</span>
-              </li>
+            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Contact Us</h3>
+            <ul className="space-y-3 text-sm">
+              {[
+                { icon: '✉', text: 'info@dripph.com' },
+                { icon: '☎', text: '+63 (2) 8123-4567' },
+                { icon: '⌂', text: 'Metro Manila, Philippines' },
+              ].map((item) => (
+                <li key={item.text} className="flex items-start gap-3">
+                  <span className="text-cyan-500 mt-0.5 text-xs">{item.icon}</span>
+                  <span className="text-gray-500">{item.text}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-blue-800 mt-8 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-500">
+        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-600">
           <p>© {new Date().getFullYear()} DRIP – Digital Resources &amp; Informatics Professionals. All rights reserved.</p>
-          <div className="flex gap-4">
-            <Link href="/contact" className="hover:text-cyan-300 transition-colors">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-cyan-300 transition-colors">Terms of Service</Link>
+          <div className="flex gap-6">
+            <Link href="/contact" className="hover:text-cyan-400 transition-colors duration-200">Privacy Policy</Link>
+            <Link href="/contact" className="hover:text-cyan-400 transition-colors duration-200">Terms of Service</Link>
           </div>
         </div>
       </div>
