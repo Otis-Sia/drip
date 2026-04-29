@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { branches } from '@/lib/branches';
 
 const contactInfo = [
   { icon: '✉', label: 'Email', value: 'info@dripph.com' },
@@ -185,6 +186,51 @@ export default function ContactPage() {
                 </div>
               )}
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Branches Section */}
+      <section className="py-20 bg-white border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="section-label">Find Us</div>
+            <h2 className="section-title mx-auto">17 Branches Nationwide</h2>
+            <p className="section-subtitle mx-auto">Visit any of our offices for in-person consultations and support.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {(['Metro Manila', 'Luzon', 'Visayas', 'Mindanao'] as const).map((region) => {
+              const regionBranches = branches.filter((b) => b.region === region);
+              return (
+                <div key={region} className="space-y-6">
+                  <h3 className="text-lg font-bold text-[#1e3a5f] border-b-2 border-cyan-500 pb-2 mb-4">
+                    {region}
+                  </h3>
+                  <div className="space-y-4">
+                    {regionBranches.map((branch) => (
+                      <div key={branch.id} className="card p-5 hover:border-cyan-500/30 transition-all duration-300">
+                        <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
+                        <div className="space-y-1.5 text-xs text-gray-500 font-medium">
+                          <p className="flex items-start gap-2">
+                            <span className="text-cyan-600 flex-shrink-0 mt-0.5">⌂</span>
+                            <span>{branch.address}</span>
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span className="text-cyan-600 flex-shrink-0">☎</span>
+                            <span>{branch.phone}</span>
+                          </p>
+                          <p className="flex items-center gap-2">
+                            <span className="text-cyan-600 flex-shrink-0">✉</span>
+                            <span className="break-all">{branch.email}</span>
+                          </p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

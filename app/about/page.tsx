@@ -66,8 +66,15 @@ export default function AboutPage() {
                 <div className="text-5xl font-black bg-gradient-to-r from-[#1e3a5f] to-[#0891b2] bg-clip-text text-transparent">2009</div>
                 <div className="text-gray-500 text-sm mt-1 font-medium">Year Founded</div>
               </div>
-              <div className="grid grid-cols-2 gap-4">
-                {[['500+', 'Clients Served'], ['10,000+', 'Trained'], ['50+', 'Expert Staff'], ['15+', 'Years Experience']].map(([val, label]) => (
+              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                {[
+                  ['500+', 'Clients Served'],
+                  ['10,000+', 'Trained'],
+                  ['50+', 'Expert Staff'],
+                  ['15+', 'Years Experience'],
+                  ['17', 'Branches Nationwide'],
+                  ['24/7', 'Support Available']
+                ].map(([val, label]) => (
                   <div key={label} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100/50">
                     <div className="text-2xl font-black bg-gradient-to-r from-[#1e3a5f] to-[#0891b2] bg-clip-text text-transparent">{val}</div>
                     <div className="text-gray-400 text-xs mt-1 font-medium">{label}</div>

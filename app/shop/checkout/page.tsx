@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useCart } from '@/lib/cartContext';
 import Link from 'next/link';
+import { branches } from '@/lib/branches';
 
 export default function CheckoutPage() {
   const { items, itemCount, clearCart } = useCart();
@@ -63,7 +64,7 @@ export default function CheckoutPage() {
           <h2 className="text-3xl font-black text-gray-900 mb-3">Quote Request Submitted!</h2>
           <p className="text-gray-500 mb-8 leading-relaxed">
             Thank you, <strong>{form.name}</strong>. Our team will review your request and send a detailed proposal to <strong>{form.email}</strong> within 1 business day.
-            Your selected pickup location is <strong>{form.pickupLocation === 'bgc' ? 'BGC' : form.pickupLocation === 'makati' ? 'Makati' : form.pickupLocation === 'qc' ? 'Quezon City' : 'Manila'}</strong>.
+            Your selected pickup location is <strong>{branches.find(b => b.id === form.pickupLocation)?.name || form.pickupLocation}</strong>.
           </p>
           <div className="space-y-3">
             <Link href="/" className="btn-secondary block" id="checkout-back-home">
@@ -162,10 +163,11 @@ export default function CheckoutPage() {
                     id="checkout-pickup"
                   >
                     <option value="">Select a pickup location</option>
-                    <option value="bgc">BGC – 5th Avenue, Taguig City (DRIP HQ)</option>
-                    <option value="makati">Makati – Ayala Avenue, Makati City</option>
-                    <option value="qc">Quezon City – North Avenue, QC</option>
-                    <option value="manila">Manila – Ermita, Manila</option>
+                    {branches.map((branch) => (
+                      <option key={branch.id} value={branch.id}>
+                        {branch.name} – {branch.address}
+                      </option>
+                    ))}
                   </select>
                   {errors.pickupLocation && <p className="text-red-500 text-xs mt-1.5 font-medium">{errors.pickupLocation}</p>}
                 </div>
