@@ -6,72 +6,72 @@ import { useCart } from '@/lib/cartContext';
 
 const allProducts = [
   {
-    id: 'cybersecurity-starter-kit',
-    name: 'Cybersecurity Starter Kit',
-    category: 'Hardware Solutions',
-    description: 'Complete security hardware bundle for SMBs. Includes managed firewall, endpoint protection agents, and a managed switch.',
-    tags: ['Firewall', 'SMB', 'Hardware', 'Bundle'],
-    features: ['Next-gen firewall appliance', 'Endpoint protection (10 licenses)', 'Managed switch', '1-year support'],
+    id: 'uv-greenhouse-polythene',
+    name: 'Greenhouse Polythene (UV Open/Blocked)',
+    category: 'Greenhouse Materials',
+    description: 'High-quality, durable polythene designed to optimize light transmission and protect crops from harsh weather.',
+    tags: ['UV Treated', 'Durable', '200 Microns'],
+    features: ['Optimal light transmission', 'Excellent heat retention', 'Tear and weather resistant', 'Long lifespan (3+ years)'],
   },
   {
-    id: 'enterprise-firewall',
-    name: 'Enterprise Firewall System',
-    category: 'Hardware Solutions',
-    description: 'Advanced next-generation firewall for enterprises with deep packet inspection, IDS/IPS, and centralized management.',
-    tags: ['Enterprise', 'NGFW', 'Network Security'],
-    features: ['10 Gbps throughput', 'Unified threat management', 'SD-WAN support', 'Centralized console'],
+    id: 'locking-profiles',
+    name: 'Locking Profiles (2m, 4m)',
+    category: 'Greenhouse Materials',
+    description: 'Galvanized steel locking profiles and zigzag wires for securely fastening polythene and nets to greenhouse structures.',
+    tags: ['Galvanized', 'Secure', 'Accessories'],
+    features: ['Corrosion resistant galvanized steel', 'Durable PVC coated zigzag wire', 'Easy to install and remove', 'Multiple length options'],
   },
   {
-    id: 'digital-training-package',
-    name: 'Digital Training Package',
-    category: 'Training & Education',
-    description: 'Comprehensive online cybersecurity training suite with self-paced modules, assessments, and certification prep.',
-    tags: ['Online', 'Certification', 'Team Training'],
-    features: ['50+ course modules', 'Certification prep (CISSP, CEH)', 'Progress tracking', 'Bulk licensing'],
+    id: 'drip-lines',
+    name: 'Driplines (0.3mm, 0.4mm)',
+    category: 'Irrigation Systems',
+    description: 'Precision emitter driplines for highly efficient, localized water delivery directly to the root zone.',
+    tags: ['Water Efficient', 'Anti-clogging'],
+    features: ['Consistent flow rate', 'High clogging resistance', 'Even water distribution', 'Easy to deploy'],
   },
   {
-    id: 'security-awareness-training',
-    name: 'Security Awareness Training',
-    category: 'Training & Education',
-    description: 'Automated phishing simulation with employee training modules and a management dashboard.',
-    tags: ['Phishing', 'Awareness', 'Simulation'],
-    features: ['Phishing simulation engine', 'Automated training assignment', 'Management dashboard', 'Risk scoring'],
+    id: 'hdpe-pipes',
+    name: 'HDPE Pipes & Fittings',
+    category: 'Irrigation Systems',
+    description: 'High-density polyethylene pipes for durable and leak-proof mainlines and submains in irrigation setups.',
+    tags: ['Heavy Duty', 'UV Resistant'],
+    features: ['Withstands high pressure', 'Durable and long-lasting', 'Corrosion and chemical resistant', 'Compatible with standard fittings'],
   },
   {
-    id: 'network-monitoring',
-    name: 'Network Monitoring Tool',
-    category: 'Software & Services',
-    description: 'Real-time network analytics and anomaly detection platform with customizable dashboards.',
-    tags: ['Monitoring', 'Analytics', 'Real-time'],
-    features: ['Real-time threat detection', 'Custom dashboards', 'SIEM integration', 'API access'],
+    id: 'dam-liners',
+    name: 'Dam Liners (0.3mm to 1mm)',
+    category: 'Water Management',
+    description: 'Premium geomembrane liners for constructing water reservoirs, fish ponds, and conservation tanks.',
+    tags: ['Waterproofing', 'Tear Resistant'],
+    features: ['High puncture resistance', 'UV stabilized for direct sunlight', 'Custom sizes available', 'Impermeable to water'],
   },
   {
-    id: 'cloud-security-bundle',
-    name: 'Cloud Security Bundle',
-    category: 'Software & Services',
-    description: 'Multi-cloud security management platform covering AWS, Azure, and GCP.',
-    tags: ['Cloud', 'Multi-cloud', 'Compliance'],
-    features: ['AWS, Azure, GCP support', 'Unified policy engine', 'Compliance reporting', 'Auto-remediation'],
+    id: 'shade-nets',
+    name: 'Shade Nets',
+    category: 'Nets & Crop Protection',
+    description: 'Knitted agricultural shade nets available in various percentages to protect crops from intense sunlight and heat stress.',
+    tags: ['UV Stabilized', 'Breathable'],
+    features: ['Various shade percentages (35%, 55%, 75%)', 'Knitted HDPE material', 'Reduces wind speed', 'Helps retain soil moisture'],
   },
   {
-    id: 'compliance-audit',
-    name: 'Compliance Audit Package',
-    category: 'Consulting Packages',
-    description: 'Comprehensive regulatory compliance assessment for ISO 27001, PDPA, GDPR, and more.',
-    tags: ['Compliance', 'ISO 27001', 'GDPR', 'Audit'],
-    features: ['Gap analysis', 'Remediation roadmap', 'Executive report', 'Follow-up session'],
+    id: 'insect-nets',
+    name: 'Pro Insect Nets',
+    category: 'Nets & Crop Protection',
+    description: 'Fine mesh netting designed to exclude harmful pests while allowing adequate ventilation and light.',
+    tags: ['Pest Control', 'Eco-friendly'],
+    features: ['Blocks tiny insects like thrips', 'Excellent ventilation', 'Saves on chemical pesticides', 'Durable construction'],
   },
   {
-    id: 'data-backup',
-    name: 'Data Backup Solution',
-    category: 'Consulting Packages',
-    description: 'Automated cloud backup and disaster recovery with encrypted storage and one-click restoration.',
-    tags: ['Backup', 'Disaster Recovery', 'Cloud'],
-    features: ['Automated daily backups', 'AES-256 encryption', 'Versioning (30 days)', 'RTO < 4 hours'],
+    id: 'mulch-films',
+    name: 'Agricultural Mulch Films',
+    category: 'Crop Enhancement Materials',
+    description: 'Plastic mulch films that suppress weed growth, conserve soil moisture, and regulate soil temperature for better yields.',
+    tags: ['Weed Control', 'Moisture Retention'],
+    features: ['Suppresses weed growth', 'Conserves soil moisture', 'Controls soil temperature', 'Prevents soil erosion'],
   },
 ];
 
-const categories = ['All', 'Hardware Solutions', 'Training & Education', 'Software & Services', 'Consulting Packages'];
+const categories = ['All', 'Greenhouse Materials', 'Irrigation Systems', 'Water Management', 'Nets & Crop Protection', 'Crop Enhancement Materials'];
 
 export default function ProductsPage() {
   const [selectedCategory, setSelectedCategory] = useState('All');
@@ -96,9 +96,9 @@ export default function ProductsPage() {
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Product Catalog</div>
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Product Catalog</div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">All Products</h1>
-          <p className="text-blue-100/70 font-light">Browse and request quotes for our cybersecurity solutions</p>
+          <p className="text-green-100/70 font-light">Browse and request quotes for our agricultural solutions</p>
         </div>
       </div>
 
@@ -126,8 +126,8 @@ export default function ProductsPage() {
                 id={`filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   selectedCategory === cat
-                    ? 'bg-[#1e3a5f] text-white shadow-md'
-                    : 'bg-white text-gray-600 border border-gray-200 hover:border-cyan-300 hover:text-[#1e3a5f]'
+                    ? 'bg-[#63913D] text-white shadow-md'
+                    : 'bg-white text-gray-600 border border-gray-200 hover:border-[#8FBB43]/50 hover:text-[#63913D]'
                 }`}
               >
                 {cat}
@@ -151,7 +151,7 @@ export default function ProductsPage() {
                 <ul className="space-y-2 mb-4">
                   {product.features.map((f) => (
                     <li key={f} className="text-xs text-gray-500 flex items-start gap-2">
-                      <span className="w-4 h-4 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-4 h-4 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">✓</span>
                       {f}
                     </li>
                   ))}
@@ -165,7 +165,7 @@ export default function ProductsPage() {
               <div className="p-4 pt-0 space-y-2">
                 <Link
                   href={`/shop/product-description?id=${product.id}`}
-                  className="block text-center border-2 border-[#1e3a5f] text-[#1e3a5f] hover:bg-[#1e3a5f] hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
+                  className="block text-center border-2 border-[#63913D] text-[#63913D] hover:bg-[#63913D] hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
                 >
                   View Details
                 </Link>
@@ -173,7 +173,7 @@ export default function ProductsPage() {
                   onClick={() => handleAdd(product)}
                   className={`w-full text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300 ${
                     addedId === product.id
-                      ? 'bg-emerald-500 text-white'
+                      ? 'bg-[#8FBB43] text-white'
                       : 'btn-secondary !w-full !text-sm'
                   }`}
                 >
@@ -190,7 +190,7 @@ export default function ProductsPage() {
             <p className="text-gray-400 text-lg mb-2">No products found matching your criteria.</p>
             <button
               onClick={() => { setSearch(''); setSelectedCategory('All'); }}
-              className="text-cyan-600 font-semibold hover:text-cyan-500 transition-colors"
+              className="text-[#63913D] font-semibold hover:text-[#8FBB43] transition-colors"
             >
               Clear filters
             </button>

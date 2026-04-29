@@ -4,10 +4,10 @@ import { useState } from 'react';
 import { branches } from '@/lib/branches';
 
 const contactInfo = [
-  { icon: '✉', label: 'Email', value: 'info@dripph.com' },
-  { icon: '☎', label: 'Phone', value: '+63 (2) 8123-4567' },
-  { icon: '⌂', label: 'Address', value: 'BGC, Taguig City, Metro Manila, Philippines' },
-  { icon: '🕐', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 6:00 PM PHT' },
+  { icon: '✉', label: 'Email', value: 'info@afrodrip.co.ke' },
+  { icon: '☎', label: 'Phone', value: '+254 711 506 498' },
+  { icon: '⌂', label: 'Address', value: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya' },
+  { icon: '🕐', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 5:00 PM EAT' },
 ];
 
 const socials = [
@@ -42,9 +42,9 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">Contact Us</div>
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-6 backdrop-blur-sm mx-auto">Contact Us</div>
           <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Get in Touch</h1>
-          <p className="text-blue-100/80 max-w-2xl mx-auto text-lg font-light animate-fadeInUp delay-100">Have a question, need a consultation, or ready to request a quote? We&apos;d love to hear from you.</p>
+          <p className="text-green-100/80 max-w-2xl mx-auto text-lg font-light animate-fadeInUp delay-100">Have a question, need a consultation, or ready to request a quote? We&apos;d love to hear from you.</p>
         </div>
       </section>
 
@@ -59,7 +59,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {contactInfo.map((item) => (
                     <div key={item.label} className="flex items-start gap-4 group">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                         {item.icon}
                       </div>
                       <div>
@@ -78,7 +78,7 @@ export default function ContactPage() {
                     <a
                       key={s.name}
                       href={s.href}
-                      className="w-10 h-10 rounded-xl bg-[#1e3a5f] text-white flex items-center justify-center font-bold hover:bg-cyan-600 transition-all duration-300 text-sm hover:scale-110"
+                      className="w-10 h-10 rounded-xl bg-[#63913D] text-white flex items-center justify-center font-bold hover:bg-[#8FBB43] transition-all duration-300 text-sm hover:scale-110"
                       title={s.name}
                     >
                       {s.icon}
@@ -87,12 +87,12 @@ export default function ContactPage() {
                 </div>
               </div>
 
-              <div className="bg-gradient-to-br from-[#0f2744] to-[#0c4a6e] rounded-2xl p-7 text-white relative overflow-hidden">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-cyan-500/20 to-transparent rounded-bl-[40px]" />
+              <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] rounded-2xl p-7 text-white relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#8FBB43]/30 to-transparent rounded-bl-[40px]" />
                 <h3 className="font-bold mb-2 relative">Need an Urgent Response?</h3>
-                <p className="text-blue-200/60 text-sm mb-5 leading-relaxed relative">For critical security incidents or urgent inquiries, please call our priority line.</p>
-                <div className="bg-gradient-to-r from-cyan-300 to-cyan-500 bg-clip-text text-transparent font-black text-xl relative">+63 (2) 8123-4568</div>
-                <div className="text-blue-300/50 text-xs mt-1 font-medium relative">Available 24/7 for security emergencies</div>
+                <p className="text-green-200/60 text-sm mb-5 leading-relaxed relative">For critical farm installations or urgent inquiries, please call our priority line.</p>
+                <div className="bg-gradient-to-r from-white to-[#57D6F2] bg-clip-text text-transparent font-black text-xl relative">+254 711 506 498</div>
+                <div className="text-green-300/50 text-xs mt-1 font-medium relative">Available for agricultural emergencies</div>
               </div>
             </div>
 
@@ -100,7 +100,7 @@ export default function ContactPage() {
             <div className="lg:col-span-3 animate-fadeInUp delay-200">
               {submitted ? (
                 <div className="card p-12 !rounded-2xl text-center animate-scaleIn">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-500 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-emerald-500/20">
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-green-500/20">
                     ✓
                   </div>
                   <h3 className="text-2xl font-black text-gray-900 mb-3">Message Sent!</h3>
@@ -195,33 +195,33 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-14">
             <div className="section-label">Find Us</div>
-            <h2 className="section-title mx-auto">17 Branches Nationwide</h2>
-            <p className="section-subtitle mx-auto">Visit any of our offices for in-person consultations and support.</p>
+            <h2 className="section-title mx-auto">16 Branches Nationwide</h2>
+            <p className="section-subtitle mx-auto">Visit any of our offices across Kenya for in-person consultations and support.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {(['Metro Manila', 'Luzon', 'Visayas', 'Mindanao'] as const).map((region) => {
+            {(['Nairobi & Central', 'Rift Valley', 'Eastern & Coast', 'Western & Nyanza'] as const).map((region) => {
               const regionBranches = branches.filter((b) => b.region === region);
               return (
                 <div key={region} className="space-y-6">
-                  <h3 className="text-lg font-bold text-[#1e3a5f] border-b-2 border-cyan-500 pb-2 mb-4">
+                  <h3 className="text-lg font-bold text-[#63913D] border-b-2 border-[#8FBB43] pb-2 mb-4">
                     {region}
                   </h3>
                   <div className="space-y-4">
                     {regionBranches.map((branch) => (
-                      <div key={branch.id} className="card p-5 hover:border-cyan-500/30 transition-all duration-300">
+                      <div key={branch.id} className="card p-5 hover:border-[#63913D]/30 transition-all duration-300">
                         <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
                         <div className="space-y-1.5 text-xs text-gray-500 font-medium">
                           <p className="flex items-start gap-2">
-                            <span className="text-cyan-600 flex-shrink-0 mt-0.5">⌂</span>
+                            <span className="text-[#63913D] flex-shrink-0 mt-0.5">⌂</span>
                             <span>{branch.address}</span>
                           </p>
                           <p className="flex items-center gap-2">
-                            <span className="text-cyan-600 flex-shrink-0">☎</span>
+                            <span className="text-[#63913D] flex-shrink-0">☎</span>
                             <span>{branch.phone}</span>
                           </p>
                           <p className="flex items-center gap-2">
-                            <span className="text-cyan-600 flex-shrink-0">✉</span>
+                            <span className="text-[#63913D] flex-shrink-0">✉</span>
                             <span className="break-all">{branch.email}</span>
                           </p>
                         </div>

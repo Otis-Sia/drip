@@ -2,101 +2,109 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Shop | DRIP',
-  description: "Browse DRIP's cybersecurity products and solutions. Request a quote for any product.",
+  title: 'Shop | Afrodrip Limited',
+  description: "Browse Afrodrip's agricultural products and solutions. Request a quote for any product.",
 };
 
 const categories = [
   {
-    id: 'hardware',
-    title: 'Hardware Solutions',
-    icon: '🖥️',
-    description: 'Physical security devices and network protection hardware for your infrastructure.',
-    count: 2,
-    gradient: 'from-cyan-50 to-blue-50',
+    id: 'greenhouse-materials',
+    title: 'Greenhouse Materials',
+    icon: '🌱',
+    description: 'Polythene covers, locking profiles, and structural accessories.',
+    count: 3,
+    gradient: 'from-[#63913D]/10 to-[#8FBB43]/10',
   },
   {
-    id: 'training',
-    title: 'Training & Education',
-    icon: '📚',
-    description: 'Comprehensive cybersecurity and digital literacy training packages.',
+    id: 'irrigation-systems',
+    title: 'Irrigation Systems',
+    icon: '💧',
+    description: 'Driplines, pipes, and efficient water delivery components.',
     count: 2,
+    gradient: 'from-[#57D6F2]/10 to-[#63913D]/10',
+  },
+  {
+    id: 'water-management',
+    title: 'Water Management',
+    icon: '🌊',
+    description: 'Heavy-duty dam liners for effective water conservation.',
+    count: 1,
+    gradient: 'from-[#57D6F2]/10 to-[#8FBB43]/10',
+  },
+  {
+    id: 'nets-crop-protection',
+    title: 'Nets & Crop Protection',
+    icon: '🕸️',
+    description: 'Shade nets, bird nets, and insect exclusion solutions.',
+    count: 3,
+    gradient: 'from-lime-50 to-green-50',
+  },
+  {
+    id: 'crop-enhancement',
+    title: 'Crop Enhancement Materials',
+    icon: '🌾',
+    description: 'Mulch films and other materials to improve crop yield.',
+    count: 1,
     gradient: 'from-amber-50 to-orange-50',
-  },
-  {
-    id: 'software',
-    title: 'Software & Services',
-    icon: '💻',
-    description: 'Software licenses, monitoring tools, and managed security services.',
-    count: 2,
-    gradient: 'from-indigo-50 to-purple-50',
-  },
-  {
-    id: 'consulting',
-    title: 'Consulting Packages',
-    icon: '🎯',
-    description: 'Expert consulting engagements for security assessments and compliance.',
-    count: 2,
-    gradient: 'from-emerald-50 to-teal-50',
   },
 ];
 
 const featuredProducts = [
   {
-    id: 'cybersecurity-starter-kit',
-    name: 'Cybersecurity Starter Kit',
-    category: 'Hardware Solutions',
-    description: 'A complete security hardware bundle designed for small and medium-sized businesses. Includes firewall appliance, managed switch, and endpoint protection.',
-    tags: ['Firewall', 'SMB', 'Hardware'],
+    id: 'uv-greenhouse-polythene',
+    name: 'Greenhouse Polythene (UV Open/Blocked)',
+    category: 'Greenhouse Materials',
+    description: 'High-quality, durable polythene designed to optimize light transmission and protect crops from harsh weather.',
+    tags: ['UV Treated', 'Durable', '200 Microns'],
   },
   {
-    id: 'enterprise-firewall',
-    name: 'Enterprise Firewall System',
-    category: 'Hardware Solutions',
-    description: 'Advanced next-generation firewall with deep packet inspection, IDS/IPS, and centralized management for enterprise environments.',
-    tags: ['Enterprise', 'NGFW', 'Network Security'],
+    id: 'locking-profiles',
+    name: 'Locking Profiles (2m, 4m)',
+    category: 'Greenhouse Materials',
+    description: 'Galvanized steel locking profiles and zigzag wires for securely fastening polythene and nets to greenhouse structures.',
+    tags: ['Galvanized', 'Secure', 'Accessories'],
   },
   {
-    id: 'digital-training-package',
-    name: 'Digital Training Package',
-    category: 'Training & Education',
-    description: 'A comprehensive online cybersecurity training suite with self-paced modules, assessments, and certification prep for your entire team.',
-    tags: ['Online', 'Certification', 'Team Training'],
+    id: 'drip-lines',
+    name: 'Driplines (0.3mm, 0.4mm)',
+    category: 'Irrigation Systems',
+    description: 'Precision emitter driplines for highly efficient, localized water delivery directly to the root zone.',
+    tags: ['Water Efficient', 'Anti-clogging'],
   },
   {
-    id: 'security-awareness-training',
-    name: 'Security Awareness Training',
-    category: 'Training & Education',
-    description: 'Automated phishing simulation platform with employee training modules and management dashboard for continuous security awareness.',
-    tags: ['Phishing', 'Awareness', 'Simulation'],
+    id: 'hdpe-pipes',
+    name: 'HDPE Pipes & Fittings',
+    category: 'Irrigation Systems',
+    description: 'High-density polyethylene pipes for durable and leak-proof mainlines and submains in irrigation setups.',
+    tags: ['Heavy Duty', 'UV Resistant'],
   },
   {
-    id: 'network-monitoring',
-    name: 'Network Monitoring Tool',
-    category: 'Software & Services',
-    description: 'Real-time network analytics and anomaly detection platform with customizable dashboards and automated alerting.',
-    tags: ['Monitoring', 'Analytics', 'Real-time'],
+    id: 'dam-liners',
+    name: 'Dam Liners (0.3mm to 1mm)',
+    category: 'Water Management',
+    description: 'Premium geomembrane liners for constructing water reservoirs, fish ponds, and conservation tanks.',
+    tags: ['Waterproofing', 'Tear Resistant'],
   },
   {
-    id: 'cloud-security-bundle',
-    name: 'Cloud Security Bundle',
-    category: 'Software & Services',
-    description: 'Multi-cloud security management platform covering AWS, Azure, and GCP with unified policy enforcement and compliance monitoring.',
-    tags: ['Cloud', 'Multi-cloud', 'Compliance'],
+    id: 'shade-nets',
+    name: 'Shade Nets',
+    category: 'Nets & Crop Protection',
+    description: 'Knitted agricultural shade nets available in various percentages to protect crops from intense sunlight and heat stress.',
+    tags: ['UV Stabilized', 'Breathable'],
   },
   {
-    id: 'compliance-audit',
-    name: 'Compliance Audit Package',
-    category: 'Consulting Packages',
-    description: 'Comprehensive regulatory compliance assessment covering ISO 27001, PDPA, GDPR, and industry-specific requirements.',
-    tags: ['Compliance', 'ISO 27001', 'GDPR'],
+    id: 'insect-nets',
+    name: 'Pro Insect Nets',
+    category: 'Nets & Crop Protection',
+    description: 'Fine mesh netting designed to exclude harmful pests while allowing adequate ventilation and light.',
+    tags: ['Pest Control', 'Eco-friendly'],
   },
   {
-    id: 'data-backup',
-    name: 'Data Backup Solution',
-    category: 'Consulting Packages',
-    description: 'Automated cloud backup and disaster recovery system with encrypted storage, versioning, and one-click restoration.',
-    tags: ['Backup', 'Disaster Recovery', 'Cloud'],
+    id: 'mulch-films',
+    name: 'Agricultural Mulch Films',
+    category: 'Crop Enhancement Materials',
+    description: 'Plastic mulch films that suppress weed growth, conserve soil moisture, and regulate soil temperature for better yields.',
+    tags: ['Weed Control', 'Moisture Retention'],
   },
 ];
 
@@ -106,10 +114,10 @@ export default function ShopPage() {
       {/* Hero */}
       <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">Product Catalog</div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Security Solutions for Every Need</h1>
-          <p className="text-blue-100/80 max-w-2xl mx-auto text-lg mb-10 font-light animate-fadeInUp delay-100">
-            Browse our curated catalog of cybersecurity products and solutions. All products are available via quote request.
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-6 backdrop-blur-sm mx-auto">Product Catalog</div>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Agricultural Solutions for Every Need</h1>
+          <p className="text-green-100/80 max-w-2xl mx-auto text-lg mb-10 font-light animate-fadeInUp delay-100">
+            Browse our curated catalog of greenhouse, irrigation, and farming products. All products are available via quote request.
           </p>
           <Link href="/shop/products" className="btn-primary !px-10 !py-3.5 text-base animate-fadeInUp delay-200" id="shop-browse-all">
             Browse All Products
@@ -139,9 +147,9 @@ export default function ShopPage() {
                 <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300`}>
                   {cat.icon}
                 </div>
-                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#1e3a5f] transition-colors">{cat.title}</h3>
+                <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#63913D] transition-colors">{cat.title}</h3>
                 <p className="text-gray-500 text-sm mb-4 leading-relaxed">{cat.description}</p>
-                <span className="text-cyan-600 text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
+                <span className="text-[#63913D] text-sm font-semibold flex items-center gap-1.5 group-hover:gap-2.5 transition-all">
                   {cat.count} products
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -199,7 +207,7 @@ export default function ShopPage() {
               { icon: '⚡', title: 'Fast Response', desc: 'Our sales team is available Mon–Fri 8am–6pm PHT to assist with your inquiries.' },
             ].map((item) => (
               <div key={item.title} className="flex flex-col items-center group">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
                   {item.icon}
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>

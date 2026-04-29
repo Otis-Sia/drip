@@ -2,78 +2,112 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Services | DRIP',
-  description: "Explore DRIP's comprehensive cybersecurity and digital solutions services.",
+  title: 'Services | Afrodrip Limited',
+  description: "Explore Afrodrip's comprehensive agricultural solutions, from greenhouse design to irrigation systems.",
 };
 
 const services = [
   {
-    icon: '🛡️',
-    title: 'Cybersecurity Training',
-    tagline: 'Human-Centered Security',
-    problem: 'Over 90% of security breaches involve human error. Your people are your greatest vulnerability—and your greatest asset when properly trained.',
-    approach: 'Our Cybersecurity Training programs are built on real-world scenarios and attack simulations. We offer customized curricula for every level—from executive awareness sessions to deep technical workshops for IT teams.',
+    icon: '🌱',
+    title: 'Greenhouse Design and Supply',
+    tagline: 'Year-Round Cultivation',
+    problem: 'Unpredictable weather and harsh climate conditions can devastate open-field crops, leading to significant financial losses.',
+    approach: 'We design and construct durable, modern greenhouse structures tailored to your specific location and crop requirements. Our systems provide the optimal controlled environment for maximum yield.',
     features: [
-      'Phishing simulation and awareness campaigns',
-      'Incident response training',
-      'CISSP, CEH, and CompTIA prep programs',
-      'Hands-on red team/blue team exercises',
-      'Security operations center (SOC) training',
+      'Custom structural design',
+      'High-quality UV treated polythene',
+      'Ventilation and temperature control',
+      'Pest exclusion netting',
+      'Turnkey installation',
     ],
-    outcomes: 'Organizations typically see a 70% reduction in successful phishing attempts within 6 months of our training programs.',
-    gradient: 'from-cyan-500/10 to-blue-500/10',
-    iconBg: 'from-cyan-50 to-blue-50',
+    outcomes: 'Farmers experience up to 300% yield increases and extended growing seasons compared to traditional open-field farming.',
+    gradient: 'from-[#63913D]/10 to-[#8FBB43]/10',
+    iconBg: 'from-[#63913D]/15 to-[#8FBB43]/15',
   },
   {
-    icon: '💡',
-    title: 'Digital Literacy Programs',
-    tagline: 'Empowering Every Employee',
-    problem: 'The digital skills gap creates operational inefficiencies and security risks across your entire organization.',
-    approach: 'We design digital literacy programs that meet employees where they are—from basic computer skills to advanced data analysis and secure digital communication practices.',
+    icon: '💧',
+    title: 'Irrigation System Installation',
+    tagline: 'Precision Water Management',
+    problem: 'Water scarcity and inefficient irrigation methods waste valuable resources and reduce crop health.',
+    approach: 'We provide state-of-the-art irrigation solutions including drip lines and automated systems. We ensure every drop of water is utilized efficiently directly at the plant root zone.',
     features: [
-      'Foundational digital skills bootcamps',
-      'Secure communication and data handling',
-      'Cloud productivity tool training',
-      'Digital compliance and privacy practices',
-      'Custom LMS content development',
+      'Drip and sprinkler system design',
+      'Water pump installation',
+      'Automated timer integration',
+      'Filtration systems',
+      'Water storage and dam liners',
     ],
-    outcomes: 'Our clients report a 45% improvement in employee productivity and a measurable reduction in IT support tickets after program completion.',
+    outcomes: 'Reduce water usage by up to 50% while simultaneously increasing crop uniformity and health.',
+    gradient: 'from-[#57D6F2]/10 to-[#63913D]/10',
+    iconBg: 'from-[#57D6F2]/15 to-[#63913D]/15',
+  },
+  {
+    icon: '☀️',
+    title: 'Climate-Smart Farming Solutions',
+    tagline: 'Adapt and Thrive',
+    problem: 'Climate change introduces unprecedented challenges, from prolonged droughts to extreme temperatures.',
+    approach: 'We integrate advanced technologies that help farms adapt to changing climates, utilizing shade nets, mulching, and smart agricultural practices to mitigate environmental risks.',
+    features: [
+      'Micro-climate monitoring',
+      'Shade net installation',
+      'Mulching solutions',
+      'Soil moisture conservation',
+      'Agro-meteorological advisory',
+    ],
+    outcomes: 'Enhanced farm resilience against extreme weather events and reduced crop failure rates.',
     gradient: 'from-amber-500/10 to-orange-500/10',
     iconBg: 'from-amber-50 to-orange-50',
   },
   {
-    icon: '🖥️',
-    title: 'IT Consulting',
-    tagline: 'Strategy Meets Execution',
-    problem: 'Many organizations struggle to align their IT infrastructure with business objectives, leaving them exposed to inefficiencies and security gaps.',
-    approach: 'Our IT consulting practice combines strategic planning with hands-on technical expertise. We assess your current state, design a secure target architecture, and guide implementation from start to finish.',
+    icon: '🏗️',
+    title: 'Agricultural Infrastructure',
+    tagline: 'Building the Foundation',
+    problem: 'Lack of proper infrastructure limits farm expansion and operational efficiency.',
+    approach: 'From land preparation to the construction of water reservoirs and crop protection structures, we build the physical foundation your agribusiness needs to scale.',
     features: [
-      'IT security architecture review',
-      'Cloud migration strategy and execution',
-      'Zero-trust network design',
-      'Vendor evaluation and procurement',
-      'IT governance and policy development',
+      'Dam liner supply and installation',
+      'Farm layout planning',
+      'Storage facilities setup',
+      'Erosion control structures',
+      'Fencing and security',
     ],
-    outcomes: 'Clients achieve an average 30% reduction in IT-related security incidents within 12 months of implementing our recommended architecture.',
-    gradient: 'from-indigo-500/10 to-purple-500/10',
-    iconBg: 'from-indigo-50 to-purple-50',
+    outcomes: 'Robust farm infrastructure that supports long-term growth and operational efficiency.',
+    gradient: 'from-[#57D6F2]/10 to-[#8FBB43]/10',
+    iconBg: 'from-[#57D6F2]/15 to-[#8FBB43]/15',
   },
   {
-    icon: '🗄️',
-    title: 'Data Management',
-    tagline: 'Secure, Compliant, Accessible',
-    problem: 'Data is your most valuable asset and your biggest liability. Mismanaged data leads to breaches, compliance failures, and lost business.',
-    approach: "DRIP's Data Management solutions cover the full lifecycle—from data classification and governance to backup automation and disaster recovery planning.",
+    icon: '🧑‍🌾',
+    title: 'Farmer Training and Support',
+    tagline: 'Empowering Growers',
+    problem: 'Access to modern equipment is not enough; farmers need the knowledge to utilize it effectively to achieve ROI.',
+    approach: 'We provide comprehensive training programs and ongoing technical support to ensure you get the most out of your agricultural investments.',
     features: [
-      'Data classification and labeling',
-      'Automated backup and recovery solutions',
-      'Data loss prevention (DLP) implementation',
-      'Regulatory compliance (PDPA, GDPR, ISO 27001)',
-      'Database security audits',
+      'On-site agronomic training',
+      'System operation workshops',
+      'Pest and disease management',
+      'Best farming practices',
+      'Dedicated agronomy support line',
     ],
-    outcomes: 'Our data management implementations have helped clients achieve full regulatory compliance and recover from ransomware attacks with zero data loss.',
-    gradient: 'from-emerald-500/10 to-teal-500/10',
-    iconBg: 'from-emerald-50 to-teal-50',
+    outcomes: 'Empowered farm workers capable of maximizing the utility and lifespan of modern farming systems.',
+    gradient: 'from-indigo-500/10 to-blue-500/10',
+    iconBg: 'from-indigo-50 to-blue-50',
+  },
+  {
+    icon: '🔧',
+    title: 'Maintenance Services',
+    tagline: 'Continuous Reliability',
+    problem: 'Equipment breakdowns can halt operations and jeopardize crop health if not addressed immediately.',
+    approach: 'Our dedicated maintenance teams offer routine servicing and rapid response repairs for all greenhouse and irrigation systems.',
+    features: [
+      'Routine system inspections',
+      'Polythene and net repairs',
+      'Pump and filter maintenance',
+      'Spare parts supply',
+      'Emergency breakdown response',
+    ],
+    outcomes: 'Minimized downtime and prolonged lifespan of your critical agricultural infrastructure.',
+    gradient: 'from-lime-500/10 to-green-500/10',
+    iconBg: 'from-lime-50 to-green-50',
   },
 ];
 
@@ -83,10 +117,10 @@ export default function ServicesPage() {
       {/* Hero */}
       <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">Our Services</div>
-          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Comprehensive Digital Security Solutions</h1>
-          <p className="text-blue-100/80 max-w-3xl mx-auto text-lg leading-relaxed font-light animate-fadeInUp delay-100">
-            From training your people to securing your systems, DRIP delivers end-to-end digital security services tailored to your organization&apos;s unique needs.
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-6 backdrop-blur-sm mx-auto">Our Services</div>
+          <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Comprehensive Agricultural Solutions</h1>
+          <p className="text-green-100/80 max-w-3xl mx-auto text-lg leading-relaxed font-light animate-fadeInUp delay-100">
+            From planning and designing your greenhouse to installing irrigation systems and providing ongoing support, Afrodrip delivers end-to-end farming infrastructure tailored to your needs.
           </p>
         </div>
       </section>
@@ -115,12 +149,12 @@ export default function ServicesPage() {
               <p className="text-gray-500 leading-relaxed mb-6">{service.approach}</p>
 
               {/* Outcomes */}
-              <div className="bg-emerald-50/80 border border-emerald-200/50 rounded-2xl p-5">
-                <p className="text-emerald-700 font-semibold text-sm mb-1 flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs">✓</span>
+              <div className="bg-[#63913D]/10 border border-[#63913D]/20 rounded-2xl p-5">
+                <p className="text-[#63913D] font-semibold text-sm mb-1 flex items-center gap-2">
+                  <span className="w-5 h-5 rounded-full bg-[#63913D] text-white flex items-center justify-center text-xs">✓</span>
                   Proven Results
                 </p>
-                <p className="text-emerald-600/80 text-sm leading-relaxed">{service.outcomes}</p>
+                <p className="text-[#63913D]/80 text-sm leading-relaxed">{service.outcomes}</p>
               </div>
             </div>
 
@@ -130,7 +164,7 @@ export default function ServicesPage() {
                 <ul className="space-y-3.5">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <span className="w-5 h-5 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-5 h-5 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
                       <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
                     </li>
                   ))}
@@ -149,11 +183,11 @@ export default function ServicesPage() {
       {/* CTA */}
       <section className="gradient-cta text-white py-20 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Not Sure Where to Start?</h2>
-          <p className="text-blue-200/70 mb-10 max-w-xl mx-auto text-lg font-light">Our experts will assess your current security posture and recommend the right combination of services for your needs.</p>
+          <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Ready to Start Your Project?</h2>
+          <p className="text-green-200/70 mb-10 max-w-xl mx-auto text-lg font-light">Our agricultural experts will assess your farm's requirements and recommend the right combination of services for your needs.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link href="/contact" className="btn-primary !px-10 !py-3.5 text-base" id="services-cta-assessment">
-              Schedule a Free Assessment
+              Schedule a Free Consultation
             </Link>
             <Link href="/shop" className="btn-outline !px-10 !py-3.5 text-base" id="services-cta-products">
               Browse Products

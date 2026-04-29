@@ -43,7 +43,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center pt-20">
         <div className="text-center animate-fadeIn">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-4xl mx-auto mb-6">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-4xl mx-auto mb-6">
             📋
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
@@ -58,7 +58,7 @@ export default function CheckoutPage() {
     return (
       <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 pt-20">
         <div className="max-w-md w-full text-center card p-12 !rounded-3xl animate-scaleIn">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-emerald-400 to-emerald-500 flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-emerald-500/20">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-green-500/20">
             ✓
           </div>
           <h2 className="text-3xl font-black text-gray-900 mb-3">Quote Request Submitted!</h2>
@@ -84,9 +84,9 @@ export default function CheckoutPage() {
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Request for Quotation</div>
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Request for Quotation</div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Complete Your Quote Request</h1>
-          <p className="text-blue-100/70 font-light">Fill in your details and we&apos;ll prepare a customized proposal for you.</p>
+          <p className="text-green-100/70 font-light">Fill in your details and we&apos;ll prepare a customized proposal for you.</p>
         </div>
       </div>
 
@@ -197,23 +197,30 @@ export default function CheckoutPage() {
               <h3 className="font-bold text-gray-900 text-lg mb-5">Quote Summary</h3>
               <div className="space-y-4 mb-5">
                 {items.map((item) => (
-                  <div key={item.id} className="flex gap-3">
+                  <div key={item.cartItemId} className="flex gap-3">
                     <div className="flex-1">
                       <p className="text-sm font-semibold text-gray-900">{item.name}</p>
                       <p className="text-xs text-gray-400 mt-0.5">{item.category}</p>
+                      {(item.farmSize || item.location) && (
+                        <p className="text-[10px] text-gray-500 mt-1">
+                          {item.farmSize && `Size: ${item.farmSize}`}
+                          {item.farmSize && item.location && ' | '}
+                          {item.location && `Loc: ${item.location}`}
+                        </p>
+                      )}
                     </div>
-                    <span className="text-sm text-gray-500 font-medium">× {item.quantity}</span>
+                    <span className="text-sm text-gray-500 font-medium flex-shrink-0">× {item.quantity}</span>
                   </div>
                 ))}
               </div>
               <div className="border-t border-gray-100 pt-5">
                 <div className="flex justify-between font-bold">
                   <span className="text-gray-700">Total Items</span>
-                  <span className="text-cyan-600 text-lg">{itemCount}</span>
+                  <span className="text-[#63913D] text-lg">{itemCount}</span>
                 </div>
               </div>
-              <div className="mt-6 bg-gradient-to-br from-cyan-50 to-blue-50 rounded-2xl p-5">
-                <p className="text-[#1e3a5f] text-xs font-bold mb-2 uppercase tracking-wider">What happens next?</p>
+              <div className="mt-6 bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 rounded-2xl p-5">
+                <p className="text-[#63913D] text-xs font-bold mb-2 uppercase tracking-wider">What happens next?</p>
                 <ul className="space-y-2">
                   {[
                     'We review your request',
@@ -221,8 +228,8 @@ export default function CheckoutPage() {
                     'Send to your email within 24 hours',
                     'Schedule a consultation call',
                   ].map((step) => (
-                    <li key={step} className="text-cyan-700/80 text-xs flex items-start gap-2 font-medium">
-                      <span className="w-4 h-4 rounded-full bg-cyan-500/10 text-cyan-600 flex items-center justify-center text-[9px] font-bold flex-shrink-0 mt-0.5">✓</span>
+                    <li key={step} className="text-[#63913D]/80 text-xs flex items-start gap-2 font-medium">
+                      <span className="w-4 h-4 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center text-[9px] font-bold flex-shrink-0 mt-0.5">✓</span>
                       {step}
                     </li>
                   ))}

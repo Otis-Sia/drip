@@ -5,12 +5,12 @@
 :root {
   --bg: #f8fafc;
   --fg: #0f172a;
-  --primary: #1e3a5f;
-  --primary-light: #2d5a8e;
-  --primary-dark: #0f2744;
-  --accent: #06b6d4;
-  --accent-light: #22d3ee;
-  --accent-dark: #0891b2;
+  --primary: #63913D;
+  --primary-light: #8FBB43;
+  --primary-dark: #4a7230;
+  --accent: #57D6F2;
+  --accent-light: #7ae1f5;
+  --accent-dark: #3bbdd9;
   --surface: #ffffff;
   --surface-alt: #f1f5f9;
   --muted: #64748b;
@@ -76,8 +76,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 0 20px rgba(6,182,212,0.2); }
-  50%      { box-shadow: 0 0 40px rgba(6,182,212,0.4); }
+  0%, 100% { box-shadow: 0 0 20px rgba(87,214,242,0.2); }
+  50%      { box-shadow: 0 0 40px rgba(87,214,242,0.4); }
 }
 
 @keyframes gradient-shift {
@@ -125,13 +125,13 @@ body {
 
 .card:hover {
   box-shadow: var(--shadow-lg);
-  border-color: rgba(6,182,212,0.3);
+  border-color: rgba(99,145,61,0.3);
   transform: translateY(-4px);
 }
 
 /* ─── Gradient Backgrounds ─── */
 .gradient-hero {
-  background: linear-gradient(135deg, #0f2744 0%, #1e3a5f 40%, #1a365d 70%, #0c4a6e 100%);
+  background: linear-gradient(135deg, #3a5c24 0%, #63913D 40%, #4a7230 70%, #2d5a1a 100%);
   position: relative;
   overflow: hidden;
 }
@@ -143,7 +143,7 @@ body {
   right: -30%;
   width: 80%;
   height: 200%;
-  background: radial-gradient(ellipse, rgba(6,182,212,0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(143,187,67,0.15) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -154,12 +154,12 @@ body {
   left: -20%;
   width: 60%;
   height: 150%;
-  background: radial-gradient(ellipse, rgba(99,102,241,0.08) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(87,214,242,0.08) 0%, transparent 70%);
   pointer-events: none;
 }
 
 .gradient-cta {
-  background: linear-gradient(135deg, #0f2744 0%, #1e3a5f 50%, #0c4a6e 100%);
+  background: linear-gradient(135deg, #3a5c24 0%, #63913D 50%, #4a7230 100%);
   position: relative;
   overflow: hidden;
 }
@@ -171,7 +171,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  background: radial-gradient(ellipse at 30% 50%, rgba(6,182,212,0.1) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 30% 50%, rgba(143,187,67,0.12) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -182,21 +182,21 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
   color: white;
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: var(--radius-sm);
   transition: all 0.3s var(--transition);
-  box-shadow: 0 2px 8px rgba(6,182,212,0.25);
+  box-shadow: 0 2px 8px rgba(99,145,61,0.3);
   border: none;
   cursor: pointer;
   text-decoration: none;
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--accent), var(--accent-light));
-  box-shadow: 0 4px 16px rgba(6,182,212,0.35);
+  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  box-shadow: 0 4px 16px rgba(99,145,61,0.4);
   transform: translateY(-2px);
 }
 
@@ -286,7 +286,7 @@ body {
 
 .input-field:focus {
   border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(6,182,212,0.1);
+  box-shadow: 0 0 0 3px rgba(87,214,242,0.12);
 }
 
 .input-field.error {
@@ -301,7 +301,7 @@ body {
 /* ─── Section Styles ─── */
 .section-label {
   display: inline-block;
-  color: var(--accent-dark);
+  color: var(--primary);
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -340,8 +340,8 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   border-radius: 999px;
-  background: rgba(6,182,212,0.1);
-  color: var(--accent-dark);
+  background: rgba(99,145,61,0.1);
+  color: var(--primary-dark);
 }
 
 .badge-tag {
@@ -357,16 +357,16 @@ body {
 }
 
 .badge-tag:hover {
-  background: rgba(6,182,212,0.08);
-  color: var(--accent-dark);
+  background: rgba(99,145,61,0.08);
+  color: var(--primary-dark);
 }
 
 /* ─── Decorative Elements ─── */
 .mesh-gradient {
   background-image: 
-    radial-gradient(at 40% 20%, rgba(6,182,212,0.06) 0px, transparent 50%),
-    radial-gradient(at 80% 0%, rgba(99,102,241,0.04) 0px, transparent 50%),
-    radial-gradient(at 0% 50%, rgba(6,182,212,0.04) 0px, transparent 50%);
+    radial-gradient(at 40% 20%, rgba(143,187,67,0.06) 0px, transparent 50%),
+    radial-gradient(at 80% 0%, rgba(87,214,242,0.04) 0px, transparent 50%),
+    radial-gradient(at 0% 50%, rgba(99,145,61,0.04) 0px, transparent 50%);
 }
 
 /* ─── Scrollbar ─── */

@@ -5,8 +5,8 @@ import Footer from "@/components/Footer";
 import { CartProvider } from "@/lib/cartContext";
 
 export const metadata: Metadata = {
-  title: "DRIP – Digital Resources & Informatics Professionals",
-  description: "Empowering organizations with cybersecurity training, digital literacy programs, IT consulting, and data management solutions.",
+  title: "Afrodrip Limited | Climate-Smart Agricultural Solutions",
+  description: "Empowering farmers with cutting-edge greenhouse systems, efficient irrigation, and climate-smart farming technologies.",
 };
 
 export default function RootLayout({

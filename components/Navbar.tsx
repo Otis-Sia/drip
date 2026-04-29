@@ -41,7 +41,7 @@ export default function Navbar() {
               <div
                 className={`font-black text-xl px-3.5 py-1.5 rounded-lg transition-all duration-300 ${
                   scrolled
-                    ? 'bg-gradient-to-br from-cyan-500 to-cyan-600 text-white shadow-md shadow-cyan-500/20'
+                    ? 'bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white shadow-md shadow-green-500/20'
                     : 'bg-white/15 text-white backdrop-blur-sm border border-white/20'
                 }`}
               >
@@ -54,14 +54,14 @@ export default function Navbar() {
                   scrolled ? 'text-gray-900' : 'text-white'
                 }`}
               >
-                Digital Resources &amp;
+                Afrodrip
               </div>
               <div
                 className={`text-xs font-medium transition-colors duration-300 ${
-                  scrolled ? 'text-cyan-600' : 'text-cyan-300'
+                  scrolled ? 'text-[#63913D]' : 'text-[#8FBB43]'
                 }`}
               >
-                Informatics Professionals
+                Limited
               </div>
             </div>
           </Link>
@@ -140,7 +140,7 @@ export default function Navbar() {
           <Link
             href="/shop/cart"
             onClick={() => setMenuOpen(false)}
-            className="block py-3 px-4 text-cyan-700 font-semibold text-sm"
+            className="block py-3 px-4 text-[#63913D] font-semibold text-sm"
           >
             📋 Quote Cart {itemCount > 0 && `(${itemCount})`}
           </Link>

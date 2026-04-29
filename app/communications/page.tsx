@@ -36,14 +36,14 @@ const alerts: Alert[] = [
   {
     id: 1,
     title: 'Scheduled System Maintenance',
-    content: 'The client portal will be offline on Saturday, May 2nd, from 10:00 PM to 2:00 AM PHT for critical infrastructure upgrades.',
+    content: 'The client portal will be offline on Saturday, May 2nd, from 10:00 PM to 2:00 AM for critical infrastructure upgrades.',
     severity: 'info',
     date: 'April 29, 2026',
   },
   {
     id: 2,
-    title: 'Security Alert: Phishing Campaign',
-    content: 'We have detected a sophisticated phishing campaign impersonating DRIP support. Remember: We will never ask for your passwords via email.',
+    title: 'Weather Advisory: Heavy Rainfall Expected',
+    content: 'Please ensure your greenhouse drainage systems are clear. Heavy rainfall is predicted across the Rift Valley region over the next 48 hours.',
     severity: 'warning',
     date: 'April 28, 2026',
   },
@@ -52,45 +52,45 @@ const alerts: Alert[] = [
 const news: NewsItem[] = [
   {
     id: 1,
-    title: 'New Cybersecurity Modules Launched',
-    content: 'We have added three new modules focusing on AI-driven threats and defensive engineering to our training catalog.',
+    title: 'New Climate-Smart Farming Modules Launched',
+    content: 'We have added three new consultation modules focusing on water conservation and organic crop protection.',
     category: 'General',
     date: 'April 25, 2026',
   },
   {
     id: 2,
-    title: 'Multi-Factor Authentication Required',
-    content: 'Starting next week, all client accounts must have MFA enabled to access the premium resources dashboard.',
+    title: 'Upcoming Agricultural Workshop in Nakuru',
+    content: 'Join our agronomists on May 15th for a hands-on workshop on optimizing drip irrigation efficiency.',
     category: 'Clients',
     date: 'April 22, 2026',
   },
   {
     id: 3,
-    title: 'Internal Policy Update: Hybrid Work',
-    content: 'The updated Work-From-Home and Hybrid guidelines for Q2 2026 have been published in the internal HR portal.',
+    title: 'Internal Policy Update: Field Guidelines',
+    content: 'The updated Work-From-Home and Field Hybrid guidelines for Q2 2026 have been published in the internal HR portal.',
     category: 'Staff',
     date: 'April 20, 2026',
   },
   {
     id: 4,
-    title: 'Welcome Our New Security Analysts',
-    content: 'Please join us in welcoming our three new Tier-2 Security Operations Center analysts joining the Manila office.',
+    title: 'Welcome Our New Field Agronomists',
+    content: 'Please join us in welcoming our three new field agronomists joining our Nairobi and Nakuru branches.',
     category: 'Staff',
     date: 'April 18, 2026',
   },
   {
     id: 5,
-    title: 'Q1 Security Posture Report Released',
-    content: 'Our comprehensive analysis of Southeast Asian cybersecurity trends for Q1 2026 is now available for download.',
+    title: 'Q1 Agricultural Yield Report Released',
+    content: 'Our comprehensive analysis of climate-smart farming trends and crop yields for Q1 2026 is now available.',
     category: 'Clients',
     date: 'April 15, 2026',
   },
 ];
 
 const events: EventItem[] = [
-  { date: 'May 05', title: 'Webinar: Defending Against Ransomware', type: 'Client Event' },
-  { date: 'May 12', title: 'Internal Tech Talk: Zero Trust Architecture', type: 'Staff Training' },
-  { date: 'May 18', title: 'Monthly Security Patching Window', type: 'Maintenance' },
+  { date: 'May 05', title: 'Webinar: Optimizing Greenhouse Yields', type: 'Client Event' },
+  { date: 'May 12', title: 'Internal Tech Talk: Drip Irrigation Techniques', type: 'Staff Training' },
+  { date: 'May 18', title: 'Monthly System Maintenance Window', type: 'Maintenance' },
   { date: 'May 25', title: 'Town Hall Meeting', type: 'Company Wide' },
 ];
 
@@ -111,13 +111,13 @@ export default function CommunicationsPage() {
       {/* Hero */}
       <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-6 backdrop-blur-sm mx-auto">
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-6 backdrop-blur-sm mx-auto">
             Bulletin &amp; Updates
           </div>
           <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">
             Communications Hub
           </h1>
-          <p className="text-blue-100/80 max-w-3xl mx-auto text-lg leading-relaxed font-light animate-fadeInUp delay-100">
+          <p className="text-green-100/80 max-w-3xl mx-auto text-lg leading-relaxed font-light animate-fadeInUp delay-100">
             Stay informed with the latest announcements, urgent alerts, and scheduled events for DRIP clients and team members.
           </p>
         </div>
@@ -144,7 +144,7 @@ export default function CommunicationsPage() {
                           ? 'border-l-amber-500 bg-amber-500/5'
                           : alert.severity === 'error'
                           ? 'border-l-red-500 bg-red-500/5'
-                          : 'border-l-cyan-500 bg-cyan-500/5'
+                          : 'border-l-[#63913D] bg-[#63913D]/5'
                       }`}
                     >
                       <div className="flex justify-between items-start gap-4">
@@ -155,7 +155,7 @@ export default function CommunicationsPage() {
                                 ? 'bg-amber-100 text-amber-800'
                                 : alert.severity === 'error'
                                 ? 'bg-red-100 text-red-800'
-                                : 'bg-cyan-100 text-cyan-800'
+                                : 'bg-[#63913D]/10 text-[#63913D]'
                             }`}
                           >
                             {alert.severity}
@@ -207,7 +207,7 @@ export default function CommunicationsPage() {
                 {filteredNews.map((item) => (
                   <div
                     key={item.id}
-                    className="card p-6 hover:border-cyan-500/30 transition-all duration-300"
+                    className="card p-6 hover:border-[#63913D]/30 transition-all duration-300"
                   >
                     <div className="flex justify-between items-start gap-4 mb-2">
                       <span
@@ -252,7 +252,7 @@ export default function CommunicationsPage() {
                       key={index}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors"
                     >
-                      <div className="bg-gradient-to-br from-cyan-500 to-blue-600 text-white font-bold text-center py-2 px-3 rounded-xl shadow-md shadow-cyan-500/20 min-w-[60px]">
+                      <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-bold text-center py-2 px-3 rounded-xl shadow-md shadow-green-500/20 min-w-[60px]">
                         <span className="block text-xs uppercase tracking-wider leading-none">
                           {event.date.split(' ')[0]}
                         </span>
@@ -264,7 +264,7 @@ export default function CommunicationsPage() {
                         <h4 className="font-bold text-gray-900 text-sm leading-snug">
                           {event.title}
                         </h4>
-                        <span className="text-[11px] font-medium text-cyan-600 uppercase tracking-wider">
+                        <span className="text-[11px] font-medium text-[#63913D] uppercase tracking-wider">
                           {event.type}
                         </span>
                       </div>
@@ -310,7 +310,7 @@ export default function CommunicationsPage() {
           <h2 className="text-2xl md:text-3xl font-black mb-4 tracking-tight">
             Need to Broadcast a Message?
           </h2>
-          <p className="text-blue-200/70 mb-8 max-w-xl mx-auto text-sm font-light">
+          <p className="text-green-200/70 mb-8 max-w-xl mx-auto text-sm font-light">
             If you are a staff member or verified client looking to post an announcement, please contact the communications administrator.
           </p>
           <Link

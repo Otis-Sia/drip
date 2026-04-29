@@ -11,9 +11,9 @@ export default function CartPage() {
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge bg-white/10 text-cyan-300 border border-cyan-400/20 mb-4 backdrop-blur-sm">Quote Cart</div>
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Quote Cart</div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Quote Request</h1>
-          <p className="text-blue-100/70 font-light">
+          <p className="text-green-100/70 font-light">
             {itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your quote cart is empty'}
           </p>
         </div>
@@ -22,7 +22,7 @@ export default function CartPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {items.length === 0 ? (
           <div className="text-center py-20 animate-fadeIn">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-cyan-50 to-blue-50 flex items-center justify-center text-4xl mx-auto mb-6">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-4xl mx-auto mb-6">
               📋
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Your quote cart is empty</h2>
@@ -45,16 +45,24 @@ export default function CartPage() {
                 </button>
               </div>
               {items.map((item) => (
-                <div key={item.id} className="card !rounded-2xl p-6 flex flex-col sm:flex-row gap-5 animate-fadeIn">
+                <div key={item.cartItemId} className="card !rounded-2xl p-6 flex flex-col sm:flex-row gap-5 animate-fadeIn">
                   <div className="flex-1">
                     <div className="badge mb-2">{item.category}</div>
                     <h3 className="font-bold text-gray-900 mb-1">{item.name}</h3>
-                    <p className="text-gray-500 text-sm leading-relaxed">{item.description}</p>
+                    <p className="text-gray-500 text-sm leading-relaxed mb-3">{item.description}</p>
+                    
+                    {(item.farmSize || item.location || item.customNotes) && (
+                      <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 space-y-1">
+                        {item.farmSize && <p><span className="font-semibold text-gray-900">Farm Size:</span> {item.farmSize}</p>}
+                        {item.location && <p><span className="font-semibold text-gray-900">Location:</span> {item.location}</p>}
+                        {item.customNotes && <p><span className="font-semibold text-gray-900">Notes:</span> {item.customNotes}</p>}
+                      </div>
+                    )}
                   </div>
                   <div className="flex items-center gap-4 flex-shrink-0">
                     <div className="flex items-center border border-gray-200 rounded-xl overflow-hidden bg-white">
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity - 1)}
+                        onClick={() => updateQuantity(item.cartItemId, item.quantity - 1)}
                         className="px-3.5 py-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors"
                       >
                         −
@@ -63,14 +71,14 @@ export default function CartPage() {
                         {item.quantity}
                       </span>
                       <button
-                        onClick={() => updateQuantity(item.id, item.quantity + 1)}
+                        onClick={() => updateQuantity(item.cartItemId, item.quantity + 1)}
                         className="px-3.5 py-2 text-gray-500 hover:bg-gray-50 hover:text-gray-900 font-medium transition-colors"
                       >
                         +
                       </button>
                     </div>
                     <button
-                      onClick={() => removeItem(item.id)}
+                      onClick={() => removeItem(item.cartItemId)}
                       className="text-red-400 hover:text-red-500 text-sm font-medium transition-colors"
                     >
                       Remove
@@ -86,7 +94,7 @@ export default function CartPage() {
                 <h3 className="font-bold text-gray-900 text-lg mb-5">Quote Summary</h3>
                 <div className="space-y-3 mb-6">
                   {items.map((item) => (
-                    <div key={item.id} className="flex justify-between text-sm">
+                    <div key={item.cartItemId} className="flex justify-between text-sm">
                       <span className="text-gray-600 flex-1 font-medium">{item.name}</span>
                       <span className="text-gray-400 ml-2">× {item.quantity}</span>
                     </div>
@@ -95,13 +103,13 @@ export default function CartPage() {
                 <div className="border-t border-gray-100 pt-5 mb-6">
                   <div className="flex justify-between font-bold">
                     <span className="text-gray-900">Total Items</span>
-                    <span className="text-cyan-600 text-lg">{itemCount}</span>
+                    <span className="text-[#63913D] text-lg">{itemCount}</span>
                   </div>
                 </div>
                 <Link href="/shop/checkout" className="btn-primary block text-center mb-3 !rounded-xl !py-3.5" id="cart-proceed-checkout">
                   Proceed to Request Quote
                 </Link>
-                <Link href="/shop" className="block text-center text-cyan-600 hover:text-cyan-500 text-sm font-semibold transition-colors">
+                <Link href="/shop" className="block text-center text-[#63913D] hover:text-[#8FBB43] text-sm font-semibold transition-colors">
                   ← Continue Browsing
                 </Link>
                 <div className="mt-7 pt-5 border-t border-gray-100">
