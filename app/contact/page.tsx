@@ -216,7 +216,7 @@ export default function ContactPage() {
                         <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
                         <div className="space-y-1.5 text-xs text-gray-500 font-medium">
                           <p className="flex items-start gap-2">
-                            <Image src="/location_pin.svg" alt="" width={14} height={14} className="text-[#63913D] flex-shrink-0 mt-0.5" />
+                            <Image src="/location_pin.svg" alt="" width={14} height={14} className="flex-shrink-0 mt-0.5" />
                             <span>{branch.address}</span>
                           </p>
                           <p className="flex items-center gap-2">
