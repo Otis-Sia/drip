@@ -388,7 +388,7 @@ ${itemLines}
                   </div>
 
                   {/* Formspree error display */}
-                  {formspreeState.errors && formspreeState.errors.length > 0 && (
+                  {formspreeState.errors && (
                     <div className="bg-red-50 border border-red-200 rounded-xl p-4">
                       <p className="text-red-600 text-sm font-semibold mb-1">Submission failed</p>
                       <p className="text-red-500 text-xs">Something went wrong. Please try again or contact us directly.</p>
