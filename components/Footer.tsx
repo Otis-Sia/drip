@@ -25,6 +25,9 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex gap-3">
               {[
+                { name: 'Instagram', href: 'https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==', icon: '/instagram.svg' },
+                { name: 'Facebook', href: 'https://www.facebook.com/share/1CiLi5Nef3/', icon: '/facebook.svg' },
+                { name: 'TikTok', href: 'https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc', icon: '/tiktok.svg' },
                 { name: 'Email', href: 'mailto:info@afrodrip.co.ke', icon: '/email.svg' },
                 { name: 'Call', href: 'tel:+254711506498', icon: '/phone.svg' },
                 { name: 'Contact', href: '/contact', icon: '/chain_link.svg' },
@@ -33,6 +36,8 @@ export default function Footer() {
                   key={item.name}
                   href={item.href}
                   title={item.name}
+                  target={item.href.startsWith('http') ? '_blank' : undefined}
+                  rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
                   className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-gray-400 transition-all duration-300 hover:border-[#63913D]/40 hover:bg-[#63913D]/10 hover:text-[#8FBB43]"
                 >
                   <Image src={item.icon} alt={item.name} width={18} height={18} className="invert opacity-60" />

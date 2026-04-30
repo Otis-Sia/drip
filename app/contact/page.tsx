@@ -12,9 +12,9 @@ const contactInfo = [
 ];
 
 const socials = [
-  { name: 'LinkedIn', href: '#', icon: 'in' },
-  { name: 'Facebook', href: '#', icon: 'f' },
-  { name: 'Twitter/X', href: '#', icon: '𝕏' },
+  { name: 'Instagram', href: 'https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==', icon: '/instagram.svg' },
+  { name: 'Facebook', href: 'https://www.facebook.com/share/1CiLi5Nef3/', icon: '/facebook.svg' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc', icon: '/tiktok.svg' },
 ];
 
 export default function ContactPage() {
@@ -82,7 +82,7 @@ export default function ContactPage() {
                       className="w-10 h-10 rounded-xl bg-[#63913D] text-white flex items-center justify-center font-bold hover:bg-[#8FBB43] transition-all duration-300 text-sm hover:scale-110"
                       title={s.name}
                     >
-                      {s.icon}
+                      <Image src={s.icon} alt={s.name} width={20} height={20} className="invert" />
                     </a>
                   ))}
                 </div>
