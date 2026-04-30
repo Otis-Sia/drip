@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 
 interface Alert {
@@ -95,10 +96,10 @@ const events: EventItem[] = [
 ];
 
 const resources: ResourceItem[] = [
-  { title: 'Client Portal', link: '/shop', icon: '🔒', target: 'Clients' },
-  { title: 'Knowledge Base', link: '/services', icon: '🧠', target: 'General' },
-  { title: 'Submit a Ticket', link: '/contact', icon: '🎫', target: 'Clients' },
-  { title: 'Internal HR Portal', link: '#', icon: '📘', target: 'Staff' },
+  { title: 'Client Portal', link: '/shop', icon: '/lock.svg', target: 'Clients' },
+  { title: 'Knowledge Base', link: '/services', icon: '/knowledge_base.svg', target: 'General' },
+  { title: 'Submit a Ticket', link: '/contact', icon: '/ticket.svg', target: 'Clients' },
+  { title: 'Internal HR Portal', link: '#', icon: '/hr_portal.svg', target: 'Staff' },
 ];
 
 export default function CommunicationsPage() {
@@ -132,7 +133,7 @@ export default function CommunicationsPage() {
             {alerts.length > 0 && (
               <section className="space-y-4">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="text-xl">🔔</span>
+                  <Image src="/bell.svg" alt="" width={22} height={22} />
                   <h2 className="text-xl font-bold text-gray-900">Active Alerts</h2>
                 </div>
                 <div className="space-y-4">
@@ -181,7 +182,7 @@ export default function CommunicationsPage() {
             <section className="space-y-6">
               <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div className="flex items-center gap-2">
-                  <span className="text-xl">📰</span>
+                  <Image src="/newspaper.svg" alt="" width={22} height={22} />
                   <h2 className="text-xl font-bold text-gray-900">Latest Messages</h2>
                 </div>
 
@@ -242,7 +243,7 @@ export default function CommunicationsPage() {
             {/* Calendar Section */}
             <section className="space-y-4">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xl">📅</span>
+                <Image src="/calendar.svg" alt="" width={22} height={22} />
                 <h2 className="text-xl font-bold text-gray-900">Calendar</h2>
               </div>
               <div className="card p-6">
@@ -277,7 +278,7 @@ export default function CommunicationsPage() {
             {/* Quick Resources */}
             <section className="space-y-4">
               <div className="flex items-center gap-2 mb-2">
-                <span className="text-xl">🔗</span>
+                <Image src="/chain_link.svg" alt="" width={22} height={22} />
                 <h2 className="text-xl font-bold text-gray-900">Quick Resources</h2>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -287,8 +288,8 @@ export default function CommunicationsPage() {
                     href={res.link}
                     className="card p-5 text-center flex flex-col items-center group"
                   >
-                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center text-2xl mb-3 group-hover:scale-110 transition-transform duration-300">
-                      {res.icon}
+                    <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-gray-50 to-gray-100 flex items-center justify-center mb-3 group-hover:scale-110 transition-transform duration-300">
+                      <Image src={res.icon} alt="" width={28} height={28} />
                     </div>
                     <h4 className="font-bold text-gray-900 text-xs mb-1">
                       {res.title}

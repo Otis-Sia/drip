@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -10,7 +11,7 @@ const categories = [
   {
     id: 'greenhouse-materials',
     title: 'Greenhouse Materials',
-    icon: '🌱',
+    icon: '/green_house.svg',
     description: 'Polythene covers, locking profiles, and structural accessories.',
     count: 3,
     gradient: 'from-[#63913D]/10 to-[#8FBB43]/10',
@@ -18,7 +19,7 @@ const categories = [
   {
     id: 'irrigation-systems',
     title: 'Irrigation Systems',
-    icon: '💧',
+    icon: '/irrigation_systems.svg',
     description: 'Driplines, pipes, and efficient water delivery components.',
     count: 2,
     gradient: 'from-[#57D6F2]/10 to-[#63913D]/10',
@@ -26,7 +27,7 @@ const categories = [
   {
     id: 'water-management',
     title: 'Water Management',
-    icon: '🌊',
+    icon: '/water_wave.svg',
     description: 'Heavy-duty dam liners for effective water conservation.',
     count: 1,
     gradient: 'from-[#57D6F2]/10 to-[#8FBB43]/10',
@@ -34,7 +35,7 @@ const categories = [
   {
     id: 'nets-crop-protection',
     title: 'Nets & Crop Protection',
-    icon: '🕸️',
+    icon: '/protection_net.svg',
     description: 'Shade nets, bird nets, and insect exclusion solutions.',
     count: 3,
     gradient: 'from-lime-50 to-green-50',
@@ -42,7 +43,7 @@ const categories = [
   {
     id: 'crop-enhancement',
     title: 'Crop Enhancement Materials',
-    icon: '🌾',
+    icon: '/wheat.svg',
     description: 'Mulch films and other materials to improve crop yield.',
     count: 1,
     gradient: 'from-amber-50 to-orange-50',
@@ -144,8 +145,8 @@ export default function ShopPage() {
                 id={`shop-cat-${cat.id}`}
                 className="card p-7 group"
               >
-                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300`}>
-                  {cat.icon}
+                <div className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${cat.gradient} flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300`}>
+                  <Image src={cat.icon} alt="" width={32} height={32} />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2 group-hover:text-[#63913D] transition-colors">{cat.title}</h3>
                 <p className="text-gray-500 text-sm mb-4 leading-relaxed">{cat.description}</p>
@@ -202,13 +203,13 @@ export default function ShopPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-10 text-center">
             {[
-              { icon: '📋', title: 'Request a Quote', desc: 'Add products to your quote cart and submit a request. Our team will respond within 24 hours.' },
-              { icon: '🤝', title: 'Custom Solutions', desc: 'Need something specific? We tailor every solution to your exact requirements.' },
-              { icon: '⚡', title: 'Fast Response', desc: 'Our sales team is available Mon–Fri 8am–6pm PHT to assist with your inquiries.' },
+              { icon: '/clipboard.svg', title: 'Request a Quote', desc: 'Add products to your quote cart and submit a request. Our team will respond within 24 hours.' },
+              { icon: '/handshake.svg', title: 'Custom Solutions', desc: 'Need something specific? We tailor every solution to your exact requirements.' },
+              { icon: '/lightning.svg', title: 'Fast Response', desc: 'Our sales team is available Mon–Fri 8am–6pm PHT to assist with your inquiries.' },
             ].map((item) => (
               <div key={item.title} className="flex flex-col items-center group">
-                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-3xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
+                <div className="w-16 h-16 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Image src={item.icon} alt="" width={32} height={32} />
                 </div>
                 <h3 className="font-bold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed max-w-xs">{item.desc}</p>

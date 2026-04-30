@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/lib/cartContext';
 
 export default function CartPage() {
@@ -22,8 +23,8 @@ export default function CartPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {items.length === 0 ? (
           <div className="text-center py-20 animate-fadeIn">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-4xl mx-auto mb-6">
-              📋
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mx-auto mb-6">
+              <Image src="/clipboard.svg" alt="" width={40} height={40} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Your quote cart is empty</h2>
             <p className="text-gray-500 mb-8">Browse our products and add items to request a quote.</p>
