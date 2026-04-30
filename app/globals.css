@@ -188,7 +188,6 @@ body {
   font-size: 0.9rem;
   border-radius: var(--radius-sm);
   transition: all 0.3s var(--transition);
-  box-shadow: 0 2px 8px rgba(99,145,61,0.3);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -196,7 +195,6 @@ body {
 
 .btn-primary:hover {
   background: linear-gradient(135deg, var(--primary), var(--primary-light));
-  box-shadow: 0 4px 16px rgba(99,145,61,0.4);
   transform: translateY(-2px);
 }
 
@@ -212,7 +210,6 @@ body {
   font-size: 0.9rem;
   border-radius: var(--radius-sm);
   transition: all 0.3s var(--transition);
-  box-shadow: var(--shadow-sm);
   border: none;
   cursor: pointer;
   text-decoration: none;
@@ -220,7 +217,6 @@ body {
 
 .btn-secondary:hover {
   background: var(--primary-light);
-  box-shadow: var(--shadow-md);
   transform: translateY(-2px);
 }
 

@@ -12,10 +12,10 @@ export default function CartPage() {
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Quote Cart</div>
+          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Cart</div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Quote Request</h1>
           <p className="text-green-100/70 font-light">
-            {itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your quote cart is empty'}
+            {itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your cart is empty'}
           </p>
         </div>
       </div>
@@ -26,7 +26,7 @@ export default function CartPage() {
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mx-auto mb-6">
               <Image src="/clipboard.svg" alt="" width={40} height={40} />
             </div>
-            <h2 className="text-2xl font-bold text-gray-900 mb-3">Your quote cart is empty</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
             <p className="text-gray-500 mb-8">Browse our products and add items to request a quote.</p>
             <Link href="/shop" className="btn-secondary" id="cart-browse-link">
               Browse Products
@@ -52,11 +52,9 @@ export default function CartPage() {
                     <h3 className="font-bold text-gray-900 mb-1">{item.name}</h3>
                     <p className="text-gray-500 text-sm leading-relaxed mb-3">{item.description}</p>
                     
-                    {(item.farmSize || item.location || item.customNotes) && (
+                    {item.customNotes && (
                       <div className="bg-gray-50 p-3 rounded-lg text-xs text-gray-600 space-y-1">
-                        {item.farmSize && <p><span className="font-semibold text-gray-900">Farm Size:</span> {item.farmSize}</p>}
-                        {item.location && <p><span className="font-semibold text-gray-900">Location:</span> {item.location}</p>}
-                        {item.customNotes && <p><span className="font-semibold text-gray-900">Notes:</span> {item.customNotes}</p>}
+                        <p><span className="font-semibold text-gray-900">Notes:</span> {item.customNotes}</p>
                       </div>
                     )}
                   </div>

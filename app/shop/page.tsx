@@ -203,7 +203,7 @@ export default function ShopPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-3 gap-10 text-center">
             {[
-              { icon: '/clipboard.svg', title: 'Request a Quote', desc: 'Add products to your quote cart and submit a request. Our team will respond within 24 hours.' },
+              { icon: '/clipboard.svg', title: 'Request a Quote', desc: 'Add products to your cart and submit a request. Our team will respond within 24 hours.' },
               { icon: '/handshake.svg', title: 'Custom Solutions', desc: 'Need something specific? We tailor every solution to your exact requirements.' },
               { icon: '/lightning.svg', title: 'Fast Response', desc: 'Our sales team is available Mon–Fri 8am–6pm PHT to assist with your inquiries.' },
             ].map((item) => (

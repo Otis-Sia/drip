@@ -4,11 +4,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/lib/cartContext';
+import { usePathname } from 'next/navigation';
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const { itemCount } = useCart();
+  const pathname = usePathname();
+  const isShopPage = pathname?.startsWith('/shop');
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -42,7 +45,7 @@ export default function Navbar() {
               <div
                 className={`font-black text-xl px-3.5 py-1.5 rounded-lg transition-all duration-300 ${
                   scrolled
-                    ? 'bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white shadow-md shadow-green-500/20'
+                    ? 'bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white'
                     : 'bg-white/15 text-white backdrop-blur-sm border border-white/20'
                 }`}
               >
@@ -83,21 +86,23 @@ export default function Navbar() {
                 {link.label}
               </Link>
             ))}
-            <Link
-              href="/shop/cart"
-              id="nav-quote-cart"
-              className="relative ml-2 btn-primary !py-2 !px-4 !text-sm"
-            >
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-              </svg>
-              Quote Cart
-              {itemCount > 0 && (
-                <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg shadow-red-500/30 animate-scaleIn">
-                  {itemCount}
-                </span>
-              )}
-            </Link>
+            {isShopPage && (
+              <Link
+                href="/shop/cart"
+                id="nav-quote-cart"
+                className="relative ml-2 btn-primary !py-2 !px-4 !text-sm flex items-center gap-2"
+              >
+                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+                </svg>
+                Cart
+                {itemCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg shadow-red-500/30 animate-scaleIn">
+                    {itemCount}
+                  </span>
+                )}
+              </Link>
+            )}
           </div>
 
           {/* Mobile menu button */}
@@ -138,14 +143,16 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          <Link
-            href="/shop/cart"
-            onClick={() => setMenuOpen(false)}
-            className="flex items-center gap-2 py-3 px-4 text-[#63913D] font-semibold text-sm"
-          >
-            <Image src="/clipboard.svg" alt="" width={16} height={16} />
-            Quote Cart {itemCount > 0 && `(${itemCount})`}
-          </Link>
+          {isShopPage && (
+            <Link
+              href="/shop/cart"
+              onClick={() => setMenuOpen(false)}
+              className="flex items-center gap-2 py-3 px-4 text-[#63913D] font-semibold text-sm"
+            >
+              <Image src="/clipboard.svg" alt="" width={16} height={16} />
+              Cart {itemCount > 0 && `(${itemCount})`}
+            </Link>
+          )}
         </div>
       </div>
     </nav>

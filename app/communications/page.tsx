@@ -253,7 +253,7 @@ export default function CommunicationsPage() {
                       key={index}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors"
                     >
-                      <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-bold text-center py-2 px-3 rounded-xl shadow-md shadow-green-500/20 min-w-[60px]">
+                      <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-bold text-center py-2 px-3 rounded-xl min-w-[60px]">
                         <span className="block text-xs uppercase tracking-wider leading-none">
                           {event.date.split(' ')[0]}
                         </span>

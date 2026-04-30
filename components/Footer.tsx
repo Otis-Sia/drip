@@ -12,7 +12,7 @@ export default function Footer() {
         <div className="grid gap-12 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <div className="mb-5 flex items-center gap-3">
-              <div className="rounded-lg bg-gradient-to-br from-[#63913D] to-[#8FBB43] px-3.5 py-1.5 text-xl font-black text-white shadow-lg shadow-green-500/20">
+              <div className="rounded-lg bg-gradient-to-br from-[#63913D] to-[#8FBB43] px-3.5 py-1.5 text-xl font-black text-white">
                 DRIP
               </div>
               <div>
@@ -100,9 +100,22 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-white/5 pt-8 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between">
-          <p>© {new Date().getFullYear()} Afrodrip Limited. All rights reserved.</p>
-          <div className="flex flex-wrap gap-x-6 gap-y-2">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/5 pt-8 text-sm text-gray-600 sm:flex-row sm:items-start sm:justify-between">
+          <div className="flex flex-col gap-2">
+            <p>© {new Date().getFullYear()} Afrodrip Limited. All rights reserved.</p>
+            <p className="text-xs">
+              Designed & Developed by{' '}
+              <a 
+                href="https://github.com/Otis-Sia" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 transition-colors duration-200 hover:text-[#8FBB43] font-medium"
+              >
+                Otis-Sia
+              </a>
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-x-6 gap-y-2 mt-2 sm:mt-0">
             <Link href="/about" className="transition-colors duration-200 hover:text-[#8FBB43]">About</Link>
             <Link href="/services" className="transition-colors duration-200 hover:text-[#8FBB43]">Services</Link>
             <Link href="/contact" className="transition-colors duration-200 hover:text-[#8FBB43]">Get in touch</Link>
