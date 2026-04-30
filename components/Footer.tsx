@@ -111,12 +111,12 @@ export default function Footer() {
             <p className="text-xs">
               Designed & Developed by{' '}
               <a 
-                href="https://github.com/Otis-Sia" 
+                href="https://github.com/Ots-Sia" 
                 target="_blank" 
                 rel="noopener noreferrer" 
                 className="text-gray-400 transition-colors duration-200 hover:text-[#8FBB43] font-medium"
               >
-                Otis-Sia
+                Cedar
               </a>
             </p>
           </div>
