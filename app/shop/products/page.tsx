@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useCart } from '@/lib/cartContext';
 
 const allProducts = [
@@ -151,7 +152,9 @@ export default function ProductsPage() {
                 <ul className="space-y-2 mb-4">
                   {product.features.map((f) => (
                     <li key={f} className="text-xs text-gray-500 flex items-start gap-2">
-                      <span className="w-4 h-4 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center text-[10px] font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-4 h-4 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-2.5 h-2.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
                       {f}
                     </li>
                   ))}
@@ -177,7 +180,12 @@ export default function ProductsPage() {
                       : 'btn-secondary !w-full !text-sm'
                   }`}
                 >
-                  {addedId === product.id ? '✓ Added to Cart' : 'Add to Quote'}
+                  {addedId === product.id ? (
+                    <span className="flex items-center justify-center gap-1.5">
+                      <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      Added to Cart
+                    </span>
+                  ) : 'Add to Quote'}
                 </button>
               </div>
             </div>
@@ -186,7 +194,9 @@ export default function ProductsPage() {
 
         {filtered.length === 0 && (
           <div className="text-center py-20">
-            <div className="text-5xl mb-4">🔍</div>
+            <div className="mb-4 flex justify-center">
+              <Image src="/search.svg" alt="" width={48} height={48} className="opacity-40" />
+            </div>
             <p className="text-gray-400 text-lg mb-2">No products found matching your criteria.</p>
             <button
               onClick={() => { setSearch(''); setSelectedCategory('All'); }}

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,7 +9,7 @@ export const metadata: Metadata = {
 
 const services = [
   {
-    icon: '🌱',
+    icon: '/green_house.svg',
     title: 'Greenhouse Design and Supply',
     tagline: 'Year-Round Cultivation',
     problem: 'Unpredictable weather and harsh climate conditions can devastate open-field crops, leading to significant financial losses.',
@@ -25,7 +26,7 @@ const services = [
     iconBg: 'from-[#63913D]/15 to-[#8FBB43]/15',
   },
   {
-    icon: '💧',
+    icon: '/irrigation_systems.svg',
     title: 'Irrigation System Installation',
     tagline: 'Precision Water Management',
     problem: 'Water scarcity and inefficient irrigation methods waste valuable resources and reduce crop health.',
@@ -42,7 +43,7 @@ const services = [
     iconBg: 'from-[#57D6F2]/15 to-[#63913D]/15',
   },
   {
-    icon: '☀️',
+    icon: '/Climate_smart_solutions.svg',
     title: 'Climate-Smart Farming Solutions',
     tagline: 'Adapt and Thrive',
     problem: 'Climate change introduces unprecedented challenges, from prolonged droughts to extreme temperatures.',
@@ -59,7 +60,7 @@ const services = [
     iconBg: 'from-amber-50 to-orange-50',
   },
   {
-    icon: '🏗️',
+    icon: '/Agricultural_infrastructure.svg',
     title: 'Agricultural Infrastructure',
     tagline: 'Building the Foundation',
     problem: 'Lack of proper infrastructure limits farm expansion and operational efficiency.',
@@ -76,7 +77,7 @@ const services = [
     iconBg: 'from-[#57D6F2]/15 to-[#8FBB43]/15',
   },
   {
-    icon: '🧑‍🌾',
+    icon: '/farmer_first.svg',
     title: 'Farmer Training and Support',
     tagline: 'Empowering Growers',
     problem: 'Access to modern equipment is not enough; farmers need the knowledge to utilize it effectively to achieve ROI.',
@@ -93,7 +94,7 @@ const services = [
     iconBg: 'from-indigo-50 to-blue-50',
   },
   {
-    icon: '🔧',
+    icon: '/wrench.svg',
     title: 'Maintenance Services',
     tagline: 'Continuous Reliability',
     problem: 'Equipment breakdowns can halt operations and jeopardize crop health if not addressed immediately.',
@@ -134,8 +135,8 @@ export default function ServicesPage() {
             className={`grid md:grid-cols-2 gap-12 lg:gap-16 items-start ${index % 2 === 1 ? 'md:grid-flow-dense' : ''}`}
           >
             <div className={index % 2 === 1 ? 'md:col-start-2' : ''}>
-              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center text-4xl mb-5`}>
-                {service.icon}
+              <div className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${service.iconBg} flex items-center justify-center mb-5`}>
+                <Image src={service.icon} alt="" width={36} height={36} />
               </div>
               <div className="section-label">{service.tagline}</div>
               <h2 className="text-3xl font-bold text-gray-900 mb-5">{service.title}</h2>
@@ -151,7 +152,9 @@ export default function ServicesPage() {
               {/* Outcomes */}
               <div className="bg-[#63913D]/10 border border-[#63913D]/20 rounded-2xl p-5">
                 <p className="text-[#63913D] font-semibold text-sm mb-1 flex items-center gap-2">
-                  <span className="w-5 h-5 rounded-full bg-[#63913D] text-white flex items-center justify-center text-xs">✓</span>
+                  <span className="w-5 h-5 rounded-full bg-[#63913D] text-white flex items-center justify-center flex-shrink-0">
+                    <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                  </span>
                   Proven Results
                 </p>
                 <p className="text-[#63913D]/80 text-sm leading-relaxed">{service.outcomes}</p>
@@ -164,7 +167,9 @@ export default function ServicesPage() {
                 <ul className="space-y-3.5">
                   {service.features.map((feature) => (
                     <li key={feature} className="flex items-start gap-3">
-                      <span className="w-5 h-5 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">✓</span>
+                      <span className="w-5 h-5 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center flex-shrink-0 mt-0.5">
+                        <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                      </span>
                       <span className="text-gray-600 text-sm leading-relaxed">{feature}</span>
                     </li>
                   ))}

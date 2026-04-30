@@ -1,13 +1,14 @@
 'use client';
 
 import { useState } from 'react';
+import Image from 'next/image';
 import { branches } from '@/lib/branches';
 
 const contactInfo = [
-  { icon: '✉', label: 'Email', value: 'info@afrodrip.co.ke' },
-  { icon: '☎', label: 'Phone', value: '+254 711 506 498' },
-  { icon: '⌂', label: 'Address', value: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya' },
-  { icon: '🕐', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 5:00 PM EAT' },
+  { icon: '/email.svg', label: 'Email', value: 'info@afrodrip.co.ke' },
+  { icon: '/phone.svg', label: 'Phone', value: '+254 711 506 498' },
+  { icon: '/location_pin.svg', label: 'Address', value: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya' },
+  { icon: '/clock.svg', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 5:00 PM EAT' },
 ];
 
 const socials = [
@@ -59,8 +60,8 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {contactInfo.map((item) => (
                     <div key={item.label} className="flex items-start gap-4 group">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-lg flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
-                        {item.icon}
+                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                        <Image src={item.icon} alt="" width={22} height={22} />
                       </div>
                       <div>
                         <div className="text-xs font-semibold text-gray-400 uppercase tracking-wider">{item.label}</div>
@@ -100,8 +101,10 @@ export default function ContactPage() {
             <div className="lg:col-span-3 animate-fadeInUp delay-200">
               {submitted ? (
                 <div className="card p-12 !rounded-2xl text-center animate-scaleIn">
-                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center text-4xl mx-auto mb-6 shadow-lg shadow-green-500/20">
-                    ✓
+                  <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+                    <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
+                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
                   </div>
                   <h3 className="text-2xl font-black text-gray-900 mb-3">Message Sent!</h3>
                   <p className="text-gray-500 mb-8 leading-relaxed">Thank you, {form.name}. We&apos;ll get back to you at <strong>{form.email}</strong> within 1 business day.</p>
@@ -213,15 +216,15 @@ export default function ContactPage() {
                         <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
                         <div className="space-y-1.5 text-xs text-gray-500 font-medium">
                           <p className="flex items-start gap-2">
-                            <span className="text-[#63913D] flex-shrink-0 mt-0.5">⌂</span>
+                            <Image src="/location_pin.svg" alt="" width={14} height={14} className="flex-shrink-0 mt-0.5" />
                             <span>{branch.address}</span>
                           </p>
                           <p className="flex items-center gap-2">
-                            <span className="text-[#63913D] flex-shrink-0">☎</span>
+                            <Image src="/phone.svg" alt="" width={14} height={14} className="flex-shrink-0" />
                             <span>{branch.phone}</span>
                           </p>
                           <p className="flex items-center gap-2">
-                            <span className="text-[#63913D] flex-shrink-0">✉</span>
+                            <Image src="/email.svg" alt="" width={14} height={14} className="flex-shrink-0" />
                             <span className="break-all">{branch.email}</span>
                           </p>
                         </div>

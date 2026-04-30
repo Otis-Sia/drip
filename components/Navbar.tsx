@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import { useCart } from '@/lib/cartContext';
 
@@ -140,9 +141,10 @@ export default function Navbar() {
           <Link
             href="/shop/cart"
             onClick={() => setMenuOpen(false)}
-            className="block py-3 px-4 text-[#63913D] font-semibold text-sm"
+            className="flex items-center gap-2 py-3 px-4 text-[#63913D] font-semibold text-sm"
           >
-            📋 Quote Cart {itemCount > 0 && `(${itemCount})`}
+            <Image src="/clipboard.svg" alt="" width={16} height={16} />
+            Quote Cart {itemCount > 0 && `(${itemCount})`}
           </Link>
         </div>
       </div>

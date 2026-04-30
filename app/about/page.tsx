@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -7,18 +8,18 @@ export const metadata: Metadata = {
 };
 
 const values = [
-  { icon: '💡', title: 'Innovation', description: 'Continuously evolving to bring cutting-edge solutions to modern farming.' },
-  { icon: '⭐', title: 'Quality', description: 'Delivering durable, premium infrastructure built to withstand real-world conditions.' },
-  { icon: '🌍', title: 'Sustainability', description: 'Promoting practices that conserve water, protect soil, and ensure long-term viability.' },
-  { icon: '🤝', title: 'Customer Focus', description: 'Working hand-in-hand with farmers to meet their specific needs and goals.' },
-  { icon: '🔐', title: 'Integrity', description: 'Operating with transparency, honesty, and ethical standards in all our engagements.' },
+  { icon: '/innovation.svg', title: 'Innovation', description: 'Continuously evolving to bring cutting-edge solutions to modern farming.' },
+  { icon: '/quality.svg', title: 'Quality', description: 'Delivering durable, premium infrastructure built to withstand real-world conditions.' },
+  { icon: '/sustainable.svg', title: 'Sustainability', description: 'Promoting practices that conserve water, protect soil, and ensure long-term viability.' },
+  { icon: '/customer_focus.svg', title: 'Customer Focus', description: 'Working hand-in-hand with farmers to meet their specific needs and goals.' },
+  { icon: '/lock.svg', title: 'Integrity', description: 'Operating with transparency, honesty, and ethical standards in all our engagements.' },
 ];
 
 const targetMarkets = [
-  { icon: '🧑‍🌾', title: 'Smallholder Farmers', desc: 'Affordable, scalable systems to increase yield and profitability on smaller plots of land.' },
-  { icon: '🚜', title: 'Commercial Farms', desc: 'Large-scale, high-efficiency infrastructure for massive agricultural operations.' },
-  { icon: '🏛️', title: 'Institutions', desc: 'Schools, universities, and research centers developing agricultural programs.' },
-  { icon: '📈', title: 'Agribusiness Investors', desc: 'Reliable turnkey farming solutions for investors looking for strong ROI.' },
+  { icon: '/farmer_first.svg', title: 'Smallholder Farmers', desc: 'Affordable, scalable systems to increase yield and profitability on smaller plots of land.' },
+  { icon: '/commercial_farms.svg', title: 'Commercial Farms', desc: 'Large-scale, high-efficiency infrastructure for massive agricultural operations.' },
+  { icon: '/institutions.svg', title: 'Institutions', desc: 'Schools, universities, and research centers developing agricultural programs.' },
+  { icon: '/agribusiness.svg', title: 'Agribusiness Investors', desc: 'Reliable turnkey farming solutions for investors looking for strong ROI.' },
 ];
 
 const gradientColors = [
@@ -54,8 +55,8 @@ export default function AboutPage() {
               </p>
               <div className="bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 border border-[#63913D]/15 rounded-2xl p-5 mb-6">
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center text-white text-2xl flex-shrink-0 shadow-lg shadow-green-500/20">
-                    🏆
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center flex-shrink-0 shadow-lg shadow-green-500/20">
+                    <Image src="/trophy.svg" alt="Award" width={28} height={28} className="invert brightness-200" />
                   </div>
                   <div>
                     <h3 className="font-bold text-gray-900">Award Winning Excellence</h3>
@@ -98,8 +99,8 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid md:grid-cols-2 gap-8">
             <div className="card p-8 md:p-10 group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                🎯
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Image src="/target.svg" alt="Mission" width={32} height={32} />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
               <p className="text-gray-500 leading-relaxed">
@@ -107,8 +108,8 @@ export default function AboutPage() {
               </p>
             </div>
             <div className="card p-8 md:p-10 group">
-              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#57D6F2]/10 to-[#63913D]/10 flex items-center justify-center text-2xl mb-6 group-hover:scale-110 transition-transform duration-300">
-                🔭
+              <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#57D6F2]/10 to-[#63913D]/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+                <Image src="/telescope.svg" alt="Vision" width={32} height={32} />
               </div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
               <p className="text-gray-500 leading-relaxed">
@@ -129,8 +130,8 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {values.map((value) => (
               <div key={value.title} className="flex gap-4 p-6 rounded-2xl bg-[#f8fafc] hover:bg-gradient-to-br hover:from-[#63913D]/5 hover:to-[#8FBB43]/5 transition-all duration-300 group border border-transparent hover:border-[#63913D]/15">
-                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center text-2xl flex-shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
-                  {value.icon}
+                <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center flex-shrink-0 shadow-sm group-hover:shadow-md group-hover:scale-110 transition-all duration-300">
+                  <Image src={value.icon} alt="" width={28} height={28} />
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900 mb-1">{value.title}</h3>
@@ -153,8 +154,8 @@ export default function AboutPage() {
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {targetMarkets.map((item) => (
               <div key={item.title} className="card p-6 group">
-                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-2xl mb-4 group-hover:scale-110 transition-transform duration-300">
-                  {item.icon}
+                <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                  <Image src={item.icon} alt="" width={28} height={28} />
                 </div>
                 <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>

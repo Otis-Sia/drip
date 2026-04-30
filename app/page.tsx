@@ -1,23 +1,24 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 const services = [
   {
-    icon: '🌱',
+    icon: '/green_house.svg',
     title: 'Greenhouse Systems',
     description: 'Modern, durable greenhouse structures tailored to your specific crop requirements and local climate conditions.',
   },
   {
-    icon: '💧',
+    icon: '/irrigation_systems.svg',
     title: 'Irrigation Systems',
     description: 'Efficient water management solutions including drip irrigation, sprinklers, and automated delivery systems.',
   },
   {
-    icon: '☀️',
+    icon: '/Climate_smart_solutions.svg',
     title: 'Climate-Smart Solutions',
     description: 'Advanced farming technologies designed to maximize yields while adapting to changing environmental factors.',
   },
   {
-    icon: '🏗️',
+    icon: '/Agricultural_infrastructure.svg',
     title: 'Agricultural Infrastructure',
     description: 'Comprehensive infrastructure development from dam liners to specialized crop protection nets.',
   },
@@ -75,7 +76,7 @@ export default function Home() {
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#8FBB43]/10 to-[#57D6F2]/10 backdrop-blur-xl border border-white/10 rotate-12" />
             <div className="absolute inset-6 rounded-2xl bg-gradient-to-br from-[#8FBB43]/8 to-[#57D6F2]/8 backdrop-blur-sm border border-white/5 -rotate-6" />
             <div className="absolute inset-12 rounded-xl bg-gradient-to-br from-[#8FBB43]/5 to-[#57D6F2]/5 border border-white/5 rotate-3 flex items-center justify-center">
-              <div className="text-6xl opacity-60">🌿</div>
+              <Image src="/leaf.svg" alt="" width={64} height={64} className="opacity-60 invert brightness-200" />
             </div>
           </div>
         </div>
@@ -122,16 +123,16 @@ export default function Home() {
             </div>
             <div className="space-y-4">
               {[
-                { icon: '🎯', title: 'Innovative Solutions', desc: 'Bringing modern technology to traditional farming for better yields.' },
-                { icon: '🤝', title: 'Farmer First', desc: 'Empowering growers with affordable, efficient, and reliable infrastructure.' },
-                { icon: '🌍', title: 'Sustainable Practice', desc: 'Promoting water conservation and climate-resilient agriculture.' },
+                { icon: '/target.svg', title: 'Innovative Solutions', desc: 'Bringing modern technology to traditional farming for better yields.' },
+                { icon: '/farmer_first.svg', title: 'Farmer First', desc: 'Empowering growers with affordable, efficient, and reliable infrastructure.' },
+                { icon: '/sustainable_practise.svg', title: 'Sustainable Practice', desc: 'Promoting water conservation and climate-resilient agriculture.' },
               ].map((item, i) => (
                 <div
                   key={item.title}
                   className={`card !rounded-xl p-5 flex gap-4 items-start animate-fadeInUp delay-${(i + 1) * 200}`}
                 >
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-2xl flex-shrink-0">
-                    {item.icon}
+                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center flex-shrink-0">
+                    <Image src={item.icon} alt="" width={28} height={28} />
                   </div>
                   <div>
                     <div className="font-semibold text-gray-900 mb-1">{item.title}</div>
@@ -158,8 +159,8 @@ export default function Home() {
                 key={service.title}
                 className={`card p-7 group animate-fadeInUp delay-${(i + 1) * 100}`}
               >
-                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center text-3xl mb-5 group-hover:scale-110 transition-transform duration-300">
-                  {service.icon}
+                <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mb-5 group-hover:scale-110 transition-transform duration-300">
+                  <Image src={service.icon} alt="" width={32} height={32} />
                 </div>
                 <h3 className="text-lg font-bold text-gray-900 mb-3">{service.title}</h3>
                 <p className="text-gray-500 text-sm leading-relaxed">{service.description}</p>

@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   return (
@@ -24,9 +25,9 @@ export default function Footer() {
             </p>
             <div className="mt-6 flex gap-3">
               {[
-                { name: 'Email', href: 'mailto:info@afrodrip.co.ke', icon: '✉' },
-                { name: 'Call', href: 'tel:+254711506498', icon: '☎' },
-                { name: 'Contact', href: '/contact', icon: '→' },
+                { name: 'Email', href: 'mailto:info@afrodrip.co.ke', icon: '/email.svg' },
+                { name: 'Call', href: 'tel:+254711506498', icon: '/phone.svg' },
+                { name: 'Contact', href: '/contact', icon: '/chain_link.svg' },
               ].map((item) => (
                 <Link
                   key={item.name}
@@ -34,7 +35,7 @@ export default function Footer() {
                   title={item.name}
                   className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-gray-400 transition-all duration-300 hover:border-[#63913D]/40 hover:bg-[#63913D]/10 hover:text-[#8FBB43]"
                 >
-                  {item.icon}
+                  <Image src={item.icon} alt={item.name} width={18} height={18} className="invert opacity-60" />
                 </Link>
               ))}
             </div>
@@ -81,14 +82,16 @@ export default function Footer() {
             <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Contact</h3>
             <ul className="space-y-4 text-sm">
               {[
-                { icon: '✉', text: 'info@afrodrip.co.ke', href: 'mailto:info@afrodrip.co.ke' },
-                { icon: '☎', text: '+254 711 506 498', href: 'tel:+254711506498' },
-                { icon: '⌂', text: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya', href: '/contact' },
-                { icon: '🕐', text: 'Mon–Fri, 8:00 AM – 5:00 PM EAT', href: '/contact' },
+                { icon: '/email.svg', text: 'info@afrodrip.co.ke', href: 'mailto:info@afrodrip.co.ke' },
+                { icon: '/phone.svg', text: '+254 711 506 498', href: 'tel:+254711506498' },
+                { icon: '/location_pin.svg', text: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya', href: '/contact' },
+                { icon: '/clock.svg', text: 'Mon–Fri, 8:00 AM – 5:00 PM EAT', href: '/contact' },
               ].map((item) => (
                 <li key={item.text}>
                   <Link href={item.href} className="flex items-start gap-3 text-gray-500 transition-colors duration-200 hover:text-[#8FBB43]">
-                    <span className="mt-0.5 text-xs text-[#8FBB43]">{item.icon}</span>
+                    <span className="mt-0.5 flex-shrink-0">
+                      <Image src={item.icon} alt="" width={14} height={14} className="invert opacity-50" />
+                    </span>
                     <span>{item.text}</span>
                   </Link>
                 </li>
