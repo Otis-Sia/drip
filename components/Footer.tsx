@@ -2,49 +2,57 @@ import Link from 'next/link';
 
 export default function Footer() {
   return (
-    <footer id="main-footer" className="bg-[#1a2e12] text-gray-300 mt-auto relative overflow-hidden">
-      {/* Decorative gradient */}
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#8FBB43]/40 to-transparent" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-bl from-[#63913D]/10 to-transparent pointer-events-none" />
+    <footer id="main-footer" className="relative mt-auto overflow-hidden bg-[#13210d] text-gray-300">
+      <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#8FBB43]/50 to-transparent" />
+      <div className="pointer-events-none absolute -top-24 right-0 h-[28rem] w-[28rem] rounded-full bg-[#63913D]/10 blur-3xl" />
+      <div className="pointer-events-none absolute bottom-0 left-0 h-[24rem] w-[24rem] rounded-full bg-[#57D6F2]/5 blur-3xl" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 relative">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {/* Company Info */}
-          <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-5">
-              <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-black text-xl px-3.5 py-1.5 rounded-lg shadow-lg shadow-green-500/20">
+      <div className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
+        <div className="grid gap-12 lg:grid-cols-12">
+          <div className="lg:col-span-4">
+            <div className="mb-5 flex items-center gap-3">
+              <div className="rounded-lg bg-gradient-to-br from-[#63913D] to-[#8FBB43] px-3.5 py-1.5 text-xl font-black text-white shadow-lg shadow-green-500/20">
                 DRIP
               </div>
+              <div>
+                <div className="text-sm font-semibold text-white">Afrodrip Limited</div>
+                <div className="text-xs font-medium text-[#8FBB43]">Climate-smart agricultural solutions</div>
+              </div>
             </div>
-            <p className="text-gray-500 text-sm leading-relaxed mb-6">
-              Afrodrip Limited. Empowering farmers with cutting-edge agricultural and climate-smart farming solutions.
+            <p className="max-w-md text-sm leading-relaxed text-gray-500">
+              We design and supply greenhouse systems, irrigation solutions, and farm infrastructure that help growers build more productive, resilient operations.
             </p>
-            <div className="flex gap-3">
+            <div className="mt-6 flex gap-3">
               {[
-                { name: 'LinkedIn', icon: 'in' },
-                { name: 'Facebook', icon: 'f' },
-                { name: 'X', icon: '𝕏' },
-              ].map((s) => (
-                <a
-                  key={s.name}
-                  href="#"
-                  title={s.name}
-                  className="w-9 h-9 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#8FBB43] hover:bg-[#63913D]/10 hover:border-[#63913D]/30 transition-all duration-300 text-sm font-bold"
+                { name: 'Email', href: 'mailto:info@afrodrip.co.ke', icon: '✉' },
+                { name: 'Call', href: 'tel:+254711506498', icon: '☎' },
+                { name: 'Contact', href: '/contact', icon: '→' },
+              ].map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  title={item.name}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-sm font-bold text-gray-400 transition-all duration-300 hover:border-[#63913D]/40 hover:bg-[#63913D]/10 hover:text-[#8FBB43]"
                 >
-                  {s.icon}
-                </a>
+                  {item.icon}
+                </Link>
               ))}
             </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Quick Links</h3>
+          <div className="lg:col-span-2">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Quick Links</h3>
             <ul className="space-y-3 text-sm">
-              {[['/', 'Home'], ['/about', 'About'], ['/services', 'Services'], ['/communications', 'Communications'], ['/shop', 'Shop'], ['/contact', 'Contact']].map(([href, label]) => (
+              {[
+                ['/', 'Home'],
+                ['/about', 'About'],
+                ['/services', 'Services'],
+                ['/shop', 'Shop'],
+                ['/contact', 'Contact'],
+              ].map(([href, label]) => (
                 <li key={href}>
-                  <Link href={href} className="text-gray-500 hover:text-[#8FBB43] transition-colors duration-200 flex items-center gap-2">
-                    <span className="w-1 h-1 rounded-full bg-[#8FBB43]/50" />
+                  <Link href={href} className="flex items-center gap-2 text-gray-500 transition-colors duration-200 hover:text-[#8FBB43]">
+                    <span className="h-1 w-1 rounded-full bg-[#8FBB43]/50" />
                     {label}
                   </Link>
                 </li>
@@ -52,42 +60,49 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Services */}
-          <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Services</h3>
+          <div className="lg:col-span-3">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Solutions</h3>
             <ul className="space-y-3 text-sm">
-              {['Greenhouse Accessories', 'Irrigation Systems', 'Climate-Smart Farming', 'Technical Support'].map((s) => (
-                <li key={s} className="text-gray-500 flex items-center gap-2">
-                  <span className="w-1 h-1 rounded-full bg-[#8FBB43]/50" />
+              {[
+                'Greenhouse Accessories',
+                'Irrigation Systems',
+                'Climate-Smart Farming',
+                'Technical Support',
+              ].map((s) => (
+                <li key={s} className="flex items-center gap-2 text-gray-500">
+                  <span className="h-1 w-1 rounded-full bg-[#8FBB43]/50" />
                   {s}
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h3 className="text-white font-semibold mb-5 text-sm uppercase tracking-wider">Contact Us</h3>
-            <ul className="space-y-3 text-sm">
+          <div className="lg:col-span-3">
+            <h3 className="mb-5 text-sm font-semibold uppercase tracking-wider text-white">Contact</h3>
+            <ul className="space-y-4 text-sm">
               {[
-                { icon: '✉', text: 'info@dripph.com' },
-                { icon: '☎', text: '+63 (2) 8123-4567' },
-                { icon: '⌂', text: 'Metro Manila, Philippines' },
+                { icon: '✉', text: 'info@afrodrip.co.ke', href: 'mailto:info@afrodrip.co.ke' },
+                { icon: '☎', text: '+254 711 506 498', href: 'tel:+254711506498' },
+                { icon: '⌂', text: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya', href: '/contact' },
+                { icon: '🕐', text: 'Mon–Fri, 8:00 AM – 5:00 PM EAT', href: '/contact' },
               ].map((item) => (
-                <li key={item.text} className="flex items-start gap-3">
-                  <span className="text-[#8FBB43] mt-0.5 text-xs">{item.icon}</span>
-                  <span className="text-gray-500">{item.text}</span>
+                <li key={item.text}>
+                  <Link href={item.href} className="flex items-start gap-3 text-gray-500 transition-colors duration-200 hover:text-[#8FBB43]">
+                    <span className="mt-0.5 text-xs text-[#8FBB43]">{item.icon}</span>
+                    <span>{item.text}</span>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
         </div>
 
-        <div className="border-t border-white/5 mt-12 pt-8 flex flex-col sm:flex-row justify-between items-center gap-4 text-sm text-gray-600">
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/5 pt-8 text-sm text-gray-600 sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Afrodrip Limited. All rights reserved.</p>
-          <div className="flex gap-6">
-            <Link href="/contact" className="hover:text-[#8FBB43] transition-colors duration-200">Privacy Policy</Link>
-            <Link href="/contact" className="hover:text-[#8FBB43] transition-colors duration-200">Terms of Service</Link>
+          <div className="flex flex-wrap gap-x-6 gap-y-2">
+            <Link href="/about" className="transition-colors duration-200 hover:text-[#8FBB43]">About</Link>
+            <Link href="/services" className="transition-colors duration-200 hover:text-[#8FBB43]">Services</Link>
+            <Link href="/contact" className="transition-colors duration-200 hover:text-[#8FBB43]">Get in touch</Link>
           </div>
         </div>
       </div>
