@@ -28,6 +28,11 @@ export default function Navbar() {
     { href: '/contact', label: 'Contact' },
   ];
 
+  const currentLabel = links.find(link => 
+    link.href === '/' ? pathname === '/' : pathname?.startsWith(link.href)
+  )?.label || '';
+
+
   return (
     <nav
       id="main-navigation"
@@ -40,52 +45,53 @@ export default function Navbar() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group" id="logo-link">
-            <div className="relative">
-              <div
-                className={`font-black text-xl px-3.5 py-1.5 rounded-lg transition-all duration-300 ${
-                  scrolled
-                    ? 'bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white'
-                    : 'bg-white/15 text-white backdrop-blur-sm border border-white/20'
-                }`}
-              >
-                DRIP
-              </div>
-            </div>
-            <div className="hidden sm:block">
-              <div
-                className={`font-semibold text-sm leading-tight transition-colors duration-300 ${
-                  scrolled ? 'text-gray-900' : 'text-white'
-                }`}
-              >
-                Afrodrip
-              </div>
-              <div
-                className={`text-xs font-medium transition-colors duration-300 ${
-                  scrolled ? 'text-[#63913D]' : 'text-[#8FBB43]'
-                }`}
-              >
-                Limited
-              </div>
-            </div>
+          <Link href="/" className="flex items-center" id="logo-link">
+            <Image 
+              src="/afrodrip.svg" 
+              alt="Afrodrip Logo" 
+              width={160} 
+              height={50} 
+              className={`h-10 w-auto transition-all duration-300 ${!scrolled && 'brightness-0 invert'}`}
+              priority
+            />
           </Link>
+
+          {/* Mobile Current Page Label */}
+          <div className="md:hidden absolute left-1/2 -translate-x-1/2">
+            <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
+              scrolled ? 'text-gray-900' : 'text-white'
+            }`}>
+              {currentLabel}
+            </span>
+          </div>
+
 
           {/* Desktop nav */}
           <div className="hidden md:flex items-center gap-1">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                id={`nav-link-${link.label.toLowerCase()}`}
-                className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
-                  scrolled
-                    ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
-                    : 'text-white/80 hover:text-white hover:bg-white/10'
-                }`}
-              >
-                {link.label}
-              </Link>
-            ))}
+            {links.map((link) => {
+              const isActive = pathname === link.href || (link.href !== '/' && pathname?.startsWith(link.href));
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  id={`nav-link-${link.label.toLowerCase()}`}
+                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
+                    isActive
+                      ? scrolled ? 'text-[#63913D]' : 'text-white'
+                      : scrolled
+                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
+                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                  }`}
+                >
+                  {link.label}
+                  {isActive && (
+                    <div className={`absolute bottom-1 left-4 right-4 h-0.5 rounded-full transition-colors duration-300 ${
+                      scrolled ? 'bg-[#63913D]' : 'bg-white'
+                    }`} />
+                  )}
+                </Link>
+              );
+            })}
             {isShopPage && (
               <Link
                 href="/shop/cart"
