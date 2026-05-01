@@ -76,14 +76,14 @@ export default function Home() {
             <div className="absolute inset-0 rounded-3xl bg-gradient-to-br from-[#8FBB43]/10 to-[#57D6F2]/10 backdrop-blur-xl border border-white/10 rotate-12" />
             <div className="absolute inset-6 rounded-2xl bg-gradient-to-br from-[#8FBB43]/8 to-[#57D6F2]/8 backdrop-blur-sm border border-white/5 -rotate-6" />
             <div className="absolute inset-12 rounded-xl bg-gradient-to-br from-[#8FBB43]/5 to-[#57D6F2]/5 border border-white/5 rotate-3 flex items-center justify-center">
-              <Image src="/leaf.svg" alt="" width={64} height={64} className="opacity-60 invert brightness-200" />
+              <Image src="/afrodrip.svg" alt="Afrodrip Logo" width={180} height={180} className="opacity-100" />
             </div>
           </div>
         </div>
       </section>
 
       {/* Stats */}
-      <section className="bg-[#2a4a1a] text-white py-12 relative">
+      <section className="bg-[#324f1f] text-white py-12 relative">
         <div className="absolute inset-0 bg-gradient-to-r from-[#63913D]/10 via-transparent to-[#8FBB43]/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
