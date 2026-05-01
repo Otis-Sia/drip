@@ -1,8 +1,9 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, use, useEffect, Suspense } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useCart } from '@/lib/cartContext';
 
 const allProducts = [
@@ -74,11 +75,56 @@ const allProducts = [
 
 const categories = ['All', 'Greenhouse Materials', 'Irrigation Systems', 'Water Management', 'Nets & Crop Protection', 'Crop Enhancement Materials'];
 
-export default function ProductsPage() {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+const categoryMap: Record<string, string> = {
+  'greenhouse-materials': 'Greenhouse Materials',
+  'irrigation-systems': 'Irrigation Systems',
+  'water-management': 'Water Management',
+  'nets-crop-protection': 'Nets & Crop Protection',
+  'crop-enhancement': 'Crop Enhancement Materials',
+};
+
+const reverseCategoryMap: Record<string, string> = {
+  'Greenhouse Materials': 'greenhouse-materials',
+  'Irrigation Systems': 'irrigation-systems',
+  'Water Management': 'water-management',
+  'Nets & Crop Protection': 'nets-crop-protection',
+  'Crop Enhancement Materials': 'crop-enhancement',
+};
+
+function ProductsContent({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  const unwrappedSearchParams = use(searchParams);
+  const router = useRouter();
+  
+  const categoryParam = typeof unwrappedSearchParams.category === 'string' 
+    ? unwrappedSearchParams.category 
+    : 'All';
+
+  const [selectedCategory, setSelectedCategory] = useState(
+    categoryMap[categoryParam] || 'All'
+  );
   const [search, setSearch] = useState('');
   const [addedId, setAddedId] = useState<string | null>(null);
   const { addItem } = useCart();
+
+  // Sync state with URL changes
+  useEffect(() => {
+    const cat = categoryMap[categoryParam] || 'All';
+    setSelectedCategory(cat);
+  }, [categoryParam]);
+
+  const handleCategoryChange = (cat: string) => {
+    setSelectedCategory(cat);
+    const slug = reverseCategoryMap[cat];
+    if (slug) {
+      router.push(`/shop/products?category=${slug}`, { scroll: false });
+    } else {
+      router.push('/shop/products', { scroll: false });
+    }
+  };
 
   const handleAdd = (product: typeof allProducts[0]) => {
     addItem({ id: product.id, name: product.name, category: product.category, description: product.description });
@@ -123,7 +169,7 @@ export default function ProductsPage() {
             {categories.map((cat) => (
               <button
                 key={cat}
-                onClick={() => setSelectedCategory(cat)}
+                onClick={() => handleCategoryChange(cat)}
                 id={`filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 ${
                   selectedCategory === cat
@@ -199,7 +245,7 @@ export default function ProductsPage() {
             </div>
             <p className="text-gray-400 text-lg mb-2">No products found matching your criteria.</p>
             <button
-              onClick={() => { setSearch(''); setSelectedCategory('All'); }}
+              onClick={() => { setSearch(''); handleCategoryChange('All'); }}
               className="text-[#63913D] font-semibold hover:text-[#8FBB43] transition-colors"
             >
               Clear filters
@@ -208,5 +254,19 @@ export default function ProductsPage() {
         )}
       </div>
     </div>
+  );
+}
+
+export default function ProductsPage(props: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+}) {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="animate-pulse text-gray-400 font-medium">Loading products...</div>
+      </div>
+    }>
+      <ProductsContent {...props} />
+    </Suspense>
   );
 }
