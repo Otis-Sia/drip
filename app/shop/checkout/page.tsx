@@ -6,6 +6,7 @@ import { useCart, CartItem } from '@/lib/cartContext';
 import Link from 'next/link';
 import Image from 'next/image';
 import { branches } from '@/lib/branches';
+import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 
 export default function CheckoutPage() {
   const { items, itemCount, clearCart } = useCart();
@@ -156,9 +157,7 @@ ${itemLines}
         <div className="max-w-2xl w-full text-center space-y-8 animate-scaleIn">
           <div className="card p-12 !rounded-3xl shadow-xl">
             <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
-              <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-              </svg>
+              <CheckCircleIcon size={40} color="white" />
             </div>
             <h2 className="text-3xl font-black text-gray-900 mb-3">Quote Request Submitted!</h2>
             <p className="text-gray-500 mb-8 leading-relaxed">
@@ -202,7 +201,7 @@ ${itemLines}
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">
+          <div className="badge !bg-[#8FBB43] !text-white border-none mb-6 backdrop-blur-sm shadow-lg shadow-green-900/20">
             {isReviewing ? 'Review Your Request' : 'Request for Quotation'}
           </div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">

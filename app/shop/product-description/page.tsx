@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useCart } from '@/lib/cartContext';
 import { Suspense, useState } from 'react';
+import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 
 const products: Record<string, {
   id: string;
@@ -286,7 +287,7 @@ function ProductContent() {
             <Image src="/search.svg" alt="Not found" width={48} height={48} className="mx-auto opacity-40" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Product not found</h2>
-          <Link href="/shop" className="text-[#63913D] hover:text-[#8FBB43] font-semibold">Back to Shop</Link>
+          <Link href="/shop" className="text-[#63913D] hover:brightness-90 font-semibold transition-all">Back to Shop</Link>
         </div>
       </div>
     );
@@ -340,9 +341,7 @@ function ProductContent() {
               <div className="grid sm:grid-cols-2 gap-3">
                 {product.useCases.map((useCase) => (
                   <div key={useCase} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
-                    <span className="w-5 h-5 rounded-full bg-[#63913D]/10 text-[#63913D] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={3}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
-                    </span>
+                    <CheckCircleIcon size={20} />
                     <span className="text-gray-600 text-sm">{useCase}</span>
                   </div>
                 ))}
@@ -385,12 +384,12 @@ function ProductContent() {
                 className={`w-full font-semibold px-6 py-3.5 rounded-xl transition-all duration-300 mb-3 ${
                   added
                     ? 'bg-[#8FBB43] text-white'
-                    : 'bg-[#63913D] hover:bg-[#8FBB43] text-white'
+                    : 'bg-[#63913D] hover:brightness-90 text-white'
                 }`}
               >
                 {added ? (
                   <span className="flex items-center justify-center gap-2">
-                    <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}><path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" /></svg>
+                    <CheckCircleIcon size={18} color="white" />
                     Added to Cart
                   </span>
                 ) : 'Add to Cart'}

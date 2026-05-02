@@ -91,11 +91,23 @@ body {
   100% { background-position: 200% 0; }
 }
 
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
 .animate-fadeInUp   { animation: fadeInUp 0.7s var(--transition) both; }
 .animate-fadeIn     { animation: fadeIn 0.6s var(--transition) both; }
 .animate-scaleIn    { animation: scaleIn 0.5s var(--transition) both; }
 .animate-slideRight { animation: slideInRight 0.6s var(--transition) both; }
 .animate-float      { animation: float 6s ease-in-out infinite; }
+.animate-fadeInLeft  { animation: fadeInLeft 0.7s var(--transition) both; }
+.animate-fadeInRight { animation: fadeInRight 0.7s var(--transition) both; }
 
 .delay-100 { animation-delay: 100ms; }
 .delay-200 { animation-delay: 200ms; }
@@ -114,6 +126,16 @@ body {
   border-radius: var(--radius);
 }
 
+.glass-icon {
+  background: rgba(87, 214, 242, 0.12);
+  backdrop-filter: blur(12px) saturate(180%);
+  -webkit-backdrop-filter: blur(12px) saturate(180%);
+  border: 1px solid rgba(87, 214, 242, 0.3);
+  box-shadow: 
+    0 4px 15px rgba(87, 214, 242, 0.1),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+}
+
 /* ─── Premium Card ─── */
 .card {
   background: var(--surface);
@@ -127,6 +149,7 @@ body {
   box-shadow: var(--shadow-lg);
   border-color: rgba(99,145,61,0.3);
   transform: translateY(-4px);
+  filter: brightness(0.95);
 }
 
 /* ─── Gradient Backgrounds ─── */
@@ -194,7 +217,7 @@ body {
 }
 
 .btn-primary:hover {
-  background: linear-gradient(135deg, var(--primary), var(--primary-light));
+  filter: brightness(1.05);
   transform: translateY(-2px);
 }
 
@@ -216,7 +239,7 @@ body {
 }
 
 .btn-secondary:hover {
-  background: var(--primary-light);
+  filter: brightness(0.95);
   transform: translateY(-2px);
 }
 
@@ -238,8 +261,10 @@ body {
 }
 
 .btn-outline:hover {
+  border-color: white;
+  color: white;
   background: rgba(255,255,255,0.1);
-  border-color: rgba(255,255,255,0.7);
+  filter: brightness(1.1);
   transform: translateY(-2px);
 }
 
@@ -261,8 +286,8 @@ body {
 }
 
 .btn-outline-dark:hover {
-  background: var(--primary);
-  color: white;
+  background: rgba(99,145,61,0.05);
+  filter: brightness(0.9);
   transform: translateY(-2px);
 }
 
@@ -381,4 +406,40 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
+}
+/* ─── SVG Consistency ─── */
+
+/* Inline SVGs: Force dark green color for consistency by default */
+svg:not([id="svg1"]):not(.logo-svg) {
+  color: var(--primary-dark);
+}
+
+/* Apply brand colors to SVG elements by default */
+svg:not([id="svg1"]):not(.logo-svg) :is(path, circle, rect, polyline, polygon, ellipse) {
+  fill: currentColor;
+  stroke: currentColor;
+}
+
+/* Maintain transparency if fill="none" is set on the element OR its parent SVG */
+svg:not([id="svg1"]):not(.logo-svg)[fill="none"] :is(path, circle, rect, polyline, polygon, ellipse),
+svg:not([id="svg1"]):not(.logo-svg) [fill="none"] {
+  fill: none !important;
+}
+
+/* Maintain transparency if stroke="none" is set on the element OR its parent SVG */
+svg:not([id="svg1"]):not(.logo-svg)[stroke="none"] :is(path, circle, rect, polyline, polygon, ellipse),
+svg:not([id="svg1"]):not(.logo-svg) [stroke="none"] {
+  stroke: none !important;
+}
+
+/* For SVGs used in Image/img tags (icons): Use CSS filter to colorize to --primary-dark (#4a7230) */
+img[src$=".svg"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]),
+img[src*=".svg?"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]) {
+  filter: brightness(0) saturate(100%) invert(41%) sepia(35%) saturate(542%) hue-rotate(54deg) brightness(91%) contrast(84%) !important;
+}
+
+/* Special case for social icons in footer which might be inverted */
+#main-footer img[src$=".svg"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]) {
+  opacity: 0.8 !important;
+  filter: brightness(0) saturate(100%) invert(41%) sepia(35%) saturate(542%) hue-rotate(54deg) brightness(91%) contrast(84%) !important;
 }

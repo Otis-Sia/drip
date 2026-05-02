@@ -1,0 +1,132 @@
+export interface CompanyValue {
+  icon: string;
+  title: string;
+  description: string;
+}
+
+export interface TargetMarket {
+  icon: string;
+  title: string;
+  desc: string;
+}
+
+export interface CompanyStat {
+  value: string;
+  label: string;
+}
+
+export interface SocialLink {
+  name: string;
+  href: string;
+  icon: string;
+}
+
+export interface ContactInfoItem {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+export const companyValues: CompanyValue[] = [
+  { icon: '/innovation.svg', title: 'Innovation', description: 'Continuously evolving to bring cutting-edge solutions to modern farming.' },
+  { icon: '/quality.svg', title: 'Quality', description: 'Delivering durable, premium infrastructure built to withstand real-world conditions.' },
+  { icon: '/sustainable.svg', title: 'Sustainability', description: 'Promoting practices that conserve water, protect soil, and ensure long-term viability.' },
+  { icon: '/customer_focus.svg', title: 'Customer Focus', description: 'Working hand-in-hand with farmers to meet their specific needs and goals.' },
+  { icon: '/lock.svg', title: 'Integrity', description: 'Operating with transparency, honesty, and ethical standards in all our engagements.' },
+];
+
+export const targetMarkets: TargetMarket[] = [
+  { icon: '/farmer_first.svg', title: 'Smallholder Farmers', desc: 'Affordable, scalable systems to increase yield and profitability on smaller plots of land.' },
+  { icon: '/commercial_farms.svg', title: 'Commercial Farms', desc: 'Large-scale, high-efficiency infrastructure for massive agricultural operations.' },
+  { icon: '/institutions.svg', title: 'Institutions', desc: 'Schools, universities, and research centers developing agricultural programs.' },
+  { icon: '/agribusiness.svg', title: 'Agribusiness Investors', desc: 'Reliable turnkey farming solutions for investors looking for strong ROI.' },
+];
+
+export const companyStats: CompanyStat[] = [
+  { value: '2018', label: 'Year Established' },
+  { value: '16+', label: 'Branches Nationwide' },
+  { value: '6', label: 'Countries Present' },
+  { value: '1st', label: 'Irrigation Excellence 2025' },
+];
+
+export const aboutStats: [string, string][] = [
+  ['16+', 'Branches Nationwide'],
+  ['6', 'Countries in EA'],
+  ['Top', 'Irrigation Award'],
+  ['1000s', 'Farms Equipped'],
+  ['24/7', 'Technical Support'],
+  ['100%', 'Commitment'],
+];
+
+export const socials: SocialLink[] = [
+  { name: 'Instagram', href: 'https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==', icon: '/instagram.svg' },
+  { name: 'Facebook', href: 'https://www.facebook.com/share/1CiLi5Nef3/', icon: '/facebook.svg' },
+  { name: 'TikTok', href: 'https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc', icon: '/tiktok.svg' },
+];
+
+export const contactInfo: ContactInfoItem[] = [
+  { icon: '/email.svg', label: 'Email', value: 'info@afrodrip.co.ke' },
+  { icon: '/phone.svg', label: 'Phone', value: '+254 711 506 498' },
+  { icon: '/location_pin.svg', label: 'Address', value: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya' },
+  { icon: '/clock.svg', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 5:00 PM EAT' },
+];
+
+export interface TeamMember {
+  name: string;
+  role: string;
+  department: string;
+  bio: string;
+  image?: string;
+}
+
+export const teamMembers: TeamMember[] = [
+  {
+    name: 'John Doe',
+    role: 'Chief Executive Officer',
+    department: 'Executive',
+    bio: 'Over 15 years of experience in agricultural technology and business leadership across East Africa.',
+    image: 'https://placehold.co/300x300/63913D/white?text=JM',
+  },
+  {
+    name: 'Jane Doe',
+    role: 'Head of Operations',
+    department: 'Operations',
+    bio: 'Spearheads supply chain management and ensures seamless project delivery across all branches.',
+    image: 'https://placehold.co/300x300/8FBB43/white?text=SW',
+  },
+  {
+    name: 'Peter philip',
+    role: 'Chief Agronomist',
+    department: 'Agronomy',
+    bio: 'Leads the technical consulting team with deep expertise in greenhouse and irrigation design.',
+    image: 'https://placehold.co/300x300/57D6F2/white?text=DO',
+  },
+  {
+    name: 'Janet Doe',
+    role: 'Head of Sales & Marketing',
+    department: 'Sales',
+    bio: 'Drives client acquisition and brand growth strategy with a farmer-first approach.',
+    image: 'https://placehold.co/300x300/324f1f/white?text=GN',
+  },
+  {
+    name: 'Peter simeon',
+    role: 'Technical Director',
+    department: 'Engineering',
+    bio: 'Oversees all technical installations and product quality assurance across the company.',
+    image: 'https://placehold.co/300x300/63913D/white?text=PK',
+  },
+  {
+    name: 'Jane Mary',
+    role: 'Finance Manager',
+    department: 'Finance',
+    bio: 'Manages financial planning, budgeting, and ensures sustainable business growth.',
+    image: 'https://placehold.co/300x300/8FBB43/white?text=FA',
+  },
+  {
+    name: 'cate Mary',
+    role: 'Finance Manager',
+    department: 'Finance',
+    bio: 'Manages financial planning, budgeting, and ensures sustainable business growth.',
+    image: 'https://placehold.co/300x300/8FBB43/white?text=FA',
+  },
+];

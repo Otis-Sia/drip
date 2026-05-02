@@ -12,7 +12,7 @@ export default function CartPage() {
       {/* Header */}
       <div className="gradient-hero text-white pt-32 pb-14 md:pt-40 md:pb-16 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-4 backdrop-blur-sm">Cart</div>
+          <div className="badge !bg-[#8FBB43] !text-white border-none mb-6 backdrop-blur-sm shadow-lg shadow-green-900/20">Cart</div>
           <h1 className="text-3xl md:text-4xl font-black mb-3 tracking-tight">Your Quote Request</h1>
           <p className="text-green-100/70 font-light">
             {itemCount > 0 ? `${itemCount} item${itemCount !== 1 ? 's' : ''} ready for quote` : 'Your cart is empty'}

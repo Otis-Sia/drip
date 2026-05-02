@@ -3,19 +3,9 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import { branches } from '@/lib/branches';
-
-const contactInfo = [
-  { icon: '/email.svg', label: 'Email', value: 'info@afrodrip.co.ke' },
-  { icon: '/phone.svg', label: 'Phone', value: '+254 711 506 498' },
-  { icon: '/location_pin.svg', label: 'Address', value: 'Maasai Rd, off Mombasa Rd, Nairobi, Kenya' },
-  { icon: '/clock.svg', label: 'Business Hours', value: 'Mon–Fri, 8:00 AM – 5:00 PM EAT' },
-];
-
-const socials = [
-  { name: 'Instagram', href: 'https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==', icon: '/instagram.svg' },
-  { name: 'Facebook', href: 'https://www.facebook.com/share/1CiLi5Nef3/', icon: '/facebook.svg' },
-  { name: 'TikTok', href: 'https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc', icon: '/tiktok.svg' },
-];
+import { contactInfo, socials } from '@/lib/company';
+import BranchCard from '@/components/contact/BranchCard';
+import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: '', email: '', phone: '', subject: '', message: '' });
@@ -43,9 +33,9 @@ export default function ContactPage() {
       {/* Hero */}
       <section className="gradient-hero text-white pt-32 pb-16 md:pt-40 md:pb-24 relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          <div className="badge !bg-white/20 !text-[#57D6F2] border !border-[#57D6F2]/30 mb-6 backdrop-blur-sm mx-auto">Contact Us</div>
+          <div className="badge !bg-[#8FBB43] !text-white border-none mb-6 backdrop-blur-sm shadow-lg shadow-green-900/20 mx-auto">Contact Us</div>
           <h1 className="text-4xl md:text-5xl font-black mb-6 tracking-tight animate-fadeInUp">Get in Touch</h1>
-          <p className="text-green-100/80 max-w-2xl mx-auto text-lg font-light animate-fadeInUp delay-100">Have a question, need a consultation, or ready to request a quote? We&apos;d love to hear from you.</p>
+          <p className="text-white max-w-2xl mx-auto text-lg font-light animate-fadeInUp delay-100">Have a question, need a consultation, or ready to request a quote? We&apos;d love to hear from you.</p>
         </div>
       </section>
 
@@ -60,7 +50,7 @@ export default function ContactPage() {
                 <div className="space-y-4">
                   {contactInfo.map((item) => (
                     <div key={item.label} className="flex items-start gap-4 group">
-                      <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
+                      <div className="w-11 h-11 rounded-xl glass-icon flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-transform duration-300">
                         <Image src={item.icon} alt="" width={22} height={22} />
                       </div>
                       <div>
@@ -79,7 +69,7 @@ export default function ContactPage() {
                     <a
                       key={s.name}
                       href={s.href}
-                      className="w-10 h-10 rounded-xl bg-[#63913D] text-white flex items-center justify-center font-bold hover:bg-[#8FBB43] transition-all duration-300 text-sm hover:scale-110"
+                      className="w-10 h-10 rounded-xl bg-[#63913D] text-white flex items-center justify-center font-bold hover:brightness-90 transition-all duration-300 text-sm hover:scale-110"
                       title={s.name}
                     >
                       <Image src={s.icon} alt={s.name} width={20} height={20} className="invert" />
@@ -91,9 +81,9 @@ export default function ContactPage() {
               <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] rounded-2xl p-7 text-white relative overflow-hidden">
                 <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-bl from-[#8FBB43]/30 to-transparent rounded-bl-[40px]" />
                 <h3 className="font-bold mb-2 relative">Need an Urgent Response?</h3>
-                <p className="text-green-200/60 text-sm mb-5 leading-relaxed relative">For critical farm installations or urgent inquiries, please call our priority line.</p>
+                <p className="text-white mb-5 leading-relaxed relative">For critical farm installations or urgent inquiries, please call our priority line.</p>
                 <div className="bg-gradient-to-r from-white to-[#57D6F2] bg-clip-text text-transparent font-black text-xl relative">+254 711 506 498</div>
-                <div className="text-green-300/50 text-xs mt-1 font-medium relative">Available for agricultural emergencies</div>
+                <div className="text-white/80 text-xs mt-1 font-medium relative">Available for agricultural emergencies</div>
               </div>
             </div>
 
@@ -102,9 +92,7 @@ export default function ContactPage() {
               {submitted ? (
                 <div className="card p-12 !rounded-2xl text-center animate-scaleIn">
                   <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
-                    <svg className="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7" />
-                    </svg>
+                    <CheckCircleIcon size={40} color="white" />
                   </div>
                   <h3 className="text-2xl font-black text-gray-900 mb-3">Message Sent!</h3>
                   <p className="text-gray-500 mb-8 leading-relaxed">Thank you, {form.name}. We&apos;ll get back to you at <strong>{form.email}</strong> within 1 business day.</p>
@@ -212,23 +200,7 @@ export default function ContactPage() {
                   </h3>
                   <div className="space-y-4">
                     {regionBranches.map((branch) => (
-                      <div key={branch.id} className="card p-5 hover:border-[#63913D]/30 transition-all duration-300">
-                        <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
-                        <div className="space-y-1.5 text-xs text-gray-500 font-medium">
-                          <p className="flex items-start gap-2">
-                            <Image src="/location_pin.svg" alt="" width={14} height={14} className="flex-shrink-0 mt-0.5" />
-                            <span>{branch.address}</span>
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Image src="/phone.svg" alt="" width={14} height={14} className="flex-shrink-0" />
-                            <span>{branch.phone}</span>
-                          </p>
-                          <p className="flex items-center gap-2">
-                            <Image src="/email.svg" alt="" width={14} height={14} className="flex-shrink-0" />
-                            <span className="break-all">{branch.email}</span>
-                          </p>
-                        </div>
-                      </div>
+                      <BranchCard key={branch.id} branch={branch} />
                     ))}
                   </div>
                 </div>
