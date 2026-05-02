@@ -1,0 +1,44 @@
+[
+  {
+    "id": "greenhouse-materials",
+    "title": "Greenhouse Materials",
+    "icon": "/green_house.svg",
+    "description": "Polythene covers, locking profiles, and structural accessories.",
+    "count": 3,
+    "gradient": "from-[#63913D]/10 to-[#8FBB43]/10",
+    "image": "https://placehold.co/600x400/63913D/white?text=Greenhouse+Materials"
+  },
+  {
+    "id": "irrigation-systems",
+    "title": "Irrigation Systems",
+    "icon": "/irrigation_systems.svg",
+    "description": "Driplines, pipes, and efficient water delivery components.",
+    "count": 2,
+    "gradient": "from-[#57D6F2]/10 to-[#63913D]/10",
+    "image": "https://placehold.co/600x400/57D6F2/white?text=Irrigation+Systems"
+  },
+  {
+    "id": "water-management",
+    "title": "Water Management",
+    "icon": "/water_wave.svg",
+    "description": "Heavy-duty dam liners for effective water conservation.",
+    "count": 1,
+    "gradient": "from-[#57D6F2]/10 to-[#8FBB43]/10"
+  },
+  {
+    "id": "nets-crop-protection",
+    "title": "Nets & Crop Protection",
+    "icon": "/protection_net.svg",
+    "description": "Shade nets, bird nets, and insect exclusion solutions.",
+    "count": 3,
+    "gradient": "from-lime-50 to-green-50"
+  },
+  {
+    "id": "crop-enhancement",
+    "title": "Crop Enhancement Materials",
+    "icon": "/wheat.svg",
+    "description": "Mulch films and other materials to improve crop yield.",
+    "count": 1,
+    "gradient": "from-amber-50 to-orange-50"
+  }
+]

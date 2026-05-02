@@ -2,7 +2,7 @@
 
 import Link from 'next/link';
 import Image from 'next/image';
-import { Product } from '@/lib/products';
+import { Product, categoryMap } from '@/lib/products';
 import { useCart } from '@/lib/cartContext';
 import { useState } from 'react';
 import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
@@ -40,7 +40,7 @@ export default function ProductCard({ product, showFeatures = false }: ProductCa
         )}
       </div>
       <div className="p-6 flex-1">
-        <div className="badge mb-3 w-fit">{product.category}</div>
+        <div className="badge mb-3 w-fit">{categoryMap[product.category] || product.category}</div>
         <h3 className="font-bold text-gray-900 mb-2">{product.name}</h3>
         <p className="text-gray-500 text-sm mb-4 leading-relaxed">{product.description}</p>
         

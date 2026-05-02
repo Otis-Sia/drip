@@ -1,0 +1,20 @@
+[
+  {
+    "title": "Client Portal",
+    "link": "/shop",
+    "icon": "/lock.svg",
+    "target": "Clients"
+  },
+  {
+    "title": "Knowledge Base",
+    "link": "/services",
+    "icon": "/knowledge_base.svg",
+    "target": "General"
+  },
+  {
+    "title": "Submit a Ticket",
+    "link": "/contact",
+    "icon": "/ticket.svg",
+    "target": "Clients"
+  }
+]

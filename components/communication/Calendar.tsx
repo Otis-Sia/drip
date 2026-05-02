@@ -21,10 +21,10 @@ export default function Calendar({ events }: CalendarProps) {
             >
               <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-bold text-center py-2 px-3 rounded-xl min-w-[60px]">
                 <span className="block text-xs uppercase tracking-wider leading-none">
-                  {event.date.split(' ')[0]}
+                  {new Date(event.date + 'T00:00:00').toLocaleString('en-US', { month: 'short' })}
                 </span>
                 <span className="block text-lg leading-tight mt-0.5">
-                  {event.date.split(' ')[1]}
+                  {new Date(event.date + 'T00:00:00').toLocaleString('en-US', { day: '2-digit' })}
                 </span>
               </div>
               <div className="flex-1">

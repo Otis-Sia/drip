@@ -102,7 +102,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
                     </h3>
                   </div>
                   <span className="text-xs text-gray-400 font-medium whitespace-nowrap">
-                    {item.date}
+                    {new Date(item.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                   </span>
                 </div>
                 <p className="text-gray-600 text-sm mt-3 leading-relaxed">
@@ -132,7 +132,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
                          </span>
                       </div>
                       <span className="text-xs text-gray-400 font-medium whitespace-nowrap">
-                        {item.date}
+                        {new Date(item.date + 'T00:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
                       </span>
                     </div>
                     <h3 className="font-bold text-gray-900 text-base mb-2">

@@ -1,0 +1,26 @@
+[
+  {
+    "icon": "/green_house.svg",
+    "title": "Greenhouse Systems",
+    "description": "Modern, durable greenhouse structures tailored to your specific crop requirements and local climate conditions.",
+    "image": "https://placehold.co/600x400/63913D/white?text=Greenhouses"
+  },
+  {
+    "icon": "/irrigation_systems.svg",
+    "title": "Irrigation Systems",
+    "description": "Efficient water management solutions including drip irrigation, sprinklers, and automated delivery systems.",
+    "image": "https://placehold.co/600x400/57D6F2/white?text=Irrigation"
+  },
+  {
+    "icon": "/Climate_smart_solutions.svg",
+    "title": "Climate-Smart Solutions",
+    "description": "Advanced farming technologies designed to maximize yields while adapting to changing environmental factors.",
+    "image": "https://placehold.co/600x400/d97706/white?text=Climate-Smart"
+  },
+  {
+    "icon": "/Agricultural_infrastructure.svg",
+    "title": "Agricultural Infrastructure",
+    "description": "Comprehensive infrastructure development from dam liners to specialized crop protection nets.",
+    "image": "https://placehold.co/600x400/324f1f/white?text=Infrastructure"
+  }
+]

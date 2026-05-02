@@ -1,0 +1,110 @@
+[
+  {
+    "icon": "/green_house.svg",
+    "title": "Greenhouse Design and Supply",
+    "tagline": "Year-Round Cultivation",
+    "problem": "Unpredictable weather and harsh climate conditions can devastate open-field crops, leading to significant financial losses.",
+    "approach": "We design and construct durable, modern greenhouse structures tailored to your specific location and crop requirements. Our systems provide the optimal controlled environment for maximum yield.",
+    "features": [
+      "Custom structural design",
+      "High-quality UV treated polythene",
+      "Ventilation and temperature control",
+      "Pest exclusion netting",
+      "Turnkey installation"
+    ],
+    "outcomes": "Farmers experience up to 300% yield increases and extended growing seasons compared to traditional open-field farming.",
+    "gradient": "from-[#63913D]/10 to-[#8FBB43]/10",
+    "iconBg": "from-[#63913D]/15 to-[#8FBB43]/15",
+    "image": "https://placehold.co/800x500/63913D/white?text=Greenhouse+Design"
+  },
+  {
+    "icon": "/irrigation_systems.svg",
+    "title": "Irrigation System Installation",
+    "tagline": "Precision Water Management",
+    "problem": "Water scarcity and inefficient irrigation methods waste valuable resources and reduce crop health.",
+    "approach": "We provide state-of-the-art irrigation solutions including drip lines and automated systems. We ensure every drop of water is utilized efficiently directly at the plant root zone.",
+    "features": [
+      "Drip and sprinkler system design",
+      "Water pump installation",
+      "Automated timer integration",
+      "Filtration systems",
+      "Water storage and dam liners"
+    ],
+    "outcomes": "Reduce water usage by up to 50% while simultaneously increasing crop uniformity and health.",
+    "gradient": "from-[#57D6F2]/10 to-[#63913D]/10",
+    "iconBg": "from-[#57D6F2]/15 to-[#63913D]/15",
+    "image": "https://placehold.co/800x500/57D6F2/white?text=Irrigation+Systems"
+  },
+  {
+    "icon": "/Climate_smart_solutions.svg",
+    "title": "Climate-Smart Farming Solutions",
+    "tagline": "Adapt and Thrive",
+    "problem": "Climate change introduces unprecedented challenges, from prolonged droughts to extreme temperatures.",
+    "approach": "We integrate advanced technologies that help farms adapt to changing climates, utilizing shade nets, mulching, and smart agricultural practices to mitigate environmental risks.",
+    "features": [
+      "Micro-climate monitoring",
+      "Shade net installation",
+      "Mulching solutions",
+      "Soil moisture conservation",
+      "Agro-meteorological advisory"
+    ],
+    "outcomes": "Enhanced farm resilience against extreme weather events and reduced crop failure rates.",
+    "gradient": "from-amber-500/10 to-orange-500/10",
+    "iconBg": "from-amber-50 to-orange-50",
+    "image": "https://placehold.co/800x500/d97706/white?text=Climate-Smart+Farming"
+  },
+  {
+    "icon": "/Agricultural_infrastructure.svg",
+    "title": "Agricultural Infrastructure",
+    "tagline": "Building the Foundation",
+    "problem": "Lack of proper infrastructure limits farm expansion and operational efficiency.",
+    "approach": "From land preparation to the construction of water reservoirs and crop protection structures, we build the physical foundation your agribusiness needs to scale.",
+    "features": [
+      "Dam liner supply and installation",
+      "Farm layout planning",
+      "Storage facilities setup",
+      "Erosion control structures",
+      "Fencing and security"
+    ],
+    "outcomes": "Robust farm infrastructure that supports long-term growth and operational efficiency.",
+    "gradient": "from-[#57D6F2]/10 to-[#8FBB43]/10",
+    "iconBg": "from-[#57D6F2]/15 to-[#8FBB43]/15",
+    "image": "https://placehold.co/800x500/324f1f/white?text=Agri+Infrastructure"
+  },
+  {
+    "icon": "/farmer_first.svg",
+    "title": "Farmer Training and Support",
+    "tagline": "Empowering Growers",
+    "problem": "Access to modern equipment is not enough; farmers need the knowledge to utilize it effectively to achieve ROI.",
+    "approach": "We provide comprehensive training programs and ongoing technical support to ensure you get the most out of your agricultural investments.",
+    "features": [
+      "On-site agronomic training",
+      "System operation workshops",
+      "Pest and disease management",
+      "Best farming practices",
+      "Dedicated agronomy support line"
+    ],
+    "outcomes": "Empowered farm workers capable of maximizing the utility and lifespan of modern farming systems.",
+    "gradient": "from-indigo-500/10 to-blue-500/10",
+    "iconBg": "from-indigo-50 to-blue-50",
+    "image": "https://placehold.co/800x500/4f46e5/white?text=Farmer+Training"
+  },
+  {
+    "icon": "/wrench.svg",
+    "title": "Maintenance Services",
+    "tagline": "Continuous Reliability",
+    "problem": "Equipment breakdowns can halt operations and jeopardize crop health if not addressed immediately.",
+    "approach": "Our dedicated maintenance teams offer routine servicing and rapid response repairs for all greenhouse and irrigation systems.",
+    "features": [
+      "Routine system inspections",
+      "Polythene and net repairs",
+      "Pump and filter maintenance",
+      "Spare parts supply",
+      "Emergency breakdown response"
+    ],
+    "outcomes": "Minimized downtime and prolonged lifespan of your critical agricultural infrastructure.",
+    "gradient": "from-lime-500/10 to-green-500/10",
+    "iconBg": "from-lime-50 to-green-50",
+    "image": "https://placehold.co/800x500/65a30d/white?text=Maintenance"
+  }
+]

@@ -13,6 +13,8 @@ export default function Navbar() {
   const pathname = usePathname();
   const isShopPage = pathname?.startsWith('/shop');
 
+  if (pathname?.startsWith('/admin')) return null;
+
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener('scroll', handleScroll, { passive: true });

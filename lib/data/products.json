@@ -1,0 +1,256 @@
+[
+  {
+    "id": "uv-greenhouse-polythene",
+    "name": "Greenhouse Polythene (UV Open/Blocked)",
+    "category": "greenhouse-materials",
+    "description": "High-quality, durable polythene designed to optimize light transmission and protect crops from harsh weather.",
+    "longDescription": "Our premium Greenhouse Polythene provides the ideal controlled environment for your crops. Available in UV Open and UV Blocked variants, it ensures optimal light diffusion, thermal efficiency, and long-lasting durability against severe weather conditions.",
+    "tags": [
+      "UV Treated",
+      "Durable",
+      "200 Microns"
+    ],
+    "features": [
+      "Optimal light transmission",
+      "Excellent heat retention",
+      "Tear and weather resistant",
+      "Long lifespan (3+ years)"
+    ],
+    "specs": [
+      { "label": "Thickness", "value": "200µm (microns)" },
+      { "label": "Type", "value": "UV Open / UV Blocked available" },
+      { "label": "Width", "value": "Standard 8m, 10m (custom available)" },
+      { "label": "Length", "value": "100m / 200m per roll" },
+      { "label": "Transparency", "value": "88% - 90% light transmission" },
+      { "label": "Color", "value": "Clear, Yellow, Diffused" },
+      { "label": "UV Lifespan", "value": "3 - 5 years" },
+      { "label": "Application", "value": "Roofing and side covering" }
+    ],
+    "useCases": [
+      "Commercial tomato and capsicum farming",
+      "Flower nurseries and propagation",
+      "Controlled environment agriculture"
+    ],
+    "image": "https://placehold.co/600x400/8FBB43/white?text=UV+Polythene"
+  },
+  {
+    "id": "locking-profiles",
+    "name": "Locking Profiles (2m, 4m)",
+    "category": "greenhouse-materials",
+    "description": "Galvanized steel locking profiles and zigzag wires for securely fastening polythene and nets to greenhouse structures.",
+    "longDescription": "Ensure your greenhouse polythene and nets stay firmly in place with our heavy-duty locking profiles. Designed to withstand high winds without tearing the plastic, these profiles provide a secure, easily adjustable fastening system.",
+    "tags": [
+      "Galvanized",
+      "Secure",
+      "Accessories"
+    ],
+    "features": [
+      "Corrosion resistant galvanized steel",
+      "Durable PVC coated zigzag wire",
+      "Easy to install and remove",
+      "Multiple length options"
+    ],
+    "specs": [
+      { "label": "Length", "value": "2m, 4m sections" },
+      { "label": "Material", "value": "Galvanized steel / Aluminum" },
+      { "label": "Compatibility", "value": "All polythene and shade nets" },
+      { "label": "Thickness", "value": "0.8mm - 1.2mm gauge" },
+      { "label": "Finish", "value": "Hot-dip galvanized" },
+      { "label": "Application", "value": "Greenhouse frame fastening" }
+    ],
+    "useCases": [
+      "Greenhouse construction and repair",
+      "Shade net house assembly",
+      "Securing side ventilation screens"
+    ],
+    "image": "https://placehold.co/600x400/8FBB43/white?text=Locking+Profiles"
+  },
+  {
+    "id": "drip-lines",
+    "name": "Driplines (0.3mm, 0.4mm)",
+    "category": "irrigation-systems",
+    "description": "Precision emitter driplines for highly efficient, localized water delivery directly to the root zone.",
+    "longDescription": "Maximize your water efficiency with our premium driplines. Featuring advanced anti-clogging emitters, they deliver water and nutrients directly to the root zone, ensuring uniform crop growth and significantly reduced water wastage.",
+    "tags": [
+      "Water Efficient",
+      "Anti-clogging"
+    ],
+    "features": [
+      "Consistent flow rate",
+      "High clogging resistance",
+      "Even water distribution",
+      "Easy to deploy"
+    ],
+    "specs": [
+      { "label": "Diameter", "value": "16mm standard" },
+      { "label": "Wall Thickness", "value": "0.3mm, 0.4mm, 0.9mm" },
+      { "label": "Emitter Spacing", "value": "15cm, 20cm, 30cm, 40cm" },
+      { "label": "Flow Rate", "value": "1.2 L/hr - 2.0 L/hr" },
+      { "label": "Length", "value": "1000m / 3000m rolls" },
+      { "label": "Pressure Rating", "value": "0.8 - 1.2 Bar" },
+      { "label": "Material", "value": "High-grade PE" }
+    ],
+    "useCases": [
+      "Row crops (tomatoes, onions, cabbages)",
+      "Greenhouse drip irrigation",
+      "Orchards and fruit trees"
+    ],
+    "image": "https://placehold.co/600x400/57D6F2/white?text=Driplines"
+  },
+  {
+    "id": "hdpe-pipes",
+    "name": "HDPE Pipes & Fittings",
+    "category": "irrigation-systems",
+    "description": "High-density polyethylene pipes for durable and leak-proof mainlines and submains in irrigation setups.",
+    "longDescription": "Our HDPE pipes offer unparalleled durability and flexibility for long-distance water transport. Highly resistant to UV rays, chemicals, and physical impact, they are the industry standard for reliable agricultural water supply.",
+    "tags": [
+      "Heavy Duty",
+      "UV Resistant"
+    ],
+    "features": [
+      "Withstands high pressure",
+      "Durable and long-lasting",
+      "Corrosion and chemical resistant",
+      "Compatible with standard fittings"
+    ],
+    "specs": [
+      { "label": "Diameter", "value": "20mm - 250mm" },
+      { "label": "Length", "value": "6m, 12m lengths / 50m, 100m coils" },
+      { "label": "Pressure Rating", "value": "PN6, PN10, PN12.5, PN16" },
+      { "label": "SDR Rating", "value": "SDR 11 to SDR 26" },
+      { "label": "Material", "value": "PE100 / PE80 Grade" },
+      { "label": "Color", "value": "Black with blue stripes" },
+      { "label": "Application", "value": "High-pressure water transport" }
+    ],
+    "useCases": [
+      "Borehole water extraction",
+      "Large-scale farm water reticulation",
+      "Underground irrigation mainlines"
+    ],
+    "image": "https://placehold.co/600x400/57D6F2/white?text=HDPE+Pipes"
+  },
+  {
+    "id": "dam-liners",
+    "name": "Dam Liners (0.3mm to 1mm)",
+    "category": "water-management",
+    "description": "Premium geomembrane liners for constructing water reservoirs, fish ponds, and conservation tanks.",
+    "longDescription": "Secure your water supply with our heavy-duty dam liners. Engineered for maximum puncture resistance and UV stability, these liners provide a reliable, long-term waterproofing solution for agricultural water storage.",
+    "tags": [
+      "Waterproofing",
+      "Tear Resistant"
+    ],
+    "features": [
+      "High puncture resistance",
+      "UV stabilized for direct sunlight",
+      "Custom sizes available",
+      "Impermeable to water"
+    ],
+    "specs": [
+      { "label": "Thickness", "value": "0.3mm, 0.5mm, 0.75mm, 1.0mm" },
+      { "label": "Material", "value": "High-Density Polyethylene (HDPE)" },
+      { "label": "Width", "value": "Standard 8m (welded to custom size)" },
+      { "label": "Length", "value": "Custom per project requirement" },
+      { "label": "UV Resistance", "value": "High UV stabilization" },
+      { "label": "Puncture Resistance", "value": "High tensile strength" },
+      { "label": "Application", "value": "Water storage ponds, fish ponds" }
+    ],
+    "useCases": [
+      "Lining agricultural water reservoirs",
+      "Constructing elevated water tanks",
+      "Aquaculture and fish farming ponds"
+    ],
+    "image": "https://placehold.co/600x400/324f1f/white?text=Dam+Liners"
+  },
+  {
+    "id": "shade-nets",
+    "name": "Shade Nets",
+    "category": "nets-crop-protection",
+    "description": "Knitted agricultural shade nets available in various percentages to protect crops from intense sunlight and heat stress.",
+    "longDescription": "Create the perfect micro-climate and protect your yields with our versatile range of agricultural nets. Whether you need to reduce heat stress, keep out destructive birds, or exclude microscopic pests, we have the specialized netting required.",
+    "tags": [
+      "UV Stabilized",
+      "Breathable"
+    ],
+    "features": [
+      "Various shade percentages (35%, 55%, 75%)",
+      "Knitted HDPE material",
+      "Reduces wind speed",
+      "Helps retain soil moisture"
+    ],
+    "specs": [
+      { "label": "Type", "value": "Shade Net / Bird Net / Insect Net" },
+      { "label": "Shade Percentage", "value": "30%, 50%, 75%, 90%" },
+      { "label": "Mesh Size", "value": "Varies (e.g., 40-mesh for insects)" },
+      { "label": "Dimensions", "value": "Standard 4m x 50m rolls" },
+      { "label": "Color", "value": "Green, Black, White" },
+      { "label": "Material", "value": "UV Stabilized HDPE" },
+      { "label": "Application", "value": "Crop protection and climate control" }
+    ],
+    "useCases": [
+      "Protecting seedlings in nurseries (Shade)",
+      "Excluding whiteflies and aphids (Insect)",
+      "Protecting fruit orchards (Bird)"
+    ],
+    "image": "https://placehold.co/600x400/63913D/white?text=Shade+Nets"
+  },
+  {
+    "id": "insect-nets",
+    "name": "Pro Insect Nets",
+    "category": "nets-crop-protection",
+    "description": "Fine mesh netting designed to exclude harmful pests while allowing adequate ventilation and light.",
+    "longDescription": "Our fine mesh netting is designed to exclude harmful pests like thrips and aphids while allowing adequate ventilation and light. It's an eco-friendly way to reduce chemical pesticide use and protect your crops naturally.",
+    "tags": [
+      "Pest Control",
+      "Eco-friendly"
+    ],
+    "features": [
+      "Blocks tiny insects like thrips",
+      "Excellent ventilation",
+      "Saves on chemical pesticides",
+      "Durable construction"
+    ],
+    "specs": [
+      { "label": "Mesh Size", "value": "40-mesh / 50-mesh" },
+      { "label": "Material", "value": "UV Stabilized HDPE" },
+      { "label": "Color", "value": "White / Transparent" },
+      { "label": "Application", "value": "Greenhouse side vents and doors" }
+    ],
+    "useCases": [
+      "Excluding whiteflies and thrips",
+      "Organic vegetable production",
+      "Seedling protection"
+    ],
+    "image": "https://placehold.co/600x400/8FBB43/white?text=Insect+Nets"
+  },
+  {
+    "id": "mulch-films",
+    "name": "Agricultural Mulch Films",
+    "category": "crop-enhancement",
+    "description": "Plastic mulch films that suppress weed growth, conserve soil moisture, and regulate soil temperature for better yields.",
+    "longDescription": "Improve crop yields and reduce labor costs with our agricultural mulch films. By blocking sunlight to weeds, retaining soil moisture, and regulating root zone temperature, mulch films provide an optimal growing environment.",
+    "tags": [
+      "Weed Control",
+      "Moisture Retention"
+    ],
+    "features": [
+      "Suppresses weed growth",
+      "Conserves soil moisture",
+      "Controls soil temperature",
+      "Prevents soil erosion"
+    ],
+    "specs": [
+      { "label": "Thickness", "value": "25µm - 50µm (microns)" },
+      { "label": "Width", "value": "1m, 1.2m, 1.5m" },
+      { "label": "Length", "value": "400m / 1000m rolls" },
+      { "label": "Color", "value": "Black, Silver/Black, Transparent" },
+      { "label": "UV Resistance", "value": "Stabilized for 1-2 seasons" },
+      { "label": "Application", "value": "Weed control, moisture retention" }
+    ],
+    "useCases": [
+      "Open-field tomato and melon farming",
+      "Strawberry cultivation",
+      "Reducing irrigation frequency"
+    ],
+    "image": "https://placehold.co/600x400/324f1f/white?text=Mulch+Films"
+  }
+]

@@ -1,0 +1,44 @@
+{
+  "alerts": [
+    {
+      "id": 1,
+      "title": "Scheduled System Maintenance",
+      "content": "The client portal will be offline on Saturday, May 2nd, from 10:00 PM to 2:00 AM for critical infrastructure upgrades.",
+      "severity": "info",
+      "date": "2026-04-29"
+    },
+    {
+      "id": 2,
+      "title": "Weather Advisory: Heavy Rainfall Expected",
+      "content": "Please ensure your greenhouse drainage systems are clear. Heavy rainfall is predicted across the Rift Valley region over the next 48 hours.",
+      "severity": "warning",
+      "date": "2026-04-28"
+    }
+  ],
+  "news": [
+    {
+      "id": 1,
+      "title": "New Climate-Smart Farming Modules Launched",
+      "content": "We have added three new consultation modules focusing on water conservation and organic crop protection.",
+      "category": "General",
+      "date": "2026-04-25",
+      "image": "https://placehold.co/600x300/63913D/white?text=Climate-Smart+Modules"
+    },
+    {
+      "id": 2,
+      "title": "Upcoming Agricultural Workshop in Nakuru",
+      "content": "Join our agronomists on May 15th for a hands-on workshop on optimizing drip irrigation efficiency.",
+      "category": "Clients",
+      "date": "2026-04-22",
+      "image": "https://placehold.co/600x300/57D6F2/white?text=Nakuru+Workshop"
+    },
+    {
+      "id": 5,
+      "title": "Q1 Agricultural Yield Report Released",
+      "content": "Our comprehensive analysis of climate-smart farming trends and crop yields for Q1 2026 is now available.",
+      "category": "Clients",
+      "date": "2026-04-15",
+      "image": "https://placehold.co/600x300/57D6F2/white?text=Q1+Report"
+    }
+  ]
+}

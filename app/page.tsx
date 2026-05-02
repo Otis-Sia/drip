@@ -5,13 +5,9 @@ import { companyStats } from '@/lib/company';
 import ServiceCard from '@/components/services/ServiceCard';
 import { events } from '@/lib/communication';
 import Calendar from '@/components/communication/Calendar';
+import { allProducts, categoryMap } from '@/lib/products';
 
-const products = [
-  { id: 'uv-greenhouse-polythene', name: 'UV Open Greenhouse Polythene', category: 'Greenhouse Materials', description: 'High-quality, durable polythene for optimal light transmission.' },
-  { id: 'drip-lines-16mm', name: 'Driplines (0.4mm)', category: 'Irrigation Systems', description: 'Precision drip irrigation lines for efficient water delivery.' },
-  { id: 'dam-liners-0-5mm', name: 'Dam Liners (0.5mm)', category: 'Water Management', description: 'Heavy-duty liners for water conservation and storage.' },
-  { id: 'shade-nets-75', name: 'Shade Nets (75%)', category: 'Nets & Crop Protection', description: 'Premium shade nets to protect crops from intense sunlight.' },
-];
+const featuredProducts = allProducts.slice(0, 4);
 
 export default function Home() {
   return (
@@ -153,12 +149,12 @@ export default function Home() {
             <p className="section-subtitle mx-auto">Explore our high-quality greenhouse materials, irrigation components, and crop protection solutions.</p>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {products.map((product, i) => (
+            {featuredProducts.map((product, i) => (
               <div
                 key={product.id}
                 className={`card p-6 flex flex-col animate-fadeInUp delay-${(i + 1) * 100}`}
               >
-                <div className="badge mb-4 w-fit">{product.category}</div>
+                <div className="badge mb-4 w-fit">{categoryMap[product.category] || product.category}</div>
                 <h3 className="text-gray-900 font-bold mb-2">{product.name}</h3>
                 <p className="text-gray-500 text-sm mb-5 flex-1">{product.description}</p>
                 <Link
