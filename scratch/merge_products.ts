@@ -1,5 +1,5 @@
-import productsData from './lib/data/products.json';
-import { categoryMap, reverseCategoryMap } from './lib/products';
+import productsData from '../lib/data/products.json';
+import { categoryMap, reverseCategoryMap } from '../lib/products';
 
 // Data from app/shop/product-description/page.tsx
 const richProducts = {
