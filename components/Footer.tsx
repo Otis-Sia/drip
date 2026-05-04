@@ -150,9 +150,25 @@ export default function Footer() {
                   href={item.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-white hover:bg-[#63913D] hover:border-[#63913D] transition-all duration-500 hover:-translate-y-1 shadow-sm"
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-white/5 border border-white/10 transition-all duration-500 hover:-translate-y-1 shadow-sm group/social"
                 >
-                  <Image src={item.icon} alt={item.name} width={18} height={18} className="invert opacity-60" />
+                  <div 
+                    className={`w-[22px] h-[22px] transition-all duration-300 ${
+                      item.name === 'Instagram' ? 'bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]' :
+                      item.name === 'Facebook' ? 'bg-[#1877F2]' :
+                      'bg-white'
+                    } opacity-80 group-hover/social:opacity-100 group-hover/social:scale-110`}
+                    style={{
+                      maskImage: `url(${item.icon})`,
+                      WebkitMaskImage: `url(${item.icon})`,
+                      maskRepeat: 'no-repeat',
+                      WebkitMaskRepeat: 'no-repeat',
+                      maskPosition: 'center',
+                      WebkitMaskPosition: 'center',
+                      maskSize: 'contain',
+                      WebkitMaskSize: 'contain'
+                    }}
+                  />
                 </Link>
               ))}
             </div>
