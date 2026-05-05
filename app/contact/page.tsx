@@ -69,10 +69,28 @@ export default function ContactPage() {
                     <a
                       key={s.name}
                       href={s.href}
-                      className="w-10 h-10 rounded-xl bg-[#63913D] text-white flex items-center justify-center font-bold hover:brightness-90 transition-all duration-300 text-sm hover:scale-110"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-11 h-11 rounded-xl bg-white border border-gray-200 flex items-center justify-center transition-all duration-300 hover:scale-110 shadow-sm group/social"
                       title={s.name}
                     >
-                      <Image src={s.icon} alt={s.name} width={20} height={20} className="invert" />
+                      <div 
+                        className={`w-6 h-6 transition-all duration-300 ${
+                          s.name === 'Instagram' ? 'bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7]' :
+                          s.name === 'Facebook' ? 'bg-[#1877F2]' :
+                          'bg-[#000000]'
+                        } opacity-90 group-hover/social:opacity-100`}
+                        style={{
+                          maskImage: `url(${s.icon})`,
+                          WebkitMaskImage: `url(${s.icon})`,
+                          maskRepeat: 'no-repeat',
+                          WebkitMaskRepeat: 'no-repeat',
+                          maskPosition: 'center',
+                          WebkitMaskPosition: 'center',
+                          maskSize: 'contain',
+                          WebkitMaskSize: 'contain'
+                        }}
+                      />
                     </a>
                   ))}
                 </div>
