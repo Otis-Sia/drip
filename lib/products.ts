@@ -12,6 +12,7 @@ export interface Product {
   specs: { label: string; value: string }[];
   useCases: string[];
   image?: string;
+  images?: string[];
 }
 
 export interface Category {

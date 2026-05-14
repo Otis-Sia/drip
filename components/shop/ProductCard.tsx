@@ -10,9 +10,16 @@ import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 interface ProductCardProps {
   product: Product;
   showFeatures?: boolean;
+  showCart?: boolean;
+  descriptionPath?: string;
 }
 
-export default function ProductCard({ product, showFeatures = false }: ProductCardProps) {
+export default function ProductCard({ 
+  product, 
+  showFeatures = false, 
+  showCart = true,
+  descriptionPath = '/delver/product-description'
+}: ProductCardProps) {
   const { addItem } = useCart();
   const [added, setAdded] = useState(false);
 
@@ -64,26 +71,28 @@ export default function ProductCard({ product, showFeatures = false }: ProductCa
       
       <div className="p-4 pt-0 space-y-2">
         <Link
-          href={`/delver/product-description?id=${product.id}`}
+          href={`${descriptionPath}?id=${product.id}`}
           className="block text-center border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
         >
           View Details
         </Link>
-        <button
-          onClick={handleAdd}
-          className={`w-full text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300 ${
-            added
-              ? 'bg-[#8FBB43] text-white'
-              : 'btn-secondary !w-full !text-sm'
-          }`}
-        >
-          {added ? (
-            <span className="flex items-center justify-center gap-1.5">
-              <CheckCircleIcon size={14} color="white" />
-              Added to Cart
-            </span>
-          ) : 'Add to Cart'}
-        </button>
+        {showCart && (
+          <button
+            onClick={handleAdd}
+            className={`w-full text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300 ${
+              added
+                ? 'bg-[#8FBB43] text-white'
+                : 'btn-secondary !w-full !text-sm'
+            }`}
+          >
+            {added ? (
+              <span className="flex items-center justify-center gap-1.5">
+                <CheckCircleIcon size={14} color="white" />
+                Added to Cart
+              </span>
+            ) : 'Add to Cart'}
+          </button>
+        )}
       </div>
     </div>
   );

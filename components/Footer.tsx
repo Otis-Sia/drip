@@ -96,7 +96,7 @@ export default function Footer() {
                 {[
                   ['/', 'Home'],
                   ['/about', 'Our Story'],
-                  ['/services', 'Expertise'],
+                  ['/services-and-products', 'Expertise & Solutions'],
                   ['/communication', 'News'],
                 ].map(([href, label]) => (
                   <li key={href}>

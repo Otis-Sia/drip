@@ -17,14 +17,38 @@
       "Long lifespan (3+ years)"
     ],
     "specs": [
-      { "label": "Thickness", "value": "200µm (microns)" },
-      { "label": "Type", "value": "UV Open / UV Blocked available" },
-      { "label": "Width", "value": "Standard 8m, 10m (custom available)" },
-      { "label": "Length", "value": "100m / 200m per roll" },
-      { "label": "Transparency", "value": "88% - 90% light transmission" },
-      { "label": "Color", "value": "Clear, Yellow, Diffused" },
-      { "label": "UV Lifespan", "value": "3 - 5 years" },
-      { "label": "Application", "value": "Roofing and side covering" }
+      {
+        "label": "Thickness",
+        "value": "200µm (microns)"
+      },
+      {
+        "label": "Type",
+        "value": "UV Open / UV Blocked available"
+      },
+      {
+        "label": "Width",
+        "value": "Standard 8m, 10m (custom available)"
+      },
+      {
+        "label": "Length",
+        "value": "100m / 200m per roll"
+      },
+      {
+        "label": "Transparency",
+        "value": "88% - 90% light transmission"
+      },
+      {
+        "label": "Color",
+        "value": "Clear, Yellow, Diffused"
+      },
+      {
+        "label": "UV Lifespan",
+        "value": "3 - 5 years"
+      },
+      {
+        "label": "Application",
+        "value": "Roofing and side covering"
+      }
     ],
     "useCases": [
       "Commercial tomato and capsicum farming",
@@ -51,12 +75,30 @@
       "Multiple length options"
     ],
     "specs": [
-      { "label": "Length", "value": "2m, 4m sections" },
-      { "label": "Material", "value": "Galvanized steel / Aluminum" },
-      { "label": "Compatibility", "value": "All polythene and shade nets" },
-      { "label": "Thickness", "value": "0.8mm - 1.2mm gauge" },
-      { "label": "Finish", "value": "Hot-dip galvanized" },
-      { "label": "Application", "value": "Greenhouse frame fastening" }
+      {
+        "label": "Length",
+        "value": "2m, 4m sections"
+      },
+      {
+        "label": "Material",
+        "value": "Galvanized steel / Aluminum"
+      },
+      {
+        "label": "Compatibility",
+        "value": "All polythene and shade nets"
+      },
+      {
+        "label": "Thickness",
+        "value": "0.8mm - 1.2mm gauge"
+      },
+      {
+        "label": "Finish",
+        "value": "Hot-dip galvanized"
+      },
+      {
+        "label": "Application",
+        "value": "Greenhouse frame fastening"
+      }
     ],
     "useCases": [
       "Greenhouse construction and repair",
@@ -82,13 +124,34 @@
       "Easy to deploy"
     ],
     "specs": [
-      { "label": "Diameter", "value": "16mm standard" },
-      { "label": "Wall Thickness", "value": "0.3mm, 0.4mm, 0.9mm" },
-      { "label": "Emitter Spacing", "value": "15cm, 20cm, 30cm, 40cm" },
-      { "label": "Flow Rate", "value": "1.2 L/hr - 2.0 L/hr" },
-      { "label": "Length", "value": "1000m / 3000m rolls" },
-      { "label": "Pressure Rating", "value": "0.8 - 1.2 Bar" },
-      { "label": "Material", "value": "High-grade PE" }
+      {
+        "label": "Diameter",
+        "value": "16mm standard"
+      },
+      {
+        "label": "Wall Thickness",
+        "value": "0.3mm, 0.4mm, 0.9mm"
+      },
+      {
+        "label": "Emitter Spacing",
+        "value": "15cm, 20cm, 30cm, 40cm"
+      },
+      {
+        "label": "Flow Rate",
+        "value": "1.2 L/hr - 2.0 L/hr"
+      },
+      {
+        "label": "Length",
+        "value": "1000m / 3000m rolls"
+      },
+      {
+        "label": "Pressure Rating",
+        "value": "0.8 - 1.2 Bar"
+      },
+      {
+        "label": "Material",
+        "value": "High-grade PE"
+      }
     ],
     "useCases": [
       "Row crops (tomatoes, onions, cabbages)",
@@ -114,13 +177,34 @@
       "Compatible with standard fittings"
     ],
     "specs": [
-      { "label": "Diameter", "value": "20mm - 250mm" },
-      { "label": "Length", "value": "6m, 12m lengths / 50m, 100m coils" },
-      { "label": "Pressure Rating", "value": "PN6, PN10, PN12.5, PN16" },
-      { "label": "SDR Rating", "value": "SDR 11 to SDR 26" },
-      { "label": "Material", "value": "PE100 / PE80 Grade" },
-      { "label": "Color", "value": "Black with blue stripes" },
-      { "label": "Application", "value": "High-pressure water transport" }
+      {
+        "label": "Diameter",
+        "value": "20mm - 250mm"
+      },
+      {
+        "label": "Length",
+        "value": "6m, 12m lengths / 50m, 100m coils"
+      },
+      {
+        "label": "Pressure Rating",
+        "value": "PN6, PN10, PN12.5, PN16"
+      },
+      {
+        "label": "SDR Rating",
+        "value": "SDR 11 to SDR 26"
+      },
+      {
+        "label": "Material",
+        "value": "PE100 / PE80 Grade"
+      },
+      {
+        "label": "Color",
+        "value": "Black with blue stripes"
+      },
+      {
+        "label": "Application",
+        "value": "High-pressure water transport"
+      }
     ],
     "useCases": [
       "Borehole water extraction",
@@ -146,13 +230,34 @@
       "Impermeable to water"
     ],
     "specs": [
-      { "label": "Thickness", "value": "0.3mm, 0.5mm, 0.75mm, 1.0mm" },
-      { "label": "Material", "value": "High-Density Polyethylene (HDPE)" },
-      { "label": "Width", "value": "Standard 8m (welded to custom size)" },
-      { "label": "Length", "value": "Custom per project requirement" },
-      { "label": "UV Resistance", "value": "High UV stabilization" },
-      { "label": "Puncture Resistance", "value": "High tensile strength" },
-      { "label": "Application", "value": "Water storage ponds, fish ponds" }
+      {
+        "label": "Thickness",
+        "value": "0.3mm, 0.5mm, 0.75mm, 1.0mm"
+      },
+      {
+        "label": "Material",
+        "value": "High-Density Polyethylene (HDPE)"
+      },
+      {
+        "label": "Width",
+        "value": "Standard 8m (welded to custom size)"
+      },
+      {
+        "label": "Length",
+        "value": "Custom per project requirement"
+      },
+      {
+        "label": "UV Resistance",
+        "value": "High UV stabilization"
+      },
+      {
+        "label": "Puncture Resistance",
+        "value": "High tensile strength"
+      },
+      {
+        "label": "Application",
+        "value": "Water storage ponds, fish ponds"
+      }
     ],
     "useCases": [
       "Lining agricultural water reservoirs",
@@ -178,13 +283,34 @@
       "Helps retain soil moisture"
     ],
     "specs": [
-      { "label": "Type", "value": "Shade Net / Bird Net / Insect Net" },
-      { "label": "Shade Percentage", "value": "30%, 50%, 75%, 90%" },
-      { "label": "Mesh Size", "value": "Varies (e.g., 40-mesh for insects)" },
-      { "label": "Dimensions", "value": "Standard 4m x 50m rolls" },
-      { "label": "Color", "value": "Green, Black, White" },
-      { "label": "Material", "value": "UV Stabilized HDPE" },
-      { "label": "Application", "value": "Crop protection and climate control" }
+      {
+        "label": "Type",
+        "value": "Shade Net / Bird Net / Insect Net"
+      },
+      {
+        "label": "Shade Percentage",
+        "value": "30%, 50%, 75%, 90%"
+      },
+      {
+        "label": "Mesh Size",
+        "value": "Varies (e.g., 40-mesh for insects)"
+      },
+      {
+        "label": "Dimensions",
+        "value": "Standard 4m x 50m rolls"
+      },
+      {
+        "label": "Color",
+        "value": "Green, Black, White"
+      },
+      {
+        "label": "Material",
+        "value": "UV Stabilized HDPE"
+      },
+      {
+        "label": "Application",
+        "value": "Crop protection and climate control"
+      }
     ],
     "useCases": [
       "Protecting seedlings in nurseries (Shade)",
@@ -210,10 +336,22 @@
       "Durable construction"
     ],
     "specs": [
-      { "label": "Mesh Size", "value": "40-mesh / 50-mesh" },
-      { "label": "Material", "value": "UV Stabilized HDPE" },
-      { "label": "Color", "value": "White / Transparent" },
-      { "label": "Application", "value": "Greenhouse side vents and doors" }
+      {
+        "label": "Mesh Size",
+        "value": "40-mesh / 50-mesh"
+      },
+      {
+        "label": "Material",
+        "value": "UV Stabilized HDPE"
+      },
+      {
+        "label": "Color",
+        "value": "White / Transparent"
+      },
+      {
+        "label": "Application",
+        "value": "Greenhouse side vents and doors"
+      }
     ],
     "useCases": [
       "Excluding whiteflies and thrips",
@@ -239,12 +377,30 @@
       "Prevents soil erosion"
     ],
     "specs": [
-      { "label": "Thickness", "value": "25µm - 50µm (microns)" },
-      { "label": "Width", "value": "1m, 1.2m, 1.5m" },
-      { "label": "Length", "value": "400m / 1000m rolls" },
-      { "label": "Color", "value": "Black, Silver/Black, Transparent" },
-      { "label": "UV Resistance", "value": "Stabilized for 1-2 seasons" },
-      { "label": "Application", "value": "Weed control, moisture retention" }
+      {
+        "label": "Thickness",
+        "value": "25µm - 50µm (microns)"
+      },
+      {
+        "label": "Width",
+        "value": "1m, 1.2m, 1.5m"
+      },
+      {
+        "label": "Length",
+        "value": "400m / 1000m rolls"
+      },
+      {
+        "label": "Color",
+        "value": "Black, Silver/Black, Transparent"
+      },
+      {
+        "label": "UV Resistance",
+        "value": "Stabilized for 1-2 seasons"
+      },
+      {
+        "label": "Application",
+        "value": "Weed control, moisture retention"
+      }
     ],
     "useCases": [
       "Open-field tomato and melon farming",
@@ -252,5 +408,25 @@
       "Reducing irrigation frequency"
     ],
     "image": "https://placehold.co/600x400/324f1f/white?text=Mulch+Films"
+  },
+  {
+    "id": "Mike-test",
+    "name": "Mie Test",
+    "category": "greenhouse-materials",
+    "description": "gert",
+    "longDescription": "",
+    "tags": [
+      "wer"
+    ],
+    "features": [
+      "erw"
+    ],
+    "specs": [
+      "gerty"
+    ],
+    "useCases": [
+      "geerrrr"
+    ],
+    "image": "https://www.piccolashoes.com/cdn/shop/files/gal-on-foot-close-front.jpg?v=1760997215&width=1024"
   }
 ]

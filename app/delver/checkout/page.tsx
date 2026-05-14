@@ -7,6 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { branches } from '@/lib/branches';
 import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
+import { supabase } from '@/lib/supabase';
 
 export default function CheckoutPage() {
   const { items, itemCount, clearCart } = useCart();
@@ -104,7 +105,49 @@ ${itemLines}
     const pickup = branches.find(b => b.id === form.pickupLocation);
     const pickupName = pickup ? `${pickup.name} – ${pickup.address}` : form.pickupLocation;
 
-    // Submit to Formspree with all structured data
+    try {
+      // 1. Insert Quote Request into Supabase
+      const { data: quote, error: quoteError } = await supabase
+        .from('quote_requests')
+        .insert({
+          name: form.name,
+          email: form.email,
+          phone: form.phone,
+          company: form.company || null,
+          farm_size: form.farmSize,
+          location: form.location,
+          pickup_location: form.pickupLocation,
+          message: form.message || null,
+          status: 'pending'
+        })
+        .select()
+        .single();
+
+      if (quoteError) throw quoteError;
+
+      // 2. Insert Items for this Quote
+      const quoteItems = items.map(item => ({
+        quote_request_id: quote.id,
+        product_id: item.id,
+        product_name: item.name,
+        category: item.category,
+        quantity: item.quantity,
+        custom_notes: item.customNotes || null
+      }));
+
+      const { error: itemsError } = await supabase
+        .from('quote_request_items')
+        .insert(quoteItems);
+
+      if (itemsError) throw itemsError;
+
+      console.log('Quote saved to Supabase successfully');
+    } catch (err) {
+      console.error('Error saving to Supabase:', err);
+      // We continue to Formspree as a fallback
+    }
+
+    // 3. Submit to Formspree with all structured data
     await formspreeSubmit({
       name: form.name,
       email: form.email,
