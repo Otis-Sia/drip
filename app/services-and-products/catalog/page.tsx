@@ -15,6 +15,7 @@ function CatalogContent({
 }) {
   const unwrappedSearchParams = use(searchParams);
   const router = useRouter();
+  const categoryParam = typeof unwrappedSearchParams.category === 'string' ? unwrappedSearchParams.category : 'All';
   
   const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [categories, setCategories] = useState<any[]>([]);
