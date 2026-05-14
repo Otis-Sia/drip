@@ -30,8 +30,7 @@ const LIBRARY_GROUPS = [
     name: 'Company',
     files: [
       { id: 'branches', name: 'Branches', description: 'Company branch locations' },
-      { id: 'company', name: 'Company Info', description: 'About us, stats, and values' },
-      { id: 'teamMembers', name: 'Team Members', description: 'Manage leadership and staff' },
+      { id: 'company', name: 'Company Info', description: 'About us, stats, and team members' },
     ]
   }
 ];
