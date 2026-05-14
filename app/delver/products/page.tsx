@@ -35,9 +35,9 @@ function ProductsContent({
     setSelectedCategory(cat);
     const slug = reverseCategoryMap[cat];
     if (slug) {
-      router.push(`/shop/products?category=${slug}`, { scroll: false });
+      router.push(`/delver/products?category=${slug}`, { scroll: false });
     } else {
-      router.push('/shop/products', { scroll: false });
+      router.push('/delver/products', { scroll: false });
     }
   };
 
@@ -88,7 +88,7 @@ function ProductsContent({
                     id={`filter-${cat.toLowerCase().replace(/\s+/g, '-')}`}
                     className={`text-left px-3 py-2.5 rounded-lg text-sm font-medium transition-all duration-200 ${
                       selectedCategory === cat
-                        ? 'bg-[#63913D]/10 text-[#63913D]'
+                        ? 'bg-primary/10 text-primary'
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                     }`}
                   >
@@ -125,7 +125,7 @@ function ProductsContent({
                 <p className="text-gray-400 text-lg mb-2">No products found matching your criteria.</p>
                 <button
                   onClick={() => { setSearch(''); handleCategoryChange('All'); }}
-                  className="text-[#63913D] font-semibold hover:brightness-90 transition-all"
+                  className="text-primary font-semibold hover:brightness-90 transition-all"
                 >
                   Clear filters
                 </button>

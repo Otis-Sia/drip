@@ -35,12 +35,10 @@ export default function ServicesPage() {
           <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Ready to Start Your Project?</h2>
           <p className="text-white mb-10 max-w-xl mx-auto text-lg font-light">Our agricultural experts will assess your farm&apos;s requirements and recommend the right combination of services for your needs.</p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary !px-10 !py-3.5 text-base" id="services-cta-assessment">
+            <Link href="#main-footer" className="btn-primary !px-10 !py-3.5 text-base" id="services-cta-assessment">
               Schedule a Free Consultation
             </Link>
-            <Link href="/shop" className="btn-outline !px-10 !py-3.5 text-base" id="services-cta-products">
-              Browse Products
-            </Link>
+
           </div>
         </div>
       </section>

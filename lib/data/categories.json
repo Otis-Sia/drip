@@ -5,7 +5,7 @@
     "icon": "/green_house.svg",
     "description": "Polythene covers, locking profiles, and structural accessories.",
     "count": 3,
-    "gradient": "from-[#63913D]/10 to-[#8FBB43]/10",
+    "gradient": "from-primary/10 to-primary-light/10",
     "image": "https://placehold.co/600x400/63913D/white?text=Greenhouse+Materials"
   },
   {
@@ -14,7 +14,7 @@
     "icon": "/irrigation_systems.svg",
     "description": "Driplines, pipes, and efficient water delivery components.",
     "count": 2,
-    "gradient": "from-[#57D6F2]/10 to-[#63913D]/10",
+    "gradient": "from-accent/10 to-primary/10",
     "image": "https://placehold.co/600x400/57D6F2/white?text=Irrigation+Systems"
   },
   {
@@ -23,7 +23,7 @@
     "icon": "/water_wave.svg",
     "description": "Heavy-duty dam liners for effective water conservation.",
     "count": 1,
-    "gradient": "from-[#57D6F2]/10 to-[#8FBB43]/10"
+    "gradient": "from-accent/10 to-primary-light/10"
   },
   {
     "id": "nets-crop-protection",

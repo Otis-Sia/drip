@@ -50,7 +50,7 @@ export default function CommunicationPage() {
             If you are a verified client looking to post an announcement, please contact our administrator.
           </p>
           <Link
-            href="/contact"
+            href="#main-footer"
             className="btn-primary !px-8 !py-3 !text-sm"
             id="comms-cta-contact"
           >

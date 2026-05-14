@@ -19,7 +19,7 @@ export default function Calendar({ events }: CalendarProps) {
               key={index}
               className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-50 transition-colors"
             >
-              <div className="bg-gradient-to-br from-[#63913D] to-[#8FBB43] text-white font-bold text-center py-2 px-3 rounded-xl min-w-[60px]">
+              <div className="bg-gradient-to-br from-primary to-primary-light text-white font-bold text-center py-2 px-3 rounded-xl min-w-[60px]">
                 <span className="block text-xs uppercase tracking-wider leading-none">
                   {new Date(event.date + 'T00:00:00').toLocaleString('en-US', { month: 'short' })}
                 </span>
@@ -31,7 +31,7 @@ export default function Calendar({ events }: CalendarProps) {
                 <h4 className="font-bold text-gray-900 text-sm leading-snug">
                   {event.title}
                 </h4>
-                <span className="text-[11px] font-medium text-[#63913D] uppercase tracking-wider">
+                <span className="text-[11px] font-medium text-primary uppercase tracking-wider">
                   {event.type}
                 </span>
               </div>

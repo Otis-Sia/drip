@@ -2,19 +2,14 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
 import { companyValues, targetMarkets, aboutStats, teamMembers } from '@/lib/company';
+import { branches } from '@/lib/branches';
 import TeamCard from '@/components/about/TeamCard';
+import BranchCard from '@/components/contact/BranchCard';
 
 export const metadata: Metadata = {
   title: 'About Us | DRIP',
   description: 'Learn about Afrodrip Limited, our mission, vision, and the team behind our success.',
 };
-
-const gradientColors = [
-  'from-[#63913D] to-[#8FBB43]',
-  'from-[#8FBB43] to-[#57D6F2]',
-  'from-[#57D6F2] to-[#63913D]',
-  'from-[#8FBB43] to-[#63913D]',
-];
 
 export default function AboutPage() {
   return (
@@ -40,7 +35,7 @@ export default function AboutPage() {
               <p className="text-gray-500 mb-4 leading-relaxed">
                 Founded in 2018 and headquartered in Nairobi, Afrodrip Limited delivers innovative farming infrastructure designed to improve productivity and sustainability. We empower farmers to increase productivity, conserve water, and grow crops year-round.
               </p>
-              <div className="bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 border border-[#63913D]/15 rounded-2xl p-5 mb-6">
+              <div className="bg-gradient-to-br from-primary/10 to-primary-light/10 border border-primary/15 rounded-2xl p-5 mb-6">
                 <div className="flex items-center gap-4">
                   <div className="w-12 h-12 rounded-xl glass-icon flex items-center justify-center flex-shrink-0">
                     <Image src="/trophy.svg" alt="Award" width={28} height={28} />
@@ -55,17 +50,18 @@ export default function AboutPage() {
                 Our vision is to lead the future of climate-smart agriculture through innovative greenhouse and irrigation technologies that enable farmers to grow more with less.
               </p>
             </div>
-            <div className="bg-gradient-to-br from-[#63913D]/5 to-[#8FBB43]/5 rounded-3xl p-8 space-y-6 relative overflow-hidden">
+            <div className="bg-gradient-to-br from-primary/5 to-primary-light/5 rounded-3xl p-8 space-y-6 relative overflow-hidden">
               <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-[#8FBB43]/20 to-transparent rounded-bl-[60px]" />
+              <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-primary/20 to-transparent rounded-bl-[60px]" />
               <div className="text-center relative">
-                <div className="text-5xl font-black bg-gradient-to-r from-[#63913D] to-[#8FBB43] bg-clip-text text-transparent">2018</div>
+                <div className="text-5xl font-black bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">2018</div>
                 <div className="text-gray-500 text-sm mt-1 font-medium">Year Founded</div>
               </div>
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
                 {aboutStats.map(([val, label]) => (
-                  <div key={label} className="bg-white rounded-2xl p-5 text-center shadow-sm border border-gray-100/50">
-                    <div className="text-2xl font-black bg-gradient-to-r from-[#63913D] to-[#8FBB43] bg-clip-text text-transparent">{val}</div>
-                    <div className="text-gray-400 text-xs mt-1 font-medium">{label}</div>
+                  <div key={label} className="bg-surface rounded-2xl p-5 text-center shadow-sm border border-border/50">
+                    <div className="text-2xl font-black bg-gradient-to-r from-primary to-primary-light bg-clip-text text-transparent">{val}</div>
+                    <div className="text-muted text-xs mt-1 font-medium">{label}</div>
                   </div>
                 ))}
               </div>
@@ -109,13 +105,13 @@ export default function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {companyValues.map((value) => (
-              <div key={value.title} className="flex gap-4 p-6 rounded-2xl bg-[#f8fafc] hover:bg-gradient-to-br hover:from-[#63913D]/5 hover:to-[#8FBB43]/5 transition-all duration-300 group border border-transparent hover:border-[#63913D]/15">
+              <div key={value.title} className="flex gap-4 p-6 rounded-2xl bg-bg hover:bg-gradient-to-br hover:from-primary/5 hover:to-primary-light/5 transition-all duration-300 group border border-transparent hover:border-primary/15">
                 <div className="w-12 h-12 rounded-xl glass-icon flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300">
                   <Image src={value.icon} alt="" width={28} height={28} />
                 </div>
                 <div>
-                  <h3 className="font-bold text-gray-900 mb-1">{value.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{value.description}</p>
+                  <h3 className="font-bold text-fg mb-1">{value.title}</h3>
+                  <p className="text-muted text-sm leading-relaxed">{value.description}</p>
                 </div>
               </div>
             ))}
@@ -153,10 +149,39 @@ export default function AboutPage() {
                 <div className="w-12 h-12 rounded-xl glass-icon flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Image src={item.icon} alt="" width={28} height={28} />
                 </div>
-                <h3 className="font-semibold text-gray-900 mb-2">{item.title}</h3>
-                <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                <h3 className="font-semibold text-fg mb-2">{item.title}</h3>
+                <p className="text-muted text-sm leading-relaxed">{item.desc}</p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Branches Section */}
+      <section className="py-20 bg-[#f8fafc] border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="section-label">Find Us</div>
+            <h2 className="section-title mx-auto">16 Branches Nationwide</h2>
+            <p className="section-subtitle mx-auto">Visit any of our offices across Kenya for in-person consultations and support.</p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {(['Nairobi & Central', 'Rift Valley', 'Eastern & Coast', 'Western & Nyanza'] as const).map((region) => {
+              const regionBranches = branches.filter((b) => b.region === region);
+              return (
+                <div key={region} className="space-y-6">
+                  <h3 className="text-lg font-bold text-primary border-b-2 border-primary-light pb-2 mb-4">
+                    {region}
+                  </h3>
+                  <div className="space-y-4">
+                    {regionBranches.map((branch) => (
+                      <BranchCard key={branch.id} branch={branch} />
+                    ))}
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -166,7 +191,7 @@ export default function AboutPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
           <h2 className="text-3xl md:text-4xl font-black mb-5 tracking-tight">Partner with Afrodrip</h2>
           <p className="text-white mb-10 max-w-xl mx-auto text-lg font-light">Ready to transform your agricultural productivity? Let&apos;s start the conversation.</p>
-          <Link href="/contact" className="btn-primary !px-10 !py-3.5 text-base" id="about-cta-contact">
+          <Link href="#main-footer" className="btn-primary !px-10 !py-3.5 text-base" id="about-cta-contact">
             Get in Touch
           </Link>
         </div>
@@ -174,3 +199,4 @@ export default function AboutPage() {
     </div>
   );
 }
+

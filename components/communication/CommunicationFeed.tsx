@@ -44,7 +44,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
     <div className="space-y-8">
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-6 pb-4 border-b border-gray-100">
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#63913D]/10 flex items-center justify-center">
+          <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
             <Image src="/bell.svg" alt="" width={24} height={24} />
           </div>
           <h2 className="text-2xl font-black text-gray-900 tracking-tight">Alerts & Updates</h2>
@@ -58,7 +58,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
               onClick={() => setFilter(cat)}
               className={`text-xs font-bold px-5 py-2 rounded-xl transition-all duration-300 ${
                 filter === cat
-                  ? 'bg-white text-[#63913D] shadow-md scale-[1.02]'
+                  ? 'bg-surface text-primary shadow-md scale-[1.02]'
                   : 'text-gray-500 hover:text-gray-700 hover:bg-white/50'
               }`}
             >
@@ -79,7 +79,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
                     ? 'border-l-amber-500 bg-amber-500/5'
                     : item.severity === 'error'
                     ? 'border-l-red-500 bg-red-500/5'
-                    : 'border-l-[#63913D] bg-[#63913D]/5'
+                    : 'border-l-primary bg-primary/5'
                 }`}
                 style={{ animationDelay: `${index * 100}ms` }}
               >
@@ -92,7 +92,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
                           ? 'bg-amber-100 text-amber-800'
                           : item.severity === 'error'
                           ? 'bg-red-100 text-red-800'
-                          : 'bg-[#63913D]/10 text-[#63913D]'
+                          : 'bg-primary/10 text-primary'
                       }`}>
                         Urgent: {item.severity}
                       </span>
@@ -114,7 +114,7 @@ export default function CommunicationFeed({ alerts, news }: CommunicationFeedPro
             return (
               <div
                 key={`news-${item.id}`}
-                className="card overflow-hidden hover:border-[#63913D]/30 transition-all duration-300 animate-fadeInUp"
+                className="card overflow-hidden hover:border-primary/30 transition-all duration-300 animate-fadeInUp"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
                 <div className="flex flex-col sm:flex-row">

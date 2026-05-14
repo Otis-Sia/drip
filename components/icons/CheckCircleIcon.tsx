@@ -3,9 +3,11 @@ import React from "react";
 export default function CheckCircleIcon({
   size = 24,
   color = "currentColor",
+  className = "",
 }: {
   size?: number;
   color?: string;
+  className?: string;
 }) {
   return (
     <svg
@@ -13,7 +15,7 @@ export default function CheckCircleIcon({
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      className="inline-block"
+      className={`inline-block ${className}`}
     >
       <circle cx="12" cy="12" r="10" stroke={color} strokeWidth="2" fill="none" />
       <path

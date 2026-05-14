@@ -43,27 +43,25 @@ function ProductContent() {
             <Image src="/search.svg" alt="Not found" width={48} height={48} className="mx-auto opacity-40" />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Product not found</h2>
-          <Link href="/shop" className="text-[#63913D] hover:brightness-90 font-semibold transition-all">Back to Shop</Link>
+          <Link href="/delver" className="text-primary hover:brightness-90 font-semibold transition-all">Back to Delver</Link>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-[#f8fafc]">
+    <div className="min-h-screen bg-bg">
       {/* Breadcrumb */}
       <div className="bg-white border-b border-gray-100 pt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center gap-2 text-sm text-gray-400 font-medium">
-            <Link href="/shop" className="hover:text-[#63913D] transition-colors">Shop</Link>
+            <Link href="/delver" className="hover:text-primary transition-colors">Delver</Link>
+            <span className="text-gray-400">/</span>
+            <Link href="/delver/products" className="hover:text-primary transition-colors">Products</Link>
             <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
             </svg>
-            <Link href="/shop/products" className="hover:text-[#63913D] transition-colors">Products</Link>
-            <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-              <path strokeLinecap="round" strokeLinejoin="round" d="M9 5l7 7-7 7" />
-            </svg>
-            <span className="text-gray-900">{product.name}</span>
+            <span className="text-fg">{product.name}</span>
           </div>
         </div>
       </div>
@@ -74,18 +72,18 @@ function ProductContent() {
           <div className="lg:col-span-2 space-y-10">
             <div className="animate-fadeInUp">
               <div className="badge mb-4">{categoryMap[product.category] || product.category}</div>
-              <h1 className="text-3xl md:text-4xl font-black text-gray-900 mb-5 tracking-tight">{product.name}</h1>
-              <p className="text-gray-500 text-lg leading-relaxed">{product.longDescription}</p>
+              <h1 className="text-3xl md:text-4xl font-black text-fg mb-5 tracking-tight">{product.name}</h1>
+              <p className="text-muted text-lg leading-relaxed">{product.longDescription}</p>
             </div>
 
             {/* Specs */}
             <div className="animate-fadeInUp delay-100">
-              <h2 className="text-xl font-bold text-gray-900 mb-5">Technical Specifications</h2>
+              <h2 className="text-xl font-bold text-fg mb-5">Technical Specifications</h2>
               <div className="card overflow-hidden !rounded-2xl">
                 {product.specs.map((spec, i) => (
-                  <div key={spec.label} className={`flex items-center px-6 py-4 ${i % 2 === 0 ? 'bg-[#f8fafc]' : 'bg-white'}`}>
-                    <span className="w-1/2 text-sm font-semibold text-gray-700">{spec.label}</span>
-                    <span className="w-1/2 text-sm text-gray-500">{spec.value}</span>
+                  <div key={spec.label} className={`flex items-center px-6 py-4 ${i % 2 === 0 ? 'bg-surface-alt' : 'bg-surface'}`}>
+                    <span className="w-1/2 text-sm font-semibold text-fg/80">{spec.label}</span>
+                    <span className="w-1/2 text-sm text-muted">{spec.value}</span>
                   </div>
                 ))}
               </div>
@@ -93,12 +91,12 @@ function ProductContent() {
 
             {/* Use Cases */}
             <div className="animate-fadeInUp delay-200">
-              <h2 className="text-xl font-bold text-gray-900 mb-5">Ideal For</h2>
+              <h2 className="text-xl font-bold text-fg mb-5">Ideal For</h2>
               <div className="grid sm:grid-cols-2 gap-3">
                 {product.useCases.map((useCase) => (
-                  <div key={useCase} className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-100">
-                    <CheckCircleIcon size={20} />
-                    <span className="text-gray-600 text-sm">{useCase}</span>
+                  <div key={useCase} className="flex items-start gap-3 bg-surface rounded-xl p-4 border border-border">
+                    <CheckCircleIcon size={20} className="text-primary" />
+                    <span className="text-muted text-sm">{useCase}</span>
                   </div>
                 ))}
               </div>
@@ -108,8 +106,8 @@ function ProductContent() {
           {/* CTA Sidebar */}
           <div className="lg:col-span-1">
             <div className="card p-7 sticky top-24 !rounded-2xl animate-slideRight">
-              <h3 className="font-bold text-gray-900 text-lg mb-2">Request a Quote</h3>
-              <p className="text-gray-500 text-sm mb-5 leading-relaxed">Please provide project details to help us prepare an accurate proposal.</p>
+              <h3 className="font-bold text-fg text-lg mb-2">Request a Quote</h3>
+              <p className="text-muted text-sm mb-5 leading-relaxed">Please provide project details to help us prepare an accurate proposal.</p>
               
               <div className="space-y-4 mb-6">
                 <div>
@@ -119,7 +117,7 @@ function ProductContent() {
                     min="1" 
                     value={quantity} 
                     onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-                    className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[#8FBB43]/30 focus:border-[#8FBB43] outline-none transition-all"
+                    className="w-full bg-surface-alt border border-border text-fg text-sm rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-light/30 focus:border-primary-light outline-none transition-all"
                   />
                 </div>
                 <div>
@@ -129,7 +127,7 @@ function ProductContent() {
                     rows={4}
                     value={customNotes} 
                     onChange={(e) => setCustomNotes(e.target.value)}
-                    className="w-full bg-gray-50 border border-gray-200 text-gray-900 text-sm rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-[#8FBB43]/30 focus:border-[#8FBB43] outline-none transition-all resize-none"
+                    className="w-full bg-surface-alt border border-border text-fg text-sm rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-light/30 focus:border-primary-light outline-none transition-all resize-none"
                   />
                 </div>
               </div>
@@ -139,8 +137,8 @@ function ProductContent() {
                 id="product-add-to-cart"
                 className={`w-full font-semibold px-6 py-3.5 rounded-xl transition-all duration-300 mb-3 ${
                   added
-                    ? 'bg-[#8FBB43] text-white'
-                    : 'bg-[#63913D] hover:brightness-90 text-white'
+                    ? 'bg-primary-light text-white'
+                    : 'bg-primary hover:brightness-90 text-white'
                 }`}
               >
                 {added ? (
@@ -150,7 +148,7 @@ function ProductContent() {
                   </span>
                 ) : 'Add to Cart'}
               </button>
-              <Link href="/contact" className="block text-center border-2 border-[#63913D] text-[#63913D] hover:bg-[#63913D] hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm">
+              <Link href="#main-footer" className="block text-center border-2 border-primary text-primary hover:bg-primary hover:text-white font-semibold px-6 py-3 rounded-xl transition-all duration-300 text-sm">
                 Contact Us Directly
               </Link>
               <div className="mt-7 pt-7 border-t border-gray-100">

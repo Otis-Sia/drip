@@ -28,13 +28,8 @@ export default function Home() {
               Afrodrip Limited empowers farmers with cutting-edge greenhouse systems, efficient irrigation, and climate-smart technologies to increase productivity and conserve resources.
             </p>
             <div className="flex flex-col sm:flex-row gap-4">
-              <Link href="/shop" className="btn-primary !px-10 !py-3.5 text-base" id="hero-explore-products">
-                Explore Products
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-              <Link href="/contact" className="btn-outline !px-10 !py-3.5 text-base" id="hero-get-in-touch">
+
+              <Link href="#main-footer" className="btn-outline !px-10 !py-3.5 text-base" id="hero-get-in-touch">
                 Request a Quote
               </Link>
             </div>
@@ -55,7 +50,7 @@ export default function Home() {
 
       {/* Stats */}
       <section className="bg-[#324f1f] text-white py-12 relative">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#63913D]/10 via-transparent to-[#8FBB43]/10" />
+        <div className="absolute inset-0 bg-gradient-to-r from-primary/10 via-transparent to-primary-light/10" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
             {companyStats.map((stat, i) => (
@@ -140,45 +135,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Featured Products */}
-      <section className="py-20 md:py-28 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-14">
-            <div className="section-label">Our Products</div>
-            <h2 className="section-title mx-auto">Featured Agricultural Products</h2>
-            <p className="section-subtitle mx-auto">Explore our high-quality greenhouse materials, irrigation components, and crop protection solutions.</p>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {featuredProducts.map((product, i) => (
-              <div
-                key={product.id}
-                className={`card p-6 flex flex-col animate-fadeInUp delay-${(i + 1) * 100}`}
-              >
-                <div className="badge mb-4 w-fit">{categoryMap[product.category] || product.category}</div>
-                <h3 className="text-gray-900 font-bold mb-2">{product.name}</h3>
-                <p className="text-gray-500 text-sm mb-5 flex-1">{product.description}</p>
-                <Link
-                  href={`/shop/product-description?id=${product.id}`}
-                  className="text-[#63913D] hover:brightness-90 text-sm font-semibold flex items-center gap-1.5 transition-colors group/link"
-                >
-                  Request Quote
-                  <svg className="w-3.5 h-3.5 group-hover/link:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
-                    <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </Link>
-              </div>
-            ))}
-          </div>
-          <div className="text-center mt-12">
-            <Link href="/shop" className="btn-outline-dark" id="home-browse-products">
-              Browse All Products
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </Link>
-          </div>
-        </div>
-      </section>
+
 
       {/* Calendar Preview Section */}
       <section className="py-20 md:py-28 bg-[#f0f9ff]">
@@ -212,12 +169,10 @@ export default function Home() {
             Let our experts help you design and build a modern, high-yield agricultural system tailored to your needs.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link href="/contact" className="btn-primary !px-10 !py-3.5 text-base" id="cta-contact">
+            <Link href="#main-footer" className="btn-primary !px-10 !py-3.5 text-base" id="cta-contact">
               Request a Quote
             </Link>
-            <Link href="/shop" className="btn-outline !px-10 !py-3.5 text-base" id="cta-products">
-              View Our Catalog
-            </Link>
+
           </div>
         </div>
       </section>

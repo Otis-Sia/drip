@@ -30,12 +30,12 @@ export default function ProductCard({ product, showFeatures = false }: ProductCa
   return (
     <div className="card flex flex-col overflow-hidden h-full">
       {/* Product Image */}
-      <div className="relative w-full h-44 bg-gradient-to-br from-[#63913D]/5 to-[#8FBB43]/5 overflow-hidden">
+      <div className="relative w-full h-44 bg-gradient-to-br from-primary/5 to-primary-light/5 overflow-hidden">
         {product.image ? (
           <Image src={product.image} alt={product.name} fill className="object-cover" sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw" />
         ) : (
           <div className="w-full h-full flex items-center justify-center">
-            <span className="text-[#63913D]/30 text-4xl font-black">{product.name.charAt(0)}</span>
+            <span className="text-primary/30 text-4xl font-black">{product.name.charAt(0)}</span>
           </div>
         )}
       </div>
@@ -64,8 +64,8 @@ export default function ProductCard({ product, showFeatures = false }: ProductCa
       
       <div className="p-4 pt-0 space-y-2">
         <Link
-          href={`/shop/product-description?id=${product.id}`}
-          className="block text-center border-2 border-[#63913D] text-[#63913D] hover:bg-[#63913D] hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
+          href={`/delver/product-description?id=${product.id}`}
+          className="block text-center border-2 border-primary text-primary hover:bg-primary hover:text-white text-sm font-semibold px-4 py-2.5 rounded-lg transition-all duration-300"
         >
           View Details
         </Link>

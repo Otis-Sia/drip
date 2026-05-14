@@ -23,12 +23,12 @@ export default function CartPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         {items.length === 0 ? (
           <div className="text-center py-20 animate-fadeIn">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mx-auto mb-6">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/10 to-primary-light/10 flex items-center justify-center mx-auto mb-6">
               <Image src="/clipboard.svg" alt="" width={40} height={40} />
             </div>
             <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
             <p className="text-gray-500 mb-8">Browse our products and add items to request a quote.</p>
-            <Link href="/shop" className="btn-secondary" id="cart-browse-link">
+            <Link href="/delver" className="btn-secondary" id="cart-browse-link">
               Browse Products
               <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                 <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -102,13 +102,13 @@ export default function CartPage() {
                 <div className="border-t border-gray-100 pt-5 mb-6">
                   <div className="flex justify-between font-bold">
                     <span className="text-gray-900">Total Items</span>
-                    <span className="text-[#63913D] text-lg">{itemCount}</span>
+                    <span className="text-primary text-lg">{itemCount}</span>
                   </div>
                 </div>
-                <Link href="/shop/checkout" className="btn-primary block text-center mb-3 !rounded-xl !py-3.5" id="cart-proceed-checkout">
+                <Link href="/delver/checkout" className="btn-primary block text-center mb-3 !rounded-xl !py-3.5" id="cart-proceed-checkout">
                   Proceed to Request Quote
                 </Link>
-                <Link href="/shop" className="block text-center text-[#63913D] hover:text-[#8FBB43] text-sm font-semibold transition-colors">
+                <Link href="/delver" className="block text-center text-[#63913D] hover:text-[#8FBB43] text-sm font-semibold transition-colors">
                   ← Continue Browsing
                 </Link>
                 <div className="mt-7 pt-5 border-t border-gray-100">

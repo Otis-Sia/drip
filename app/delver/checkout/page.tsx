@@ -139,12 +139,12 @@ ${itemLines}
     return (
       <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center pt-20">
         <div className="text-center animate-fadeIn">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D]/10 to-[#8FBB43]/10 flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary/10 to-primary-light/10 flex items-center justify-center mx-auto mb-6">
             <Image src="/clipboard.svg" alt="" width={40} height={40} />
           </div>
           <h2 className="text-2xl font-bold text-gray-900 mb-3">Your cart is empty</h2>
           <p className="text-gray-500 mb-6">Add products before requesting a quote.</p>
-          <Link href="/shop" className="btn-secondary">Browse products</Link>
+          <Link href="/delver" className="btn-secondary">Browse products</Link>
         </div>
       </div>
     );
@@ -156,7 +156,7 @@ ${itemLines}
       <div className="min-h-screen bg-[#f8fafc] flex items-center justify-center px-4 pt-20">
         <div className="max-w-2xl w-full text-center space-y-8 animate-scaleIn">
           <div className="card p-12 !rounded-3xl shadow-xl">
-            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-[#63913D] to-[#8FBB43] flex items-center justify-center mx-auto mb-6 shadow-lg shadow-green-500/20">
+            <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-primary to-primary-light flex items-center justify-center mx-auto mb-6 shadow-lg shadow-primary/20">
               <CheckCircleIcon size={40} color="white" />
             </div>
             <h2 className="text-3xl font-black text-gray-900 mb-3">Quote Request Submitted!</h2>
@@ -169,7 +169,7 @@ ${itemLines}
                 <h3 className="text-xs font-black text-gray-400 uppercase tracking-widest">Shareable Quote Summary</h3>
                 <button 
                   onClick={handleCopy}
-                  className="text-[11px] font-bold text-[#63913D] hover:text-[#8FBB43] flex items-center gap-1.5 bg-white px-3 py-1.5 rounded-lg border border-gray-100 shadow-sm transition-all active:scale-95"
+                  className="text-[11px] font-bold text-primary hover:text-primary-light flex items-center gap-1.5 bg-surface px-3 py-1.5 rounded-lg border border-border shadow-sm transition-all active:scale-95"
                 >
                   <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
                     <path strokeLinecap="round" strokeLinejoin="round" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" />
@@ -186,7 +186,7 @@ ${itemLines}
               <Link href="/" className="btn-secondary block" id="checkout-back-home">
                 Back to Home
               </Link>
-              <Link href="/shop" className="btn-outline-dark block" id="checkout-browse-more">
+               <Link href="/delver" className="btn-outline-dark block" id="checkout-browse-more">
                 Browse More Products
               </Link>
             </div>
@@ -332,7 +332,7 @@ ${itemLines}
                     <h2 className="text-xl font-bold text-gray-900">Review Your Details</h2>
                     <button 
                       onClick={() => setIsReviewing(false)}
-                      className="text-sm font-semibold text-[#63913D] hover:text-[#8FBB43] flex items-center gap-1.5 transition-colors"
+                      className="text-sm font-semibold text-primary hover:text-primary-light flex items-center gap-1.5 transition-colors"
                       disabled={formspreeState.submitting}
                     >
                       <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2.5}>
@@ -370,7 +370,7 @@ ${itemLines}
                         <div key={item.cartItemId} className="bg-gray-50 rounded-xl p-4 border border-gray-100">
                           <div className="flex justify-between mb-2">
                             <span className="text-sm font-bold text-gray-900">{item.name}</span>
-                            <span className="text-xs font-bold text-[#63913D]">Qty: {item.quantity}</span>
+                            <span className="text-xs font-bold text-primary">Qty: {item.quantity}</span>
                           </div>
                           <p className="text-xs text-gray-400 mb-2">{item.category}</p>
                           {item.customNotes ? (
@@ -398,7 +398,7 @@ ${itemLines}
                     <button 
                       onClick={handleFinalSubmit}
                       disabled={formspreeState.submitting}
-                      className={`btn-primary w-full !py-4 !rounded-xl text-lg shadow-xl shadow-[#63913D]/20 transition-all ${
+                      className={`btn-primary w-full !py-4 !rounded-xl text-lg shadow-xl shadow-primary/20 transition-all ${
                         formspreeState.submitting ? 'opacity-70 cursor-not-allowed' : 'animate-pulse-slow'
                       }`}
                     >
@@ -433,7 +433,7 @@ ${itemLines}
                         <p className="text-sm font-semibold text-gray-900">{item.name}</p>
                         <p className="text-[10px] text-gray-400 uppercase font-bold tracking-tight">{item.category}</p>
                       </div>
-                      <span className="text-sm text-[#63913D] font-bold flex-shrink-0">×{item.quantity}</span>
+                      <span className="text-sm text-primary font-bold flex-shrink-0">×{item.quantity}</span>
                     </div>
                     {item.customNotes && (
                       <p className="text-[10px] text-gray-500 italic line-clamp-1 mt-0.5">Note: {item.customNotes}</p>

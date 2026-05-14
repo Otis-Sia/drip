@@ -48,7 +48,7 @@ export default function NewsFeed({ news, hideTitle = false }: NewsFeedProps) {
         {filteredNews.map((item) => (
           <div
             key={item.id}
-            className="card overflow-hidden hover:border-[#63913D]/30 transition-all duration-300"
+            className="card overflow-hidden hover:border-primary/30 transition-all duration-300"
           >
             <div className="flex flex-col sm:flex-row">
               {/* News Image */}

@@ -30,12 +30,12 @@ export default function ServiceSection({ service, index }: ServiceSectionProps) 
         <p className="text-gray-500 leading-relaxed mb-6">{service.approach}</p>
 
         {/* Outcomes */}
-        <div className="bg-[#63913D]/10 border border-[#63913D]/20 rounded-2xl p-5">
-          <p className="text-[#63913D] font-semibold text-sm mb-1 flex items-center gap-2">
-            <CheckCircleIcon size={20} color="white" />
-            Proven Results
+        <div className="bg-primary/10 border border-primary/20 rounded-2xl p-5">
+          <p className="text-primary font-semibold text-sm mb-1 flex items-center gap-2">
+            <CheckCircleIcon size={20} className="text-primary" />
+            Key Outcomes
           </p>
-          <p className="text-[#63913D]/80 text-sm leading-relaxed">{service.outcomes}</p>
+          <p className="text-primary/80 text-sm leading-relaxed">{service.outcomes}</p>
         </div>
       </div>
 
@@ -57,7 +57,7 @@ export default function ServiceSection({ service, index }: ServiceSectionProps) 
             ))}
           </ul>
           <div className="mt-8">
-            <Link href="/contact" className="btn-secondary block text-center" id={`service-cta-${index}`}>
+            <Link href="#main-footer" className="btn-secondary block text-center" id={`service-cta-${index}`}>
               Request a Quote
             </Link>
           </div>

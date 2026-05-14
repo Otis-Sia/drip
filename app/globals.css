@@ -1,27 +1,41 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 @import "tailwindcss";
 
-/* ─── Design Tokens ─── */
-:root {
-  --bg: #f8fafc;
-  --fg: #0f172a;
-  --primary: #63913D;
-  --primary-light: #8FBB43;
-  --primary-dark: #4a7230;
-  --accent: #57D6F2;
-  --accent-light: #7ae1f5;
-  --accent-dark: #3bbdd9;
-  --surface: #ffffff;
-  --surface-alt: #f1f5f9;
-  --muted: #64748b;
-  --border: #e2e8f0;
-  --radius: 16px;
-  --radius-sm: 10px;
-  --radius-lg: 24px;
+@theme {
+  /* ─── Color Palette ─── */
+  --color-bg: #f8fafc;
+  --color-fg: #0f172a;
+  --color-primary: #63913D;
+  --color-primary-light: #8FBB43;
+  --color-primary-dark: #4a7230;
+  --color-accent: #57D6F2;
+  --color-accent-light: #7ae1f5;
+  --color-accent-dark: #3bbdd9;
+  --color-surface: #ffffff;
+  --color-surface-alt: #f1f5f9;
+  --color-muted: #64748b;
+  --color-border: #e2e8f0;
+  --color-footer: #0a1206;
+
+  /* ─── Border Radii ─── */
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+  --radius-xl: 16px;
+  --radius-2xl: 20px;
+  --radius-3xl: 24px;
+
+  /* ─── Transitions & Effects ─── */
+  --animate-float: float 6s ease-in-out infinite;
+  --animate-pulse-glow: pulse-glow 3s ease-in-out infinite;
+  
   --shadow-sm: 0 1px 3px rgba(15,23,42,0.04), 0 1px 2px rgba(15,23,42,0.06);
   --shadow-md: 0 4px 16px rgba(15,23,42,0.06), 0 2px 6px rgba(15,23,42,0.04);
   --shadow-lg: 0 10px 40px rgba(15,23,42,0.08), 0 4px 12px rgba(15,23,42,0.04);
   --shadow-xl: 0 20px 60px rgba(15,23,42,0.12), 0 8px 24px rgba(15,23,42,0.06);
+}
+
+:root {
   --glass-bg: rgba(255,255,255,0.7);
   --glass-border: rgba(255,255,255,0.25);
   --transition: cubic-bezier(0.4, 0, 0.2, 1);
@@ -38,14 +52,14 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--fg);
+  background: var(--color-bg);
+  color: var(--color-fg);
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
   line-height: 1.6;
 }
 
 ::selection {
-  background: var(--accent);
+  background: var(--color-accent);
   color: white;
 }
 
@@ -123,7 +137,7 @@ body {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   border: 1px solid var(--glass-border);
-  border-radius: var(--radius);
+  border-radius: var(--radius-md);
 }
 
 .glass-icon {
@@ -138,9 +152,9 @@ body {
 
 /* ─── Premium Card ─── */
 .card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
   transition: all 0.35s var(--transition);
 }
@@ -205,7 +219,7 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 12px 28px;
-  background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
   color: white;
   font-weight: 600;
   font-size: 0.9rem;
@@ -227,7 +241,7 @@ body {
   justify-content: center;
   gap: 8px;
   padding: 12px 28px;
-  background: var(--primary);
+  background: var(--color-primary);
   color: white;
   font-weight: 600;
   font-size: 0.9rem;
@@ -275,11 +289,11 @@ body {
   gap: 8px;
   padding: 11px 28px;
   background: transparent;
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: 600;
   font-size: 0.9rem;
   border-radius: var(--radius-sm);
-  border: 2px solid var(--primary);
+  border: 2px solid var(--color-primary);
   transition: all 0.3s var(--transition);
   cursor: pointer;
   text-decoration: none;
@@ -295,18 +309,18 @@ body {
 .input-field {
   width: 100%;
   padding: 12px 16px;
-  border: 1.5px solid var(--border);
+  border: 1.5px solid var(--color-border);
   border-radius: var(--radius-sm);
   font-size: 0.9rem;
   font-family: 'Inter', sans-serif;
-  background: var(--surface);
-  color: var(--fg);
+  background: var(--color-surface);
+  color: var(--color-fg);
   transition: all 0.25s var(--transition);
   outline: none;
 }
 
 .input-field:focus {
-  border-color: var(--accent);
+  border-color: var(--color-accent);
   box-shadow: 0 0 0 3px rgba(87,214,242,0.12);
 }
 
@@ -322,7 +336,7 @@ body {
 /* ─── Section Styles ─── */
 .section-label {
   display: inline-block;
-  color: var(--primary);
+  color: var(--color-primary);
   font-weight: 700;
   font-size: 0.75rem;
   text-transform: uppercase;
@@ -333,7 +347,7 @@ body {
 .section-title {
   font-size: 2rem;
   font-weight: 800;
-  color: var(--fg);
+  color: var(--color-fg);
   line-height: 1.2;
   margin-bottom: 16px;
 }
@@ -345,7 +359,7 @@ body {
 }
 
 .section-subtitle {
-  color: var(--muted);
+  color: var(--color-muted);
   font-size: 1.05rem;
   line-height: 1.7;
   max-width: 640px;
@@ -360,9 +374,9 @@ body {
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);
   background: rgba(99,145,61,0.1);
-  color: var(--primary-dark);
+  color: var(--color-primary-dark);
 }
 
 .badge-tag {
@@ -371,15 +385,15 @@ body {
   padding: 3px 10px;
   font-size: 0.7rem;
   font-weight: 500;
-  border-radius: 999px;
-  background: var(--surface-alt);
-  color: var(--muted);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-alt);
+  color: var(--color-muted);
   transition: all 0.2s var(--transition);
 }
 
 .badge-tag:hover {
   background: rgba(99,145,61,0.08);
-  color: var(--primary-dark);
+  color: var(--color-primary-dark);
 }
 
 /* ─── Decorative Elements ─── */
@@ -396,7 +410,7 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--surface-alt);
+  background: var(--color-surface-alt);
 }
 
 ::-webkit-scrollbar-thumb {
@@ -407,39 +421,4 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: #94a3b8;
 }
-/* ─── SVG Consistency ─── */
 
-/* Inline SVGs: Force dark green color for consistency by default */
-svg:not([id="svg1"]):not(.logo-svg) {
-  color: var(--primary-dark);
-}
-
-/* Apply brand colors to SVG elements by default */
-svg:not([id="svg1"]):not(.logo-svg) :is(path, circle, rect, polyline, polygon, ellipse) {
-  fill: currentColor;
-  stroke: currentColor;
-}
-
-/* Maintain transparency if fill="none" is set on the element OR its parent SVG */
-svg:not([id="svg1"]):not(.logo-svg)[fill="none"] :is(path, circle, rect, polyline, polygon, ellipse),
-svg:not([id="svg1"]):not(.logo-svg) [fill="none"] {
-  fill: none !important;
-}
-
-/* Maintain transparency if stroke="none" is set on the element OR its parent SVG */
-svg:not([id="svg1"]):not(.logo-svg)[stroke="none"] :is(path, circle, rect, polyline, polygon, ellipse),
-svg:not([id="svg1"]):not(.logo-svg) [stroke="none"] {
-  stroke: none !important;
-}
-
-/* For SVGs used in Image/img tags (icons): Use CSS filter to colorize to --primary-dark (#4a7230) */
-img[src$=".svg"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]),
-img[src*=".svg?"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]) {
-  filter: brightness(0) saturate(100%) invert(41%) sepia(35%) saturate(542%) hue-rotate(54deg) brightness(91%) contrast(84%) !important;
-}
-
-/* Special case for social icons in footer which might be inverted */
-#main-footer img[src$=".svg"]:not([src*="afrodrip"]):not([src*="logo"]):not([src*="brand"]) {
-  opacity: 0.8 !important;
-  filter: brightness(0) saturate(100%) invert(41%) sepia(35%) saturate(542%) hue-rotate(54deg) brightness(91%) contrast(84%) !important;
-}

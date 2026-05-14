@@ -7,9 +7,9 @@ interface BranchCardProps {
 
 export default function BranchCard({ branch }: BranchCardProps) {
   return (
-    <div className="card p-5 hover:border-[#63913D]/30 transition-all duration-300">
-      <h4 className="font-bold text-gray-900 text-sm mb-2">{branch.name}</h4>
-      <div className="space-y-3 text-xs text-gray-500 font-medium">
+    <div className="card overflow-hidden hover:border-primary/30 transition-all duration-300 p-5">
+      <h4 className="font-bold text-fg text-sm mb-2">{branch.name}</h4>
+      <div className="space-y-3 text-xs text-muted font-medium">
         <p className="flex items-start gap-3">
           <span className="w-6 h-6 rounded-md glass-icon flex items-center justify-center flex-shrink-0 mt-0.5">
             <Image src="/location_pin.svg" alt="" width={12} height={12} />

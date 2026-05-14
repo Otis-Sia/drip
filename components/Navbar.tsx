@@ -11,9 +11,6 @@ export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const { itemCount } = useCart();
   const pathname = usePathname();
-  const isShopPage = pathname?.startsWith('/shop');
-
-  if (pathname?.startsWith('/admin')) return null;
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -21,13 +18,14 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  if (pathname?.startsWith('/admin')) return null;
+
   const links = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/services', label: 'Services' },
     { href: '/communication', label: 'Communication' },
-    { href: '/shop', label: 'Shop' },
-    { href: '/contact', label: 'Contact' },
+    { href: '#main-footer', label: 'Contact' },
   ];
 
   const currentLabel = links.find(link => 
@@ -38,53 +36,33 @@ export default function Navbar() {
   return (
     <nav
       id="main-navigation"
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 bg-surface/90 backdrop-blur-xl border-b border-border/50 ${
         scrolled
-          ? 'bg-white/90 backdrop-blur-xl shadow-[0_1px_20px_rgba(15,23,42,0.08)] border-b border-gray-100/50'
-          : 'bg-transparent'
+          ? 'shadow-lg'
+          : 'shadow-sm'
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-[72px]">
           {/* Logo */}
-          <Link href="/" className="flex items-center" id="logo-link">
+          <Link href="/" className="flex items-center relative z-10" id="logo-link">
             <Image 
               src="/afrodrip.svg" 
               alt="Afrodrip Logo" 
               width={160} 
               height={50} 
-              className={`h-10 w-auto transition-all duration-300 ${!scrolled && 'brightness-0 invert'}`}
+              className="h-10 w-auto transition-all duration-300"
               priority
             />
           </Link>
 
           {/* Mobile Current Page Label & Cart */}
-          <div className="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-3">
-            <span className={`text-sm font-bold uppercase tracking-wider transition-colors duration-300 ${
-              scrolled ? 'text-gray-900' : 'text-white'
-            }`}>
+          <div className="md:hidden absolute left-1/2 -translate-x-1/2 flex items-center gap-3 pointer-events-none">
+            <span className="text-sm font-bold uppercase tracking-wider text-gray-900">
               {currentLabel}
             </span>
-            {isShopPage && (
-              <Link
-                href="/shop/cart"
-                id="mobile-nav-cart"
-                className={`relative p-1.5 transition-all duration-300 rounded-full ${
-                  scrolled 
-                    ? 'text-gray-700 hover:bg-gray-100' 
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                {itemCount > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-[10px] rounded-full w-4 h-4 flex items-center justify-center font-bold shadow-lg shadow-red-500/30 animate-scaleIn">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
-            )}
+
+
           </div>
 
 
@@ -99,49 +77,26 @@ export default function Navbar() {
                   id={`nav-link-${link.label.toLowerCase()}`}
                   className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 relative group ${
                     isActive
-                      ? scrolled ? 'text-[#63913D]' : 'text-white'
-                      : scrolled
-                        ? 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/70'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                      ? 'text-primary'
+                      : 'text-muted hover:text-fg hover:bg-surface-alt/70'
                   }`}
                 >
                   {link.label}
                   {isActive && (
-                    <div className={`absolute bottom-1 left-4 right-4 h-0.5 rounded-full transition-colors duration-300 ${
-                      scrolled ? 'bg-[#63913D]' : 'bg-white'
-                    }`} />
+                    <div className="absolute bottom-1 left-4 right-4 h-0.5 rounded-full bg-primary" />
                   )}
                 </Link>
               );
             })}
-            {isShopPage && (
-              <Link
-                href="/shop/cart"
-                id="nav-quote-cart"
-                className="relative ml-2 btn-primary !py-2 !px-4 !text-sm flex items-center gap-2"
-              >
-                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                </svg>
-                Cart
-                {itemCount > 0 && (
-                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center font-bold shadow-lg shadow-red-500/30 animate-scaleIn">
-                    {itemCount}
-                  </span>
-                )}
-              </Link>
-            )}
+
+
           </div>
 
           {/* Mobile menu button */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
             id="mobile-menu-toggle"
-            className={`md:hidden p-2.5 rounded-lg transition-all duration-300 ${
-              scrolled
-                ? 'text-gray-700 hover:bg-gray-100'
-                : 'text-white hover:bg-white/10'
-            }`}
+            className="md:hidden p-2.5 rounded-lg transition-all duration-300 text-gray-700 hover:bg-gray-100 relative z-10"
           >
             <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               {menuOpen ? (
@@ -171,16 +126,8 @@ export default function Navbar() {
               {link.label}
             </Link>
           ))}
-          {isShopPage && (
-            <Link
-              href="/shop/cart"
-              onClick={() => setMenuOpen(false)}
-              className="flex items-center gap-2 py-3 px-4 text-[#63913D] font-semibold text-sm"
-            >
-              <Image src="/clipboard.svg" alt="" width={16} height={16} />
-              Cart {itemCount > 0 && `(${itemCount})`}
-            </Link>
-          )}
+
+
         </div>
       </div>
     </nav>

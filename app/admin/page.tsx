@@ -115,9 +115,9 @@ export default function AdminPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-12 font-sans">
+    <div className="min-h-screen bg-bg pb-12 font-sans">
       {/* Admin Header */}
-      <div className="bg-white border-b border-gray-100 py-6 mb-8">
+      <div className="bg-surface border-b border-border py-6 mb-8">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4">
           <Image 
             src="/afrodrip.svg" 
@@ -127,8 +127,8 @@ export default function AdminPage() {
             className="h-10 w-auto"
             priority
           />
-          <div className="h-px w-12 bg-gray-100" />
-          <h2 className="text-xl font-black text-gray-900 tracking-tight uppercase">Admin Page</h2>
+          <div className="h-px w-12 bg-border" />
+          <h2 className="text-xl font-black text-fg tracking-tight uppercase">Admin Page</h2>
         </div>
       </div>
 
@@ -137,10 +137,10 @@ export default function AdminPage() {
           
           {/* Sidebar */}
           <div className="w-full md:w-64 flex-shrink-0">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden sticky top-24">
-              <div className="p-6 border-b border-gray-50">
-                <h2 className="text-lg font-bold text-gray-900">Libraries</h2>
-                <p className="text-xs text-gray-500 mt-1">Select a file to edit</p>
+            <div className="bg-surface rounded-2xl shadow-sm border border-border overflow-hidden sticky top-24">
+              <div className="p-6 border-b border-surface-alt">
+                <h2 className="text-lg font-bold text-fg">Libraries</h2>
+                <p className="text-xs text-muted mt-1">Select a file to edit</p>
               </div>
               <nav className="p-3 space-y-6">
                 {LIBRARY_GROUPS.map((group) => (
@@ -155,8 +155,8 @@ export default function AdminPage() {
                           onClick={() => setSelectedFile(file)}
                           className={`w-full text-left px-4 py-2.5 rounded-xl text-sm font-medium transition-all duration-200 ${
                             selectedFile.id === file.id
-                              ? 'bg-[#63913D] text-white shadow-lg shadow-[#63913D]/20'
-                              : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                              ? 'bg-primary text-white shadow-lg shadow-primary/20'
+                              : 'text-muted hover:bg-surface-alt hover:text-fg'
                           }`}
                         >
                           {file.name}
@@ -171,13 +171,13 @@ export default function AdminPage() {
 
           {/* Editor Area */}
           <div className="flex-1 min-w-0">
-            <div className="bg-white rounded-2xl shadow-sm border border-gray-100 flex flex-col min-h-[700px]">
+            <div className="bg-surface rounded-2xl shadow-sm border border-border flex flex-col min-h-[700px]">
               
               {/* Header */}
-              <div className="p-6 border-b border-gray-50 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <div className="p-6 border-b border-surface-alt flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                 <div>
-                  <h1 className="text-xl font-bold text-gray-900">{selectedFile.name}</h1>
-                  <p className="text-sm text-gray-500">{selectedFile.description}</p>
+                  <h1 className="text-xl font-bold text-fg">{selectedFile.name}</h1>
+                  <p className="text-sm text-muted">{selectedFile.description}</p>
                 </div>
                 
                 <div className="flex items-center gap-4">
@@ -228,10 +228,10 @@ export default function AdminPage() {
               {/* Content */}
               <div className="flex-1 relative overflow-hidden">
                 {loading ? (
-                  <div className="absolute inset-0 flex items-center justify-center bg-white/80 backdrop-blur-sm z-10">
+                  <div className="absolute inset-0 flex items-center justify-center bg-surface/80 backdrop-blur-sm z-10">
                     <div className="flex flex-col items-center gap-3">
-                      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-[#63913D]"></div>
-                      <p className="text-sm text-gray-500 font-medium">Loading data...</p>
+                      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-primary"></div>
+                      <p className="text-sm text-muted font-medium">Loading data...</p>
                     </div>
                   </div>
                 ) : null}
@@ -241,7 +241,7 @@ export default function AdminPage() {
                     <textarea
                       value={rawContent}
                       onChange={(e) => setRawContent(e.target.value)}
-                      className="w-full h-full font-mono text-sm p-6 bg-gray-900 text-gray-100 rounded-xl focus:ring-2 focus:ring-[#63913D] focus:outline-none resize-none selection:bg-[#63913D]/30"
+                      className="w-full h-full font-mono text-sm p-6 bg-gray-900 text-gray-100 rounded-xl focus:ring-2 focus:ring-primary focus:outline-none resize-none selection:bg-primary/30"
                       spellCheck={false}
                     />
                   </div>
@@ -265,7 +265,7 @@ export default function AdminPage() {
                           </div>
                           <button 
                             onClick={() => setViewMode('code')}
-                            className="text-sm font-bold text-[#63913D] hover:underline"
+                            className="text-sm font-bold text-primary hover:underline"
                           >
                             Switch to CODE mode
                           </button>
@@ -351,10 +351,10 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
   return (
     <div className={`flex flex-col md:flex-row h-full ${embedded ? '' : 'min-h-[600px]'}`}>
       {/* List */}
-      <div className={`w-full md:w-64 border-r border-gray-50 flex flex-col bg-gray-50/50 ${embedded ? 'max-h-48 md:max-h-none' : ''}`}>
-        <div className="p-4 border-b border-gray-100 flex items-center justify-between">
-          <span className="text-xs font-bold text-gray-500 uppercase">{items.length} Items</span>
-          <button onClick={addItem} className="text-[#63913D] hover:bg-[#63913D]/10 p-1.5 rounded-lg transition-colors">
+      <div className={`w-full md:w-64 border-r border-surface-alt flex flex-col bg-surface-alt/50 ${embedded ? 'max-h-48 md:max-h-none' : ''}`}>
+        <div className="p-4 border-b border-border flex items-center justify-between">
+          <span className="text-xs font-bold text-muted uppercase">{items.length} Items</span>
+          <button onClick={addItem} className="text-primary hover:bg-primary/10 p-1.5 rounded-lg transition-colors">
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
           </button>
         </div>
@@ -364,7 +364,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
               <button
                 onClick={() => setSelectedIndex(idx)}
                 className={`w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition-all truncate pr-10 ${
-                  selectedIndex === idx ? 'bg-white text-[#63913D] shadow-sm ring-1 ring-gray-100' : 'text-gray-500 hover:bg-white/50'
+                  selectedIndex === idx ? 'bg-surface text-primary shadow-sm ring-1 ring-border' : 'text-muted hover:bg-surface/50'
                 }`}
               >
                 {item.name || item.title || item.label || `Item ${idx + 1}`}
@@ -402,7 +402,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                             newArr[vIdx] = e.target.value;
                             updateField(key, newArr);
                           }}
-                          className="flex-1 px-4 py-2.5 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-[#63913D]/20 focus:border-[#63913D] focus:outline-none"
+                          className="flex-1 px-4 py-2.5 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                         />
                         <button 
                           onClick={() => updateField(key, value.filter((_, i) => i !== vIdx))}
@@ -414,7 +414,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                     ))}
                     <button 
                       onClick={() => updateField(key, [...value, ''])}
-                      className="text-xs font-bold text-[#63913D] hover:underline px-1"
+                      className="text-xs font-bold text-primary hover:underline px-1"
                     >
                       + Add Item
                     </button>
@@ -423,7 +423,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                   <select
                     value={value as string}
                     onChange={(e) => updateField(key, e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-[#63913D]/20 focus:border-[#63913D] focus:outline-none appearance-none"
+                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none appearance-none"
                   >
                     <option value="">Select Category</option>
                     {categories?.map(cat => (
@@ -435,14 +435,14 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                     type="date"
                     value={value as string}
                     onChange={(e) => updateField(key, e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-[#63913D]/20 focus:border-[#63913D] focus:outline-none"
+                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                   />
                 ) : (
                   <input
                     type={typeof value === 'number' ? 'number' : 'text'}
                     value={value as string}
                     onChange={(e) => updateField(key, e.target.value)}
-                    className="w-full px-4 py-3 bg-gray-50 border border-gray-100 rounded-xl text-sm focus:ring-2 focus:ring-[#63913D]/20 focus:border-[#63913D] focus:outline-none"
+                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                   />
                 )}
               </div>

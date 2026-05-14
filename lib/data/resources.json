@@ -1,7 +1,7 @@
 [
   {
     "title": "Client Portal",
-    "link": "/shop",
+    "link": "/delver",
     "icon": "/lock.svg",
     "target": "Clients"
   },
@@ -13,7 +13,7 @@
   },
   {
     "title": "Submit a Ticket",
-    "link": "/contact",
+    "link": "#main-footer",
     "icon": "/ticket.svg",
     "target": "Clients"
   }

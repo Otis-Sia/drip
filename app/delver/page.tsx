@@ -6,7 +6,7 @@ import CategoryCard from '@/components/shop/CategoryCard';
 import ProductCard from '@/components/shop/ProductCard';
 
 export const metadata: Metadata = {
-  title: 'Shop | Afrodrip Limited',
+  title: 'Delver | Afrodrip Limited',
   description: "Browse Afrodrip's agricultural products and solutions. Request a quote for any product.",
 };
 
@@ -23,7 +23,7 @@ export default function ShopPage() {
           <p className="text-white max-w-2xl mx-auto text-lg mb-10 font-light animate-fadeInUp delay-100">
             Browse our curated catalog of greenhouse, irrigation, and farming products. All products are available via quote request.
           </p>
-          <Link href="/shop/products" className="btn-primary !px-10 !py-3.5 text-base animate-fadeInUp delay-200" id="shop-browse-all">
+          <Link href="/delver/products" className="btn-primary !px-10 !py-3.5 text-base animate-fadeInUp delay-200" id="shop-browse-all">
             Browse All Products
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
@@ -56,7 +56,7 @@ export default function ShopPage() {
               <h2 className="section-title !mb-2">Featured Products</h2>
               <p className="text-gray-500">{allProducts.length} products available</p>
             </div>
-            <Link href="/shop/products" className="btn-outline-dark !text-sm !py-2.5 !px-5" id="shop-view-filters">
+            <Link href="/delver/products" className="btn-outline-dark !text-sm !py-2.5 !px-5" id="shop-view-filters">
               View All with Filters
             </Link>
           </div>

@@ -26,7 +26,7 @@ export default function Alerts({ alerts, hideTitle = false }: AlertsProps) {
                 ? 'border-l-amber-500 bg-amber-500/5'
                 : alert.severity === 'error'
                 ? 'border-l-red-500 bg-red-500/5'
-                : 'border-l-[#63913D] bg-[#63913D]/5'
+                : 'border-l-primary bg-primary/5'
             }`}
           >
             <div className="flex justify-between items-start gap-4">
@@ -37,7 +37,7 @@ export default function Alerts({ alerts, hideTitle = false }: AlertsProps) {
                       ? 'bg-amber-100 text-amber-800'
                       : alert.severity === 'error'
                       ? 'bg-red-100 text-red-800'
-                      : 'bg-[#63913D]/10 text-[#63913D]'
+                      : 'bg-primary/10 text-primary'
                   }`}
                 >
                   {alert.severity}
