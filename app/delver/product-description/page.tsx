@@ -53,19 +53,6 @@ function ProductContent() {
     );
   }
 
-  const handleAdd = () => {
-    addItem({ 
-      id: product.id, 
-      name: product.name, 
-      category: product.category, 
-      description: product.description,
-      quantity,
-      customNotes
-    });
-    setAdded(true);
-    setTimeout(() => setAdded(false), 2000);
-  };
-
   if (!product) {
     return (
       <div className="min-h-screen flex items-center justify-center pt-20">
@@ -79,6 +66,20 @@ function ProductContent() {
       </div>
     );
   }
+
+  const handleAdd = () => {
+    addItem({ 
+      id: product.id, 
+      name: product.name, 
+      category: product.category, 
+      description: product.description,
+      quantity,
+      customNotes
+    });
+    setAdded(true);
+    setTimeout(() => setAdded(false), 2000);
+  };
+
 
   return (
     <div className="min-h-screen bg-bg">
