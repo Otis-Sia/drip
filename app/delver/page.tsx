@@ -6,7 +6,7 @@ import CategoryCard from '@/components/shop/CategoryCard';
 import ProductCard from '@/components/shop/ProductCard';
 
 export const metadata: Metadata = {
-  title: 'Delver | Afrodrip Limited',
+  title: 'Delver',
   description: "Browse Afrodrip's agricultural products and solutions. Request a quote for any product.",
 };
 

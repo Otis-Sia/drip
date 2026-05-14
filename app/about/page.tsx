@@ -7,7 +7,7 @@ import TeamCard from '@/components/about/TeamCard';
 import BranchCard from '@/components/contact/BranchCard';
 
 export const metadata: Metadata = {
-  title: 'About Us | DRIP',
+  title: 'About Us',
   description: 'Learn about Afrodrip Limited, our mission, vision, and the team behind our success.',
 };
 

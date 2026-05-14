@@ -7,7 +7,7 @@ import ProductCard from '@/components/shop/ProductCard';
 import SubNavbar from '@/components/services/SubNavbar';
 
 export const metadata: Metadata = {
-  title: 'Services and Products | Afrodrip Limited',
+  title: 'Services and Products',
   description: "Explore Afrodrip's comprehensive agricultural solutions and high-quality products, from greenhouse design to irrigation systems.",
 };
 

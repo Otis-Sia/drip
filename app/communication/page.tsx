@@ -1,8 +1,14 @@
 import Link from 'next/link';
+import type { Metadata } from 'next';
 import { getAlerts, getNews, getEvents, getResources } from '@/lib/communication';
 import CommunicationFeed from '@/components/communication/CommunicationFeed';
 import Calendar from '@/components/communication/Calendar';
 import QuickResources from '@/components/communication/QuickResources';
+
+export const metadata: Metadata = {
+  title: 'Communication Hub',
+  description: 'Stay informed with the latest announcements, alerts, and scheduled events from Afrodrip Limited.',
+};
 
 export default async function CommunicationPage() {
   const alerts = await getAlerts();
