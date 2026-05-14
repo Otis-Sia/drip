@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { categories, allProducts } from '@/lib/products';
+import { getCategories, getAllProducts } from '@/lib/products';
 import CategoryCard from '@/components/shop/CategoryCard';
 import ProductCard from '@/components/shop/ProductCard';
 
@@ -10,7 +10,9 @@ export const metadata: Metadata = {
   description: "Browse Afrodrip's agricultural products and solutions. Request a quote for any product.",
 };
 
-export default function ShopPage() {
+export default async function ShopPage() {
+  const categories = await getCategories();
+  const allProducts = await getAllProducts();
   const featuredProducts = allProducts.slice(0, 8);
 
   return (

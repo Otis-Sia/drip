@@ -1,8 +1,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { companyValues, targetMarkets, aboutStats, teamMembers } from '@/lib/company';
-import { branches } from '@/lib/branches';
+import { getCompanyValues, getTargetMarkets, aboutStats, teamMembers } from '@/lib/company';
+import { getBranches } from '@/lib/branches';
 import TeamCard from '@/components/about/TeamCard';
 import BranchCard from '@/components/contact/BranchCard';
 
@@ -11,7 +11,10 @@ export const metadata: Metadata = {
   description: 'Learn about Afrodrip Limited, our mission, vision, and the team behind our success.',
 };
 
-export default function AboutPage() {
+export default async function AboutPage() {
+  const companyValues = await getCompanyValues();
+  const targetMarkets = await getTargetMarkets();
+  const branches = await getBranches();
   return (
     <div>
       {/* Hero */}

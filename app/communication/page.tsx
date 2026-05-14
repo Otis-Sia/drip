@@ -1,12 +1,14 @@
-'use client';
-
 import Link from 'next/link';
-import { alerts, news, events, resources } from '@/lib/communication';
+import { getAlerts, getNews, getEvents, getResources } from '@/lib/communication';
 import CommunicationFeed from '@/components/communication/CommunicationFeed';
 import Calendar from '@/components/communication/Calendar';
 import QuickResources from '@/components/communication/QuickResources';
 
-export default function CommunicationPage() {
+export default async function CommunicationPage() {
+  const alerts = await getAlerts();
+  const news = await getNews();
+  const events = await getEvents();
+  const resources = await getResources();
   return (
     <div className="min-h-screen bg-[#f8fafc]">
       {/* Hero */}

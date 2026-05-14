@@ -3,10 +3,10 @@
 import { useState, use, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { allProducts, categoryMap, reverseCategoryMap } from '@/lib/products';
+import { type Product, getCategories, getAllProducts } from '@/lib/products';
 import ProductCard from '@/components/shop/ProductCard';
 
-const filterCategories = ['All', 'Greenhouse Materials', 'Irrigation Systems', 'Water Management', 'Nets & Crop Protection', 'Crop Enhancement Materials'];
+
 
 function ProductsContent({
   searchParams,
@@ -16,20 +16,49 @@ function ProductsContent({
   const unwrappedSearchParams = use(searchParams);
   const router = useRouter();
   
-  const categoryParam = typeof unwrappedSearchParams.category === 'string' 
-    ? unwrappedSearchParams.category 
-    : 'All';
-
-  const [selectedCategory, setSelectedCategory] = useState(
-    categoryMap[categoryParam] || 'All'
-  );
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<any[]>([]);
+  const [categoryMap, setCategoryMap] = useState<Record<string, string>>({});
+  const [reverseCategoryMap, setReverseCategoryMap] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(true);
+  const [selectedCategory, setSelectedCategory] = useState('All');
   const [search, setSearch] = useState('');
 
-  // Sync state with URL changes
   useEffect(() => {
-    const cat = categoryMap[categoryParam] || 'All';
-    setSelectedCategory(cat);
-  }, [categoryParam]);
+    async function loadData() {
+      setLoading(true);
+      try {
+        const [prods, cats] = await Promise.all([
+          getAllProducts(),
+          getCategories()
+        ]);
+        setAllProducts(prods);
+        setCategories(cats);
+        
+        const cMap = Object.fromEntries(cats.map(c => [c.id, c.title]));
+        const rcMap = Object.fromEntries(cats.map(c => [c.title, c.id]));
+        setCategoryMap(cMap);
+        setReverseCategoryMap(rcMap);
+
+        // Set initial category from URL
+        const initialCat = cMap[categoryParam] || 'All';
+        setSelectedCategory(initialCat);
+      } catch (error) {
+        console.error('Error loading products data:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    loadData();
+  }, []);
+
+  // Sync state with URL changes after initial load
+  useEffect(() => {
+    if (!loading) {
+      const cat = categoryMap[categoryParam] || 'All';
+      setSelectedCategory(cat);
+    }
+  }, [categoryParam, loading, categoryMap]);
 
   const handleCategoryChange = (cat: string) => {
     setSelectedCategory(cat);
@@ -41,11 +70,21 @@ function ProductsContent({
     }
   };
 
+  const filterCategories = ['All', ...categories.map(c => c.title)];
+
   const filtered = allProducts.filter((p) => {
     const matchCat = selectedCategory === 'All' || p.category === reverseCategoryMap[selectedCategory];
     const matchSearch = !search || p.name.toLowerCase().includes(search.toLowerCase()) || p.description.toLowerCase().includes(search.toLowerCase());
     return matchCat && matchSearch;
   });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="animate-pulse text-gray-400 font-medium">Loading products...</div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-[#f8fafc]">

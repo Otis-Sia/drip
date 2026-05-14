@@ -14,11 +14,61 @@ export async function GET(request: Request) {
   }
 
   try {
-    const filePath = path.join(DATA_DIR, `${file}.json`);
-    const content = await fs.readFile(filePath, 'utf-8');
-    return NextResponse.json(JSON.parse(content));
+    let data: any = null;
+
+    // 1. Try to fetch from Supabase
+    try {
+      if (file === 'products') {
+        const { data: dbData } = await supabase.from('products').select('*').order('created_at', { ascending: true });
+        if (dbData) data = dbData.map(p => ({
+          ...p,
+          category: p.category_id,
+          longDescription: p.long_description
+        }));
+      } else if (file === 'categories') {
+        const { data: dbData } = await supabase.from('categories').select('*').order('created_at', { ascending: true });
+        data = dbData;
+      } else if (file === 'branches') {
+        const { data: dbData } = await supabase.from('branches').select('*').order('created_at', { ascending: true });
+        data = dbData;
+      } else if (file === 'services') {
+        const { data: dbData } = await supabase.from('services').select('*').order('created_at', { ascending: true });
+        if (dbData) data = dbData.map(s => ({
+          ...s,
+          iconBg: s.icon_bg
+        }));
+      } else if (file === 'serviceSummaries') {
+        const { data: dbData } = await supabase.from('service_summaries').select('*').order('created_at', { ascending: true });
+        data = dbData;
+      } else if (file === 'alerts') {
+        const { data: alerts } = await supabase.from('alerts').select('*').order('date', { ascending: false });
+        const { data: news } = await supabase.from('news').select('*').order('date', { ascending: false });
+        if (alerts || news) data = { alerts: alerts || [], news: news || [] };
+      } else if (file === 'company') {
+        const { data: companyValues } = await supabase.from('company_values').select('*').order('created_at', { ascending: true });
+        const { data: targetMarkets } = await supabase.from('target_markets').select('*').order('created_at', { ascending: true });
+        if (companyValues || targetMarkets) data = { companyValues: companyValues || [], targetMarkets: targetMarkets || [] };
+      } else if (file === 'calendar') {
+        const { data: dbData } = await supabase.from('calendar_events').select('*').order('date', { ascending: true });
+        data = dbData;
+      } else if (file === 'resources') {
+        const { data: dbData } = await supabase.from('resources').select('*').order('created_at', { ascending: true });
+        data = dbData;
+      }
+    } catch (supabaseError) {
+      console.error('Error fetching from Supabase:', supabaseError);
+    }
+
+    // 2. Fallback to Local JSON if Supabase has no data or it's a local-only file
+    if (!data || (Array.isArray(data) && data.length === 0)) {
+      const filePath = path.join(DATA_DIR, `${file}.json`);
+      const content = await fs.readFile(filePath, 'utf-8');
+      data = JSON.parse(content);
+    }
+
+    return NextResponse.json(data);
   } catch (error) {
-    console.error(`Error reading file ${file}:`, error);
+    console.error(`Error reading data for ${file}:`, error);
     return NextResponse.json({ error: 'Failed to read data' }, { status: 500 });
   }
 }
@@ -33,9 +83,16 @@ export async function PUT(request: Request) {
   }
 
   try {
-    // 1. Update JSON File (Source of Truth for build)
-    const filePath = path.join(DATA_DIR, `${file}.json`);
-    await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+    // 1. Update JSON File (Only in Development)
+    if (process.env.NODE_ENV === 'development') {
+      try {
+        const filePath = path.join(DATA_DIR, `${file}.json`);
+        await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf-8');
+      } catch (fsError) {
+        console.error(`Local file write failed for ${file}:`, fsError);
+        // We continue anyway so Supabase can still be updated
+      }
+    }
 
     // 2. Sync to Supabase (Database source of truth)
     try {

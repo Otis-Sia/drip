@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
-import { services } from '@/lib/services';
-import { allProducts } from '@/lib/products';
+import { getServices } from '@/lib/services';
+import { getAllProducts } from '@/lib/products';
 import ServiceSection from '@/components/services/ServiceSection';
 import ProductCard from '@/components/shop/ProductCard';
 import SubNavbar from '@/components/services/SubNavbar';
@@ -11,7 +11,9 @@ export const metadata: Metadata = {
   description: "Explore Afrodrip's comprehensive agricultural solutions and high-quality products, from greenhouse design to irrigation systems.",
 };
 
-export default function ServicesAndProductsPage() {
+export default async function ServicesAndProductsPage() {
+  const services = await getServices();
+  const allProducts = await getAllProducts();
   const featuredProducts = allProducts.slice(0, 8);
 
   return (

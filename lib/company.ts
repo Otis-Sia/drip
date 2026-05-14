@@ -1,3 +1,4 @@
+import { supabase } from './supabase';
 import companyData from './data/company.json';
 
 export interface CompanyValue {
@@ -37,6 +38,7 @@ export interface TeamMember {
   image?: string;
 }
 
+// Static Fallbacks
 export const companyValues: CompanyValue[] = companyData.companyValues as CompanyValue[];
 export const targetMarkets: TargetMarket[] = companyData.targetMarkets as TargetMarket[];
 export const companyStats: CompanyStat[] = companyData.companyStats as CompanyStat[];
@@ -44,3 +46,16 @@ export const aboutStats: [string, string][] = companyData.aboutStats as [string,
 export const socials: SocialLink[] = companyData.socials as SocialLink[];
 export const contactInfo: ContactInfoItem[] = companyData.contactInfo as ContactInfoItem[];
 export const teamMembers: TeamMember[] = companyData.teamMembers as TeamMember[];
+
+// Supabase Fetches
+export async function getCompanyValues(): Promise<CompanyValue[]> {
+  const { data, error } = await supabase.from('company_values').select('*').order('created_at', { ascending: true });
+  if (error || !data) return companyValues;
+  return data as CompanyValue[];
+}
+
+export async function getTargetMarkets(): Promise<TargetMarket[]> {
+  const { data, error } = await supabase.from('target_markets').select('*').order('created_at', { ascending: true });
+  if (error || !data) return targetMarkets;
+  return data as TargetMarket[];
+}

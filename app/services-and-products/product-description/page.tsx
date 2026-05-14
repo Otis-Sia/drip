@@ -3,17 +3,47 @@
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
-import { Suspense } from 'react';
+import { Suspense, useState, useEffect } from 'react';
 import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
-
-import { allProducts, categoryMap } from '@/lib/products';
-
-const products = Object.fromEntries(allProducts.map(p => [p.id, p]));
+import { type Product, getCategories, getAllProducts } from '@/lib/products';
 
 function ProductContent() {
   const searchParams = useSearchParams();
   const id = searchParams.get('id') ?? '';
-  const product = products[id];
+  const [product, setProduct] = useState<Product | null>(null);
+  const [categoryMap, setCategoryMap] = useState<Record<string, string>>({});
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function loadData() {
+      setLoading(true);
+      try {
+        const [products, categories] = await Promise.all([
+          getAllProducts(),
+          getCategories()
+        ]);
+        
+        const found = products.find(p => p.id === id);
+        setProduct(found || null);
+        
+        const catMap = Object.fromEntries(categories.map(c => [c.id, c.title]));
+        setCategoryMap(catMap);
+      } catch (error) {
+        console.error('Error loading product details:', error);
+      } finally {
+        setLoading(false);
+      }
+    }
+    if (id) loadData();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center pt-20">
+        <div className="animate-pulse text-gray-400 font-medium">Loading product details...</div>
+      </div>
+    );
+  }
 
   if (!product) {
     return (

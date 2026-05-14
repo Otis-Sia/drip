@@ -1,15 +1,17 @@
 import Link from 'next/link';
 import Image from 'next/image';
-import { serviceSummaries } from '@/lib/services';
+import { getServiceSummaries } from '@/lib/services';
 import { companyStats } from '@/lib/company';
 import ServiceCard from '@/components/services/ServiceCard';
-import { events } from '@/lib/communication';
+import { getEvents } from '@/lib/communication';
 import Calendar from '@/components/communication/Calendar';
-import { allProducts, categoryMap } from '@/lib/products';
+import { getAllProducts } from '@/lib/products';
 
-const featuredProducts = allProducts.slice(0, 4);
-
-export default function Home() {
+export default async function Home() {
+  const serviceSummaries = await getServiceSummaries();
+  const allProducts = await getAllProducts();
+  const events = await getEvents();
+  const featuredProducts = allProducts.slice(0, 4);
   return (
     <div className="flex flex-col">
       {/* Hero Section */}
