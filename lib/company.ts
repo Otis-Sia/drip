@@ -1,13 +1,13 @@
 import { supabase } from './supabase';
-import companyData from './data/company.json';
-
 export interface CompanyValue {
+  id?: string;
   icon: string;
   title: string;
   description: string;
 }
 
 export interface TargetMarket {
+  id?: string;
   icon: string;
   title: string;
   desc: string;
@@ -31,6 +31,7 @@ export interface ContactInfoItem {
 }
 
 export interface TeamMember {
+  id?: string;
   name: string;
   role: string;
   department: string;
@@ -38,30 +39,61 @@ export interface TeamMember {
   image?: string;
 }
 
-// Static Fallbacks
-export const companyValues: CompanyValue[] = companyData.companyValues as CompanyValue[];
-export const targetMarkets: TargetMarket[] = companyData.targetMarkets as TargetMarket[];
-export const companyStats: CompanyStat[] = companyData.companyStats as CompanyStat[];
-export const aboutStats: [string, string][] = companyData.aboutStats as [string, string][];
-export const socials: SocialLink[] = companyData.socials as SocialLink[];
-export const contactInfo: ContactInfoItem[] = companyData.contactInfo as ContactInfoItem[];
-export const teamMembers: TeamMember[] = companyData.teamMembers as TeamMember[];
+// Empty fallbacks
+export const companyValues: CompanyValue[] = [];
+export const targetMarkets: TargetMarket[] = [];
+export const companyStats: CompanyStat[] = [];
+export const aboutStats: [string, string][] = [
+  ['250+', 'Projects Done'],
+  ['15k+', 'Farmers Reached'],
+  ['16+', 'Branches']
+];
+export const socials: SocialLink[] = [];
+export const contactInfo: ContactInfoItem[] = [];
+export const teamMembers: TeamMember[] = [];
 
 // Supabase Fetches
 export async function getCompanyValues(): Promise<CompanyValue[]> {
   const { data, error } = await supabase.from('company_values').select('*').order('created_at', { ascending: true });
-  if (error || !data) return companyValues;
-  return data as CompanyValue[];
+  if (error || !data || data.length === 0) return [];
+
+  // Deduplicate by title
+  const seen = new Set();
+  const uniqueData = data.filter(v => {
+    const duplicate = seen.has(v.title);
+    seen.add(v.title);
+    return !duplicate;
+  });
+
+  return uniqueData as CompanyValue[];
 }
 
 export async function getTargetMarkets(): Promise<TargetMarket[]> {
   const { data, error } = await supabase.from('target_markets').select('*').order('created_at', { ascending: true });
-  if (error || !data) return targetMarkets;
-  return data as TargetMarket[];
+  if (error || !data || data.length === 0) return [];
+
+  // Deduplicate by title
+  const seen = new Set();
+  const uniqueData = data.filter(m => {
+    const duplicate = seen.has(m.title);
+    seen.add(m.title);
+    return !duplicate;
+  });
+
+  return uniqueData as TargetMarket[];
 }
 
 export async function getTeamMembers(): Promise<TeamMember[]> {
   const { data, error } = await supabase.from('team_members').select('*').order('created_at', { ascending: true });
-  if (error || !data) return teamMembers;
-  return data as TeamMember[];
+  if (error || !data || data.length === 0) return [];
+
+  // Deduplicate by name
+  const seen = new Set();
+  const uniqueData = data.filter(t => {
+    const duplicate = seen.has(t.name);
+    seen.add(t.name);
+    return !duplicate;
+  });
+
+  return uniqueData as TeamMember[];
 }

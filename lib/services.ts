@@ -1,7 +1,4 @@
 import { supabase } from './supabase';
-import servicesData from './data/services.json';
-import serviceSummariesData from './data/serviceSummaries.json';
-
 export interface Service {
   id?: string;
   icon: string;
@@ -24,15 +21,24 @@ export interface ServiceSummary {
   image?: string;
 }
 
-// Static Fallbacks
-export const services: Service[] = servicesData as Service[];
-export const serviceSummaries: ServiceSummary[] = serviceSummariesData as ServiceSummary[];
+// Empty fallbacks
+export const services: Service[] = [];
+export const serviceSummaries: ServiceSummary[] = [];
 
 // Supabase Fetches
 export async function getServices(): Promise<Service[]> {
   const { data, error } = await supabase.from('services').select('*').order('created_at', { ascending: true });
-  if (error || !data) return services;
-  return data.map(s => ({
+  if (error || !data) return [];
+  
+  // Deduplicate by title
+  const seen = new Set();
+  const uniqueData = data.filter(s => {
+    const duplicate = seen.has(s.title);
+    seen.add(s.title);
+    return !duplicate;
+  });
+
+  return uniqueData.map(s => ({
     ...s,
     iconBg: s.icon_bg
   })) as Service[];
@@ -40,6 +46,15 @@ export async function getServices(): Promise<Service[]> {
 
 export async function getServiceSummaries(): Promise<ServiceSummary[]> {
   const { data, error } = await supabase.from('service_summaries').select('*').order('created_at', { ascending: true });
-  if (error || !data) return serviceSummaries;
-  return data as ServiceSummary[];
+  if (error || !data) return [];
+  
+  // Deduplicate by title
+  const seen = new Set();
+  const uniqueData = data.filter(s => {
+    const duplicate = seen.has(s.title);
+    seen.add(s.title);
+    return !duplicate;
+  });
+
+  return uniqueData as ServiceSummary[];
 }

@@ -41,7 +41,7 @@ export default async function ServicesAndProductsPage() {
           </div>
           <div className="space-y-20">
             {services.map((service, index) => (
-              <ServiceSection key={service.title} service={service} index={index} />
+              <ServiceSection key={service.id || service.title} service={service} index={index} />
             ))}
           </div>
         </div>

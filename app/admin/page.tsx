@@ -46,6 +46,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(false);
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
+  const [migrating, setMigrating] = useState(false);
 
   useEffect(() => {
     fetchData(selectedFile.id);
@@ -54,7 +55,7 @@ export default function AdminPage() {
 
   async function fetchCategories() {
     try {
-      const res = await fetch('/api/admin/data?file=categories');
+      const res = await fetch('/api/data?file=categories');
       if (res.ok) {
         const json = await res.json();
         setCategories(json);
@@ -68,7 +69,7 @@ export default function AdminPage() {
     setLoading(true);
     setMessage(null);
     try {
-      const res = await fetch(`/api/admin/data?file=${fileId}`);
+      const res = await fetch(`/api/data?file=${fileId}`);
       if (!res.ok) throw new Error('Failed to fetch data');
       const json = await res.json();
       setRawContent(JSON.stringify(json, null, 2));
@@ -91,7 +92,7 @@ export default function AdminPage() {
 
     setSaving(true);
     try {
-      const res = await fetch(`/api/admin/data?file=${selectedFile.id}`, {
+      const res = await fetch(`/api/data?file=${selectedFile.id}`, {
         method: 'PUT',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(parsedData),
@@ -119,7 +120,7 @@ export default function AdminPage() {
     <div className="min-h-screen bg-bg pb-12 font-sans">
       {/* Admin Header */}
       <div className="bg-surface border-b border-border py-6 mb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center gap-4 relative">
           <Image 
             src="/afrodrip.svg" 
             alt="Afrodrip Logo" 
@@ -184,22 +185,9 @@ export default function AdminPage() {
                 <div className="flex items-center gap-4">
                   {/* Mode Toggle */}
                   <div className="flex bg-gray-100 p-1 rounded-xl">
-                    <button
-                      onClick={() => setViewMode('gui')}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                        viewMode === 'gui' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      GUI
-                    </button>
-                    <button
-                      onClick={() => setViewMode('code')}
-                      className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                        viewMode === 'code' ? 'bg-white text-gray-900 shadow-sm' : 'text-gray-500 hover:text-gray-700'
-                      }`}
-                    >
-                      CODE
-                    </button>
+                    <div className="px-4 py-1.5 bg-white text-gray-900 shadow-sm rounded-lg text-xs font-bold">
+                      GUI EDITOR
+                    </div>
                   </div>
 
                   <button
@@ -279,8 +267,11 @@ export default function AdminPage() {
 
               {/* Footer / Tip */}
               <div className="px-6 py-4 bg-gray-50 border-t border-gray-100 text-xs text-gray-500 flex flex-col sm:flex-row justify-between items-center gap-2">
-                <p>Tip: {viewMode === 'gui' ? 'Editing in GUI mode is safer and easier.' : 'You can edit the JSON directly for advanced changes.'}</p>
-                <p>Location: <code className="bg-gray-200 px-1 rounded">lib/data/{selectedFile.id}.json</code></p>
+                <p>Tip: Changes are saved directly to the Supabase database.</p>
+                <div className="flex items-center gap-2 text-primary font-bold">
+                  <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+                  Live Database Sync
+                </div>
               </div>
             </div>
           </div>
@@ -427,7 +418,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                     className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none appearance-none"
                   >
                     <option value="">Select Category</option>
-                    {categories?.map(cat => (
+                    {Array.isArray(categories) && categories.map(cat => (
                       <option key={cat.id} value={cat.id}>{cat.title}</option>
                     ))}
                   </select>

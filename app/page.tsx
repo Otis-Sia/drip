@@ -123,7 +123,7 @@ export default async function Home() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {serviceSummaries.map((service, i) => (
-              <ServiceCard key={service.title} service={service} index={i} />
+              <ServiceCard key={service.id || service.title} service={service} index={i} />
             ))}
           </div>
           <div className="text-center mt-12">

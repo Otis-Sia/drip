@@ -1,6 +1,4 @@
 import { supabase } from './supabase';
-import branchesData from './data/branches.json';
-
 export type Region = 'Nairobi & Central' | 'Rift Valley' | 'Eastern & Coast' | 'Western & Nyanza';
 
 export interface Branch {
@@ -13,12 +11,12 @@ export interface Branch {
   region: Region;
 }
 
-// Static Fallbacks
-export const branches: Branch[] = branchesData as Branch[];
+// Empty fallbacks
+export const branches: Branch[] = [];
 
 // Supabase Fetches
 export async function getBranches(): Promise<Branch[]> {
   const { data, error } = await supabase.from('branches').select('*').order('created_at', { ascending: true });
-  if (error || !data) return branches;
+  if (error || !data) return [];
   return data as Branch[];
 }

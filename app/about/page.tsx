@@ -109,7 +109,7 @@ export default async function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {companyValues.map((value) => (
-              <div key={value.title} className="flex gap-4 p-6 rounded-2xl bg-bg hover:bg-gradient-to-br hover:from-primary/5 hover:to-primary-light/5 transition-all duration-300 group border border-transparent hover:border-primary/15">
+              <div key={value.id || value.title} className="flex gap-4 p-6 rounded-2xl bg-bg hover:bg-gradient-to-br hover:from-primary/5 hover:to-primary-light/5 transition-all duration-300 group border border-transparent hover:border-primary/15">
                 <div className="w-12 h-12 rounded-xl glass-icon flex items-center justify-center flex-shrink-0 group-hover:scale-110 transition-all duration-300">
                   <Image src={value.icon} alt="" width={28} height={28} />
                 </div>
@@ -133,7 +133,7 @@ export default async function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {teamMembers.map((member) => (
-              <TeamCard key={member.name} member={member} />
+              <TeamCard key={member.id || member.name} member={member} />
             ))}
           </div>
         </div>
@@ -149,7 +149,7 @@ export default async function AboutPage() {
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {targetMarkets.map((item) => (
-              <div key={item.title} className="card p-6 group">
+              <div key={item.id || item.title} className="card p-6 group">
                 <div className="w-12 h-12 rounded-xl glass-icon flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                   <Image src={item.icon} alt="" width={28} height={28} />
                 </div>
