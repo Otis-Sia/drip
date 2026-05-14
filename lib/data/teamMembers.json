@@ -1,0 +1,51 @@
+[
+  {
+    "name": "John Doe",
+    "role": "Chief Executive Officer",
+    "department": "Executive",
+    "bio": "Over 15 years of experience in agricultural technology and business leadership across East Africa.",
+    "image": "https://placehold.co/300x300/63913D/white?text=JM"
+  },
+  {
+    "name": "Jane Doe",
+    "role": "Head of Operations",
+    "department": "Operations",
+    "bio": "Spearheads supply chain management and ensures seamless project delivery across all branches.",
+    "image": "https://placehold.co/300x300/8FBB43/white?text=SW"
+  },
+  {
+    "name": "Peter philip",
+    "role": "Chief Agronomist",
+    "department": "Agronomy",
+    "bio": "Leads the technical consulting team with deep expertise in greenhouse and irrigation design.",
+    "image": "https://placehold.co/300x300/57D6F2/white?text=DO"
+  },
+  {
+    "name": "Janet Doe",
+    "role": "Head of Sales & Marketing",
+    "department": "Sales",
+    "bio": "Drives client acquisition and brand growth strategy with a farmer-first approach.",
+    "image": "https://placehold.co/300x300/324f1f/white?text=GN"
+  },
+  {
+    "name": "Peter simeon",
+    "role": "Technical Director",
+    "department": "Engineering",
+    "bio": "Oversees all technical installations and product quality assurance across the company.",
+    "image": "https://placehold.co/300x300/63913D/white?text=PK"
+  },
+  {
+    "name": "Jane Mary",
+    "role": "Finance Manager",
+    "department": "Finance",
+    "bio": "Manages financial planning, budgeting, and ensures sustainable business growth.",
+    "image": "https://placehold.co/300x300/8FBB43/white?text=FA"
+  },
+  {
+    "name": "cate ",
+    "role": "Finance",
+    "department": "Finan",
+    "bio": "Manages financial planning, budgeting, and ensures sustainable business growth.",
+    "image": "https://placehold.co/300x300/8FBB43/white?text=FA"
+  }
+]

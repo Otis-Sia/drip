@@ -59,3 +59,9 @@ export async function getTargetMarkets(): Promise<TargetMarket[]> {
   if (error || !data) return targetMarkets;
   return data as TargetMarket[];
 }
+
+export async function getTeamMembers(): Promise<TeamMember[]> {
+  const { data, error } = await supabase.from('team_members').select('*').order('created_at', { ascending: true });
+  if (error || !data) return teamMembers;
+  return data as TeamMember[];
+}
