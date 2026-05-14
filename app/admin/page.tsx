@@ -388,7 +388,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                       <div key={vIdx} className="flex gap-2">
                         <input
                           type="text"
-                          value={val}
+                          value={val ?? ''}
                           onChange={(e) => {
                             const newArr = [...value];
                             newArr[vIdx] = e.target.value;
@@ -425,14 +425,14 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                 ) : key.toLowerCase().includes('date') ? (
                   <input
                     type="date"
-                    value={value as string}
+                    value={(value as string) ?? ''}
                     onChange={(e) => updateField(key, e.target.value)}
                     className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                   />
                 ) : (
                   <input
                     type={typeof value === 'number' ? 'number' : 'text'}
-                    value={value as string}
+                    value={(value as string) ?? ''}
                     onChange={(e) => updateField(key, e.target.value)}
                     className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                   />
