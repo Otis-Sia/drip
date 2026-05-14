@@ -45,9 +45,25 @@ export async function GET(request: Request) {
         const { data: news } = await supabase.from('news').select('*').order('date', { ascending: false });
         if (alerts || news) data = { alerts: alerts || [], news: news || [] };
       } else if (file === 'company') {
+        let localData: any = {};
+        try {
+          const filePath = path.join(DATA_DIR, 'company.json');
+          localData = JSON.parse(await fs.readFile(filePath, 'utf-8'));
+        } catch (e) {}
+
         const { data: companyValues } = await supabase.from('company_values').select('*').order('created_at', { ascending: true });
         const { data: targetMarkets } = await supabase.from('target_markets').select('*').order('created_at', { ascending: true });
-        if (companyValues || targetMarkets) data = { companyValues: companyValues || [], targetMarkets: targetMarkets || [] };
+
+        data = {
+          ...localData,
+          companyValues: companyValues && companyValues.length > 0 ? companyValues : localData.companyValues,
+          targetMarkets: targetMarkets && targetMarkets.length > 0 ? targetMarkets : localData.targetMarkets,
+        };
+        // Remove teamMembers from Company Info to prevent editing in two places
+        if (data.teamMembers) delete data.teamMembers;
+      } else if (file === 'teamMembers') {
+        const { data: dbData } = await supabase.from('team_members').select('*').order('created_at', { ascending: true });
+        data = dbData || [];
       } else if (file === 'calendar') {
         const { data: dbData } = await supabase.from('calendar_events').select('*').order('date', { ascending: true });
         data = dbData;
@@ -61,9 +77,13 @@ export async function GET(request: Request) {
 
     // 2. Fallback to Local JSON if Supabase has no data or it's a local-only file
     if (!data || (Array.isArray(data) && data.length === 0)) {
-      const filePath = path.join(DATA_DIR, `${file}.json`);
-      const content = await fs.readFile(filePath, 'utf-8');
-      data = JSON.parse(content);
+      try {
+        const filePath = path.join(DATA_DIR, `${file}.json`);
+        const content = await fs.readFile(filePath, 'utf-8');
+        data = JSON.parse(content);
+      } catch (e) {
+        // Silent fail if file doesn't exist (handled by specific cases or returns null)
+      }
     }
 
     return NextResponse.json(data);
@@ -134,14 +154,33 @@ export async function PUT(request: Request) {
         if (data.alerts) await supabase.from('alerts').upsert(data.alerts);
         if (data.news) await supabase.from('news').upsert(data.news);
       } else if (file === 'company') {
-        if (data.companyValues) await supabase.from('company_values').upsert(data.companyValues);
+        if (data.companyValues) {
+          await supabase.from('company_values').upsert(data.companyValues.map((v: any) => ({
+            id: v.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v.id) ? v.id : undefined,
+            icon: v.icon,
+            title: v.title,
+            description: v.description
+          })));
+        }
         if (data.targetMarkets) {
           await supabase.from('target_markets').upsert(data.targetMarkets.map((m: any) => ({
+            id: m.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(m.id) ? m.id : undefined,
             icon: m.icon,
             title: m.title,
             desc: m.desc
           })));
         }
+      } else if (file === 'teamMembers') {
+        // Only sync to Supabase (Database source of truth)
+        const { error } = await supabase.from('team_members').upsert(data.map((t: any) => ({
+          id: t.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t.id) ? t.id : undefined,
+          name: t.name,
+          role: t.role,
+          department: t.department,
+          bio: t.bio,
+          image: t.image
+        })));
+        if (error) throw error;
       } else if (file === 'calendar') {
         await supabase.from('calendar_events').upsert(data);
       } else if (file === 'resources') {

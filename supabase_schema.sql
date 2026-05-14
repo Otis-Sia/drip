@@ -58,6 +58,17 @@ CREATE TABLE IF NOT EXISTS target_markets (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- 5b. Team Members
+CREATE TABLE IF NOT EXISTS team_members (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  role TEXT NOT NULL,
+  department TEXT,
+  bio TEXT,
+  image TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
 -- 6. Services
 CREATE TABLE IF NOT EXISTS services (
   id TEXT PRIMARY KEY,
@@ -161,6 +172,7 @@ ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE branches ENABLE ROW LEVEL SECURITY;
 ALTER TABLE company_values ENABLE ROW LEVEL SECURITY;
 ALTER TABLE target_markets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE team_members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE service_summaries ENABLE ROW LEVEL SECURITY;
 ALTER TABLE alerts ENABLE ROW LEVEL SECURITY;
@@ -176,6 +188,7 @@ CREATE POLICY "Public Read Access for Products" ON products FOR SELECT USING (tr
 CREATE POLICY "Public Read Access for Branches" ON branches FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Company Values" ON company_values FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Target Markets" ON target_markets FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Team Members" ON team_members FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Services" ON services FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Service Summaries" ON service_summaries FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Alerts" ON alerts FOR SELECT USING (true);
@@ -194,6 +207,7 @@ CREATE POLICY "Temp All Access Products" ON products FOR ALL USING (true);
 CREATE POLICY "Temp All Access Branches" ON branches FOR ALL USING (true);
 CREATE POLICY "Temp All Access Company Values" ON company_values FOR ALL USING (true);
 CREATE POLICY "Temp All Access Target Markets" ON target_markets FOR ALL USING (true);
+CREATE POLICY "Temp All Access Team Members" ON team_members FOR ALL USING (true);
 CREATE POLICY "Temp All Access Services" ON services FOR ALL USING (true);
 CREATE POLICY "Temp All Access Service Summaries" ON service_summaries FOR ALL USING (true);
 CREATE POLICY "Temp All Access Alerts" ON alerts FOR ALL USING (true);
