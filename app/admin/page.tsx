@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
+import { supabase } from '@/lib/supabase';
+import { useRouter } from 'next/navigation';
 
 const LIBRARY_GROUPS = [
   {
@@ -47,6 +49,12 @@ export default function AdminPage() {
   const [saving, setSaving] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error', text: string } | null>(null);
   const [migrating, setMigrating] = useState(false);
+  const router = useRouter();
+
+  async function handleSignOut() {
+    await supabase.auth.signOut();
+    router.push('/admin/login');
+  }
 
   useEffect(() => {
     fetchData(selectedFile.id);
@@ -131,6 +139,13 @@ export default function AdminPage() {
           />
           <div className="h-px w-12 bg-border" />
           <h2 className="text-xl font-black text-fg tracking-tight uppercase">Admin Page</h2>
+          
+          <button 
+            onClick={handleSignOut}
+            className="absolute right-4 top-1/2 -translate-y-1/2 px-4 py-2 text-xs font-bold text-muted hover:text-red-500 transition-colors uppercase tracking-widest border border-border rounded-lg hover:border-red-200 hover:bg-red-50"
+          >
+            Sign Out
+          </button>
         </div>
       </div>
 
