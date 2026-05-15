@@ -16,11 +16,13 @@ export async function GET(request: Request) {
     if (file === 'products') {
       const { data: dbData } = await supabase.from('products').select('*').order('created_at', { ascending: true });
       if (dbData) data = dbData.map(p => {
-        const { category_id, long_description, ...rest } = p;
+        const { category_id, long_description, use_cases, ...rest } = p;
         return {
           ...rest,
           category: category_id,
-          longDescription: long_description
+          longDescription: long_description,
+          useCases: use_cases || [],
+          images: p.images || []
         };
       });
     } else if (file === 'categories') {
@@ -98,7 +100,9 @@ export async function PUT(request: Request) {
           tags: p.tags,
           features: p.features,
           specs: p.specs,
-          image: p.image || null
+          image: p.image || null,
+          images: p.images || [],
+          use_cases: p.useCases || []
         };
         // Relaxed ID check for TEXT primary key
         if (p.id && typeof p.id === 'string' && p.id.length > 0) {

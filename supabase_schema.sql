@@ -25,6 +25,8 @@ CREATE TABLE IF NOT EXISTS products (
   features TEXT[],
   specs JSONB,
   image TEXT,
+  images TEXT[],
+  use_cases TEXT[],
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 

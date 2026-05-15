@@ -8,7 +8,7 @@ export default function SubNavbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['overview', 'services-section', 'products-section'];
+      const sections = ['overview', 'services-section', 'categories-section', 'products-section'];
       const scrollPosition = window.scrollY + 150;
 
       for (const section of sections) {
@@ -30,6 +30,7 @@ export default function SubNavbar() {
   const links = [
     { id: 'overview', label: 'Overview', href: '#overview' },
     { id: 'services-section', label: 'Services', href: '#services-section' },
+    { id: 'categories-section', label: 'Categories', href: '#categories-section' },
     { id: 'products-section', label: 'Products', href: '#products-section' },
   ];
 

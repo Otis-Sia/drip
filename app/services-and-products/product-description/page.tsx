@@ -13,6 +13,7 @@ function ProductContent() {
   const [product, setProduct] = useState<Product | null>(null);
   const [categoryMap, setCategoryMap] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(true);
+  const [activeImage, setActiveImage] = useState<string>('');
 
   useEffect(() => {
     async function loadData() {
@@ -25,6 +26,7 @@ function ProductContent() {
         
         const found = products.find(p => p.id === id);
         setProduct(found || null);
+        if (found) setActiveImage(found.image || '');
         
         const catMap = Object.fromEntries(categories.map(c => [c.id, c.title]));
         setCategoryMap(catMap);
@@ -82,20 +84,30 @@ function ProductContent() {
           <div className="lg:col-span-2 space-y-10">
             {/* Gallery */}
             <div className="animate-fadeInUp">
-              <div className="relative w-full aspect-[16/10] bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm mb-6">
-                <Image 
-                  src={product.image || 'https://placehold.co/800x500/8FBB43/white?text=Product+Image'} 
+              <div className="max-w-xl mx-auto bg-white rounded-3xl overflow-hidden border border-gray-100 shadow-sm mb-6 flex items-center justify-center">
+                <img 
+                  src={activeImage || 'https://placehold.co/800x500/8FBB43/white?text=Product+Image'} 
                   alt={product.name} 
-                  fill 
-                  className="object-cover" 
-                  priority
+                  className="w-full h-auto block transition-all duration-500" 
                 />
               </div>
               
               {product.images && product.images.length > 0 && (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-4 sm:grid-cols-6 gap-4 max-w-xl mx-auto">
+                  {/* Main Image Thumbnail */}
+                  <div 
+                    onClick={() => setActiveImage(product.image || '')}
+                    className={`relative aspect-square bg-white rounded-2xl overflow-hidden border-2 transition-all cursor-pointer group ${activeImage === product.image ? 'border-primary shadow-md' : 'border-gray-100 hover:border-primary/50'}`}
+                  >
+                    <Image src={product.image || ''} alt={product.name} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
+                  </div>
+
                   {product.images.map((img, i) => (
-                    <div key={i} className="relative aspect-square bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-primary/50 transition-all cursor-pointer group">
+                    <div 
+                      key={i} 
+                      onClick={() => setActiveImage(img)}
+                      className={`relative aspect-square bg-white rounded-2xl overflow-hidden border-2 transition-all cursor-pointer group ${activeImage === img ? 'border-primary shadow-md' : 'border-gray-100 hover:border-primary/50'}`}
+                    >
                       <Image src={img} alt={`${product.name} ${i + 1}`} fill className="object-cover group-hover:scale-105 transition-transform duration-500" />
                     </div>
                   ))}

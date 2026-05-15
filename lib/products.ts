@@ -70,6 +70,7 @@ export async function getAllProducts(): Promise<Product[]> {
     ...p,
     category: p.category_id,
     longDescription: p.long_description,
-    useCases: p.useCases || [] // Assuming useCases might be in the JSON but not DB yet, handle gracefully
+    useCases: p.use_cases || [],
+    images: p.images || []
   })) as Product[];
 }

@@ -1,9 +1,10 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getServices } from '@/lib/services';
-import { getAllProducts } from '@/lib/products';
+import { getAllProducts, getCategories } from '@/lib/products';
 import ServiceSection from '@/components/services/ServiceSection';
 import ProductCard from '@/components/shop/ProductCard';
+import CategoryCard from '@/components/shop/CategoryCard';
 import SubNavbar from '@/components/services/SubNavbar';
 
 export const metadata: Metadata = {
@@ -12,8 +13,11 @@ export const metadata: Metadata = {
 };
 
 export default async function ServicesAndProductsPage() {
-  const services = await getServices();
-  const allProducts = await getAllProducts();
+  const [services, allProducts, categories] = await Promise.all([
+    getServices(),
+    getAllProducts(),
+    getCategories()
+  ]);
   const featuredProducts = allProducts.slice(0, 8);
 
   return (
@@ -42,6 +46,22 @@ export default async function ServicesAndProductsPage() {
           <div className="space-y-20">
             {services.map((service, index) => (
               <ServiceSection key={service.id || service.title} service={service} index={index} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Categories Section */}
+      <section id="categories-section" className="py-20 bg-white mesh-gradient">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-14">
+            <div className="section-label">Categories</div>
+            <h2 className="section-title mx-auto">Product Categories</h2>
+            <p className="section-subtitle mx-auto">Explore our solutions by category</p>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {categories.map((cat) => (
+              <CategoryCard key={cat.id} category={cat} />
             ))}
           </div>
         </div>
