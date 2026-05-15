@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
+import { revalidatePath } from 'next/cache';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -85,6 +86,8 @@ export async function PUT(request: Request) {
   }
 
   try {
+    let error: any = null;
+
     if (file === 'products') {
       const products = data.map((p: any) => {
         const item: any = {
@@ -97,28 +100,44 @@ export async function PUT(request: Request) {
           specs: p.specs,
           image: p.image || null
         };
-        if (p.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.id)) {
+        // Relaxed ID check for TEXT primary key
+        if (p.id && typeof p.id === 'string' && p.id.length > 0) {
           item.id = p.id;
         }
         return item;
       });
-      await supabase.from('products').upsert(products);
+      const result = await supabase.from('products').upsert(products);
+      error = result.error;
+      revalidatePath('/services-and-products');
+      revalidatePath('/services-and-products/catalog');
     } else if (file === 'categories') {
-      await supabase.from('categories').upsert(data.map((c: any) => {
+      const categoriesData = data.map((c: any) => {
         const item = { ...c };
-        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(c.id)) {
+        // Relaxed ID check for TEXT primary key
+        if (c.id && typeof c.id === 'string' && c.id.length > 0) {
+          item.id = c.id;
+        } else {
           delete item.id;
         }
         return item;
-      }));
+      });
+      const result = await supabase.from('categories').upsert(categoriesData);
+      error = result.error;
+      revalidatePath('/services-and-products');
+      revalidatePath('/services-and-products/catalog');
     } else if (file === 'branches') {
-      await supabase.from('branches').upsert(data.map((b: any) => {
+      const branchesData = data.map((b: any) => {
         const item = { ...b };
-        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(b.id)) {
+        if (b.id && typeof b.id === 'string' && b.id.length > 0) {
+          item.id = b.id;
+        } else {
           delete item.id;
         }
         return item;
-      }));
+      });
+      const result = await supabase.from('branches').upsert(branchesData);
+      error = result.error;
+      revalidatePath('/about');
     } else if (file === 'services') {
       const services = data.map((s: any) => {
         const item: any = {
@@ -133,26 +152,39 @@ export async function PUT(request: Request) {
           icon_bg: s.iconBg,
           image: s.image
         };
-        if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) {
+        if (s.id && typeof s.id === 'string' && s.id.length > 0) {
           item.id = s.id;
         }
         return item;
       });
-      await supabase.from('services').upsert(services);
+      const result = await supabase.from('services').upsert(services);
+      error = result.error;
+      revalidatePath('/services-and-products');
     } else if (file === 'serviceSummaries') {
-      await supabase.from('service_summaries').upsert(data.map((s: any) => {
+      const result = await supabase.from('service_summaries').upsert(data.map((s: any) => {
         const item = { ...s };
-        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) {
+        if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) {
+          item.id = s.id;
+        } else {
           delete item.id;
         }
         return item;
       }));
+      error = result.error;
+      revalidatePath('/');
     } else if (file === 'alerts') {
-      if (data.alerts) await supabase.from('alerts').upsert(data.alerts);
-      if (data.news) await supabase.from('news').upsert(data.news);
+      if (data.alerts) {
+        const r1 = await supabase.from('alerts').upsert(data.alerts);
+        if (r1.error) error = r1.error;
+      }
+      if (data.news) {
+        const r2 = await supabase.from('news').upsert(data.news);
+        if (r2.error) error = r2.error;
+      }
+      revalidatePath('/communication');
     } else if (file === 'company') {
       if (data.companyValues) {
-        await supabase.from('company_values').upsert(data.companyValues.map((v: any) => {
+        const r1 = await supabase.from('company_values').upsert(data.companyValues.map((v: any) => {
           const item: any = {
             icon: v.icon,
             title: v.title,
@@ -163,9 +195,10 @@ export async function PUT(request: Request) {
           }
           return item;
         }));
+        if (r1.error) error = r1.error;
       }
       if (data.targetMarkets) {
-        await supabase.from('target_markets').upsert(data.targetMarkets.map((m: any) => {
+        const r2 = await supabase.from('target_markets').upsert(data.targetMarkets.map((m: any) => {
           const item: any = {
             icon: m.icon,
             title: m.title,
@@ -176,7 +209,9 @@ export async function PUT(request: Request) {
           }
           return item;
         }));
+        if (r2.error) error = r2.error;
       }
+      revalidatePath('/about');
     } else if (file === 'teamMembers') {
       if (!Array.isArray(data)) throw new Error('Array expected');
       const upsertData = data.map((t: any) => {
@@ -192,28 +227,44 @@ export async function PUT(request: Request) {
         }
         return item;
       });
-      await supabase.from('team_members').upsert(upsertData);
+      const result = await supabase.from('team_members').upsert(upsertData);
+      error = result.error;
+      revalidatePath('/about');
     } else if (file === 'calendar') {
-      await supabase.from('calendar_events').upsert(data.map((e: any) => {
+      const result = await supabase.from('calendar_events').upsert(data.map((e: any) => {
         const item = { ...e };
-        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(e.id)) {
+        if (e.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(e.id)) {
+          item.id = e.id;
+        } else {
           delete item.id;
         }
         return item;
       }));
+      error = result.error;
+      revalidatePath('/communication');
     } else if (file === 'resources') {
-      await supabase.from('resources').upsert(data.map((r: any) => {
+      const result = await supabase.from('resources').upsert(data.map((r: any) => {
         const item = { ...r };
-        if (!/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(r.id)) {
+        if (r.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(r.id)) {
+          item.id = r.id;
+        } else {
           delete item.id;
         }
         return item;
       }));
+      error = result.error;
+      revalidatePath('/communication');
     }
 
+    if (error) {
+      console.error(`Supabase error saving ${file}:`, error);
+      return NextResponse.json({ error: error.message }, { status: 500 });
+    }
+
+    revalidatePath('/'); // Global revalidate as fallback
     return NextResponse.json({ success: true });
-  } catch (error) {
+  } catch (error: any) {
     console.error(`Error saving data for ${file}:`, error);
-    return NextResponse.json({ error: 'Failed to save data' }, { status: 500 });
+    return NextResponse.json({ error: error.message || 'Failed to save data' }, { status: 500 });
   }
 }
