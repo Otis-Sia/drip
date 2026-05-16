@@ -1,8 +1,11 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { supabase } from '@/lib/supabase';
 import { useRouter, usePathname } from 'next/navigation';
+
+const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes
+const STORAGE_KEY = 'lastAdminActivity';
 
 export default function AdminLayout({
   children,
@@ -12,6 +15,10 @@ export default function AdminLayout({
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const pathname = usePathname();
+
+  const updateActivity = useCallback(() => {
+    localStorage.setItem(STORAGE_KEY, Date.now().toString());
+  }, []);
 
   useEffect(() => {
     const checkAuth = async () => {
@@ -28,6 +35,8 @@ export default function AdminLayout({
         router.replace('/admin/login');
       } else {
         setLoading(false);
+        // Initialize activity timestamp when authenticated
+        updateActivity();
       }
     };
 
@@ -43,7 +52,41 @@ export default function AdminLayout({
     return () => {
       subscription.unsubscribe();
     };
-  }, [pathname, router]);
+  }, [pathname, router, updateActivity]);
+
+  // Handle inactivity timeout
+  useEffect(() => {
+    if (pathname === '/admin/login' || loading) return;
+
+    // Track user interaction events
+    const events = ['mousedown', 'mousemove', 'keydown', 'scroll', 'touchstart'];
+    
+    const handleActivity = () => updateActivity();
+
+    events.forEach(event => {
+      window.addEventListener(event, handleActivity);
+    });
+
+    // Check for inactivity every 10 seconds
+    const interval = setInterval(async () => {
+      const lastActivity = localStorage.getItem(STORAGE_KEY);
+      if (lastActivity) {
+        const elapsed = Date.now() - parseInt(lastActivity, 10);
+        if (elapsed >= INACTIVITY_TIMEOUT) {
+          console.log('Admin session expired due to inactivity.');
+          await supabase.auth.signOut();
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+    }, 10000);
+
+    return () => {
+      events.forEach(event => {
+        window.removeEventListener(event, handleActivity);
+      });
+      clearInterval(interval);
+    };
+  }, [pathname, loading, updateActivity]);
 
   // Show a loading state while verifying the session, unless it's the login page
   if (loading && pathname !== '/admin/login') {
