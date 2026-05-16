@@ -48,8 +48,47 @@ export const aboutStats: [string, string][] = [
   ['15k+', 'Farmers Reached'],
   ['16+', 'Branches']
 ];
-export const socials: SocialLink[] = [];
-export const contactInfo: ContactInfoItem[] = [];
+export const socials: SocialLink[] = [
+  {
+    name: "Instagram",
+    href: "https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==",
+    icon: "/instagram.svg"
+  },
+  {
+    name: "Facebook",
+    href: "https://www.facebook.com/share/1CiLi5Nef3/",
+    icon: "/facebook.svg"
+  },
+  {
+    name: "TikTok",
+    href: "https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc",
+    icon: "/tiktok.svg"
+  }
+];
+
+export const contactInfo: ContactInfoItem[] = [
+  {
+    icon: "/email.svg",
+    label: "Email",
+    value: "info@afrodrip.co.ke"
+  },
+  {
+    icon: "/phone.svg",
+    label: "Phone",
+    value: "+254 711 506 498"
+  },
+  {
+    icon: "/location_pin.svg",
+    label: "Address",
+    value: "Maasai Rd, off Mombasa Rd, Nairobi, Kenya"
+  },
+  {
+    icon: "/clock.svg",
+    label: "Business Hours",
+    value: "Mon–Fri, 8:00 AM – 5:00 PM EAT"
+  }
+];
+
 export const teamMembers: TeamMember[] = [];
 
 // Supabase Fetches

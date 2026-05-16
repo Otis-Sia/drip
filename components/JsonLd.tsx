@@ -12,7 +12,11 @@ export function OrganizationJsonLd() {
       addressLocality: "Nairobi",
       addressCountry: "KE",
     },
-    sameAs: [],
+    sameAs: [
+      "https://www.facebook.com/share/1CiLi5Nef3/",
+      "https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==",
+      "https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc"
+    ],
     contactPoint: {
       "@type": "ContactPoint",
       contactType: "sales",

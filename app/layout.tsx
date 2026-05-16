@@ -11,6 +11,9 @@ export const metadata: Metadata = {
     default: "Afrodrip Limited | Climate-Smart Agricultural Solutions",
     template: "%s | Afrodrip Limited",
   },
+  alternates: {
+    canonical: "https://afrodrip.co.ke",
+  },
   description:
     "Empowering farmers with cutting-edge greenhouse systems, efficient irrigation, and climate-smart farming technologies across Kenya and East Africa.",
   keywords: [
