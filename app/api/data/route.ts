@@ -50,11 +50,16 @@ export async function GET(request: Request) {
     } else if (file === 'company') {
       const { data: companyValues } = await supabase.from('company_values').select('*').order('created_at', { ascending: true });
       const { data: targetMarkets } = await supabase.from('target_markets').select('*').order('created_at', { ascending: true });
+      const { data: aboutStatsData } = await supabase.from('company_stats').select('*').order('created_at', { ascending: true });
+      const { data: contactInfo } = await supabase.from('contact_info').select('*').order('created_at', { ascending: true });
+      const { data: socials } = await supabase.from('socials').select('*').order('created_at', { ascending: true });
       
       data = {
         companyValues: companyValues || [],
         targetMarkets: targetMarkets || [],
-        aboutStats: [
+        contactInfo: contactInfo || [],
+        socials: socials || [],
+        aboutStats: aboutStatsData?.length ? aboutStatsData.map(s => [s.value, s.label]) : [
           ['250+', 'Projects Done'],
           ['15k+', 'Farmers Reached'],
           ['16+', 'Branches']
@@ -68,6 +73,12 @@ export async function GET(request: Request) {
       data = dbData;
     } else if (file === 'resources') {
       const { data: dbData } = await supabase.from('resources').select('*').order('created_at', { ascending: true });
+      data = dbData;
+    } else if (file === 'blog') {
+      const { data: dbData } = await supabase.from('blog_posts').select('*').order('published_at', { ascending: false });
+      data = dbData;
+    } else if (file === 'gallery') {
+      const { data: dbData } = await supabase.from('gallery_items').select('*').order('created_at', { ascending: false });
       data = dbData;
     }
 
@@ -215,7 +226,45 @@ export async function PUT(request: Request) {
         }));
         if (r2.error) error = r2.error;
       }
+      if (data.aboutStats) {
+        // Since aboutStats is a tuple array [value, label][], we need to map it back to objects
+        // However, the admin panel array editor just gives us what it gets, which might be an array of arrays.
+        // Wait, if it's a nested array editor, it might just give an array of arrays.
+        const statsToUpsert = data.aboutStats.map((s: any, idx: number) => {
+          let value = '', label = '';
+          if (Array.isArray(s) && s.length >= 2) {
+            value = s[0];
+            label = s[1];
+          } else if (typeof s === 'object' && s !== null) {
+            value = s.value || s[0] || '';
+            label = s.label || s[1] || '';
+          }
+          return { value, label };
+        });
+        
+        // We delete all and recreate for simplicity, since it's just 3 stats and they might not have IDs
+        await supabase.from('company_stats').delete().neq('value', 'DO_NOT_MATCH_ANYTHING'); // deletes all
+        const r3 = await supabase.from('company_stats').insert(statsToUpsert);
+        if (r3.error) error = r3.error;
+      }
+      if (data.contactInfo) {
+        const r4 = await supabase.from('contact_info').upsert(data.contactInfo.map((c: any) => {
+          const item: any = { icon: c.icon, label: c.label, value: c.value };
+          if (c.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(c.id)) item.id = c.id;
+          return item;
+        }));
+        if (r4.error) error = r4.error;
+      }
+      if (data.socials) {
+        const r5 = await supabase.from('socials').upsert(data.socials.map((s: any) => {
+          const item: any = { name: s.name, href: s.href, icon: s.icon };
+          if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) item.id = s.id;
+          return item;
+        }));
+        if (r5.error) error = r5.error;
+      }
       revalidatePath('/about');
+      revalidatePath('/');
     } else if (file === 'teamMembers') {
       if (!Array.isArray(data)) throw new Error('Array expected');
       const upsertData = data.map((t: any) => {
@@ -258,6 +307,30 @@ export async function PUT(request: Request) {
       }));
       error = result.error;
       revalidatePath('/communication');
+    } else if (file === 'blog') {
+      const result = await supabase.from('blog_posts').upsert(data.map((p: any) => {
+        const item = { ...p };
+        if (p.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.id)) {
+          item.id = p.id;
+        } else {
+          delete item.id;
+        }
+        return item;
+      }));
+      error = result.error;
+      revalidatePath('/blog');
+    } else if (file === 'gallery') {
+      const result = await supabase.from('gallery_items').upsert(data.map((g: any) => {
+        const item = { ...g };
+        if (g.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(g.id)) {
+          item.id = g.id;
+        } else {
+          delete item.id;
+        }
+        return item;
+      }));
+      error = result.error;
+      revalidatePath('/gallery');
     }
 
     if (error) {

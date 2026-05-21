@@ -35,6 +35,13 @@ const LIBRARY_GROUPS = [
       { id: 'company', name: 'Company Info', description: 'About us, stats, and values' },
       { id: 'teamMembers', name: 'Team Members', description: 'Manage leadership and staff' },
     ]
+  },
+  {
+    name: 'Content & Media',
+    files: [
+      { id: 'blog', name: 'Blog Posts', description: 'Articles, news, and guides' },
+      { id: 'gallery', name: 'Gallery Items', description: 'Photos and videos for site gallery' },
+    ]
   }
 ];
 
@@ -60,6 +67,25 @@ export default function AdminPage() {
     fetchData(selectedFile.id);
     fetchCategories();
   }, [selectedFile]);
+
+  // Log out user when the page is closed or refreshed
+  useEffect(() => {
+    const handleUnload = () => {
+      supabase.auth.signOut();
+      
+      const keysToRemove: string[] = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('sb-')) {
+          keysToRemove.push(key);
+        }
+      }
+      keysToRemove.forEach(k => localStorage.removeItem(k));
+    };
+
+    window.addEventListener('beforeunload', handleUnload);
+    return () => window.removeEventListener('beforeunload', handleUnload);
+  }, []);
 
   async function fetchCategories() {
     try {
@@ -90,12 +116,33 @@ export default function AdminPage() {
 
   async function handleSave() {
     setMessage(null);
-    let parsedData;
+    let parsedData: any;
     try {
       parsedData = JSON.parse(rawContent);
     } catch (err) {
       setMessage({ type: 'error', text: 'Invalid JSON format. Please check your syntax.' });
       return;
+    }
+
+    const now = new Date().toISOString();
+    if (Array.isArray(parsedData)) {
+      parsedData = parsedData.map(item => {
+        if (item && typeof item === 'object') {
+          return { ...item, created_at: item.created_at || now };
+        }
+        return item;
+      });
+    } else if (typeof parsedData === 'object' && parsedData !== null) {
+      Object.keys(parsedData).forEach(key => {
+        if (Array.isArray(parsedData[key])) {
+          parsedData[key] = parsedData[key].map((item: any) => {
+            if (item && typeof item === 'object') {
+              return { ...item, created_at: item.created_at || now };
+            }
+            return item;
+          });
+        }
+      });
     }
 
     setSaving(true);
@@ -298,6 +345,8 @@ export default function AdminPage() {
 }
 
 function GuiEditor({ data, onChange, categories, fileId }: { data: any, onChange: (newData: any) => void, categories?: any[], fileId?: string }) {
+  const [activeTab, setActiveTab] = useState<string | null>(null);
+
   if (!data) return null;
 
   // If it's a simple array (like products, branches)
@@ -306,22 +355,38 @@ function GuiEditor({ data, onChange, categories, fileId }: { data: any, onChange
   }
 
   // If it's an object with multiple arrays (like company, communication)
+  const keys = Object.keys(data);
+  const currentTab = activeTab && keys.includes(activeTab) ? activeTab : keys[0];
+
   return (
-    <div className="p-6 space-y-12 h-[600px] overflow-y-auto">
-      {Object.entries(data).map(([key, value]) => (
-        <div key={key} className="space-y-4">
-          <h3 className="text-sm font-bold uppercase tracking-wider text-gray-400 px-2">{key.replace(/([A-Z])/g, ' $1')}</h3>
-          <div className="border border-gray-100 rounded-2xl overflow-hidden">
+    <div className="flex flex-col h-[600px]">
+      <div className="flex border-b border-surface-alt px-4 overflow-x-auto shrink-0 bg-surface">
+        {keys.map(key => (
+          <button
+            key={key}
+            onClick={() => setActiveTab(key)}
+            className={`px-4 py-3.5 text-xs font-bold uppercase tracking-wider whitespace-nowrap transition-colors border-b-2 ${
+              currentTab === key 
+                ? 'border-primary text-primary' 
+                : 'border-transparent text-muted hover:text-fg hover:border-border'
+            }`}
+          >
+            {key.replace(/([A-Z])/g, ' $1').trim()}
+          </button>
+        ))}
+      </div>
+      <div className="flex-1 overflow-hidden bg-surface-alt/20 p-6">
+        {currentTab && (
+          <div className="h-full bg-surface border border-border rounded-2xl overflow-hidden shadow-sm">
             <ArrayEditor 
-              items={Array.isArray(value) ? value : [value]} 
-              onChange={(newVal) => onChange({ ...data, [key]: newVal })} 
+              items={Array.isArray(data[currentTab]) ? data[currentTab] : [data[currentTab]]} 
+              onChange={(newVal) => onChange({ ...data, [currentTab]: newVal })} 
               categories={categories}
               fileId={fileId}
-              embedded
             />
           </div>
-        </div>
-      ))}
+        )}
+      </div>
     </div>
   );
 }
@@ -343,7 +408,8 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
       if (typeof newItem[key] === 'string') newItem[key] = '';
       if (Array.isArray(newItem[key])) newItem[key] = [];
     });
-    if (newItem.id) newItem.id = `new-item-${Date.now()}`;
+    // Always ensure an ID is self-generated
+    newItem.id = `new-item-${Date.now()}`;
     onChange([...items, newItem]);
     setSelectedIndex(items.length);
   };
@@ -393,14 +459,38 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
       <div className="flex-1 p-8 overflow-y-auto bg-white">
         {currentItem ? (
           <div className="max-w-2xl space-y-6">
-            {Object.entries(currentItem).map(([key, value]) => (
+            {Object.entries({
+              ...currentItem,
+              ...(fileId === 'blog' && !('topic' in currentItem) ? { topic: currentItem.topic || '' } : {})
+            }).map(([key, value]) => {
+              if (key === 'id' || key === 'width' || key === 'height' || key === 'created_at' || key === 'createdAt') return null;
+              
+              const isImageField = typeof value === 'string' && (
+                key.toLowerCase().includes('image') ||
+                key.toLowerCase().includes('photo') ||
+                key.toLowerCase().includes('avatar') ||
+                key.toLowerCase() === 'logo' ||
+                (key === 'url' && currentItem?.type === 'image') ||
+                /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(value)
+              );
+
+              return (
               <div key={key} className="space-y-2">
                 <label className="text-xs font-bold text-gray-400 uppercase ml-1">{key.replace(/([A-Z])/g, ' $1')}</label>
                 
                 {Array.isArray(value) ? (
                   <div className="space-y-2">
-                    {value.map((val, vIdx) => (
-                      <div key={vIdx} className="flex gap-2">
+                    {value.map((val, vIdx) => {
+                      const isArrImageField = typeof val === 'string' && (
+                        key.toLowerCase().includes('image') ||
+                        key.toLowerCase().includes('photo') ||
+                        key.toLowerCase().includes('avatar') ||
+                        key.toLowerCase() === 'gallery' ||
+                        /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(val)
+                      );
+                      return (
+                      <div key={vIdx} className="space-y-2">
+                        <div className="flex gap-2">
                         <input
                           type="text"
                           value={val ?? ''}
@@ -412,13 +502,15 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                           className="flex-1 px-4 py-2.5 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                         />
                         <button 
-                          onClick={() => updateField(key, value.filter((_, i) => i !== vIdx))}
-                          className="p-2.5 text-gray-300 hover:text-red-500 transition-colors"
-                        >
-                          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
-                        </button>
+                            onClick={() => updateField(key, value.filter((_, i) => i !== vIdx))}
+                            className="p-2.5 text-gray-300 hover:text-red-500 transition-colors"
+                          >
+                            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                          </button>
+                        </div>
+                        {isArrImageField && val && <ImagePreview src={val} />}
                       </div>
-                    ))}
+                    ); })}
                     <button 
                       onClick={() => updateField(key, [...value, ''])}
                       className="text-xs font-bold text-primary hover:underline px-1"
@@ -427,38 +519,146 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                     </button>
                   </div>
                 ) : key === 'category' && fileId === 'products' ? (
-                  <select
-                    value={value as string}
-                    onChange={(e) => updateField(key, e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none appearance-none"
-                  >
-                    <option value="">Select Category</option>
-                    {Array.isArray(categories) && categories.map(cat => (
-                      <option key={cat.id} value={cat.id}>{cat.title}</option>
-                    ))}
-                  </select>
-                ) : key.toLowerCase().includes('date') ? (
+                  <>
+                    <input
+                      list="categories-list"
+                      value={value as string}
+                      onChange={(e) => updateField(key, e.target.value)}
+                      placeholder="Select or type a category"
+                      className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                    />
+                    <datalist id="categories-list">
+                      {Array.isArray(categories) && categories.map(cat => (
+                        <option key={cat.id} value={cat.id}>{cat.title}</option>
+                      ))}
+                    </datalist>
+                  </>
+                ) : key === 'topic' && fileId === 'blog' ? (
+                  <>
+                    <input
+                      list="topics-list"
+                      value={value as string}
+                      onChange={(e) => updateField(key, e.target.value)}
+                      placeholder="Select or type a topic"
+                      className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                    />
+                    <datalist id="topics-list">
+                      <option value="Irrigation" />
+                      <option value="Greenhouse" />
+                      <option value="Agronomy" />
+                      <option value="Farming" />
+                      <option value="General" />
+                    </datalist>
+                  </>
+                ) : key.toLowerCase().includes('date') || key === 'published_at' ? (
                   <input
                     type="date"
                     value={(value as string) ?? ''}
                     onChange={(e) => updateField(key, e.target.value)}
                     className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                   />
-                ) : (
-                  <input
-                    type={typeof value === 'number' ? 'number' : 'text'}
+                ) : key === 'type' && fileId === 'gallery' ? (
+                  <>
+                    <input
+                      list="gallery-type-list"
+                      value={value as string}
+                      onChange={(e) => updateField(key, e.target.value)}
+                      placeholder="Select or type type"
+                      className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                    />
+                    <datalist id="gallery-type-list">
+                      <option value="image" />
+                      <option value="video" />
+                    </datalist>
+                  </>
+                ) : key === 'content' || key === 'excerpt' || key === 'description' || key === 'bio' || key === 'caption' ? (
+                  <textarea
                     value={(value as string) ?? ''}
                     onChange={(e) => updateField(key, e.target.value)}
-                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                    rows={key === 'content' ? 10 : 4}
+                    className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none resize-y"
                   />
+                ) : (
+                  <>
+                    <input
+                      type={typeof value === 'number' ? 'number' : 'text'}
+                      value={(value as string) ?? ''}
+                      onChange={(e) => updateField(key, e.target.value)}
+                      className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                    />
+                    {isImageField && value && <ImagePreview src={value as string} />}
+                  </>
                 )}
               </div>
-            ))}
+            ); })}
           </div>
         ) : (
           <div className="h-full flex items-center justify-center text-gray-400 text-sm">
             Select an item to edit
           </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function ImagePreview({ src }: { src: string }) {
+  const [info, setInfo] = useState<{ width: number, height: number, type: string } | null>(null);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    if (!src) {
+      setInfo(null);
+      setError(false);
+      return;
+    }
+    
+    setError(false);
+    const img = new window.Image();
+    img.onload = () => {
+      let type = 'UNKNOWN';
+      const match = src.match(/\.([a-zA-Z0-9]+)(?:\?|$)/);
+      if (match) {
+        type = match[1].toUpperCase();
+      } else if (src.startsWith('data:image/')) {
+        type = src.split(';')[0].split('/')[1].toUpperCase();
+      } else {
+        type = 'IMAGE';
+      }
+      
+      setInfo({
+        width: img.naturalWidth,
+        height: img.naturalHeight,
+        type
+      });
+    };
+    img.onerror = () => {
+      setError(true);
+    };
+    img.src = src;
+  }, [src]);
+
+  if (!src) return null;
+
+  return (
+    <div className="mt-2 flex gap-4 p-3 bg-surface border border-border rounded-xl">
+      <div className="w-16 h-16 relative rounded-lg overflow-hidden bg-gray-100 flex-shrink-0">
+        {!error ? (
+          <img src={src} alt="Preview" className="w-full h-full object-cover" />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center text-[10px] text-gray-400 font-bold uppercase">Invalid</div>
+        )}
+      </div>
+      <div className="flex flex-col justify-center">
+        {info ? (
+          <>
+            <span className="text-[10px] font-bold text-gray-400 tracking-wider">TYPE: {info.type}</span>
+            <span className="text-[10px] font-bold text-gray-400 tracking-wider mt-1">DIMENSIONS: {info.width} × {info.height}</span>
+          </>
+        ) : !error ? (
+          <span className="text-[10px] font-bold text-gray-400 tracking-wider">LOADING INFO...</span>
+        ) : (
+          <span className="text-[10px] font-bold text-red-400 tracking-wider">CANNOT LOAD IMAGE</span>
         )}
       </div>
     </div>

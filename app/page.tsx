@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { getServiceSummaries } from '@/lib/services';
-import { companyStats } from '@/lib/company';
+import { getCompanyStats } from '@/lib/company';
 import ServiceCard from '@/components/services/ServiceCard';
 import { getEvents } from '@/lib/communication';
 import Calendar from '@/components/communication/Calendar';
@@ -11,6 +11,7 @@ export default async function Home() {
   const serviceSummaries = await getServiceSummaries();
   const allProducts = await getAllProducts();
   const events = await getEvents();
+  const companyStats = await getCompanyStats();
   const featuredProducts = allProducts.slice(0, 4);
   return (
     <div className="flex flex-col">

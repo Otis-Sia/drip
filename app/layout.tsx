@@ -73,11 +73,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+import { getSocials, getContactInfo } from '@/lib/company';
+
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const socials = await getSocials();
+  const contactInfo = await getContactInfo();
+  
   return (
     <html lang="en" className="h-full">
       <body className="min-h-full flex flex-col" suppressHydrationWarning>
@@ -88,7 +93,7 @@ export default function RootLayout({
           <main className="flex-1">
             {children}
           </main>
-          <Footer />
+          <Footer socials={socials} contactInfo={contactInfo} />
         </CartProvider>
       </body>
     </html>

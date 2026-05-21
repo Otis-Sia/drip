@@ -1,7 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import type { Metadata } from 'next';
-import { getCompanyValues, getTargetMarkets, aboutStats, getTeamMembers } from '@/lib/company';
+import { getCompanyValues, getTargetMarkets, getCompanyStats, getTeamMembers } from '@/lib/company';
 import { getBranches } from '@/lib/branches';
 import TeamCard from '@/components/about/TeamCard';
 import BranchCard from '@/components/contact/BranchCard';
@@ -16,6 +16,8 @@ export default async function AboutPage() {
   const targetMarkets = await getTargetMarkets();
   const branches = await getBranches();
   const teamMembers = await getTeamMembers();
+  const companyStatsData = await getCompanyStats();
+  const aboutStats = companyStatsData.map(s => [s.value, s.label]);
   return (
     <div>
       {/* Hero */}

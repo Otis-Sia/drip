@@ -32,13 +32,14 @@ CREATE TABLE IF NOT EXISTS products (
 
 -- 3. Branches
 CREATE TABLE IF NOT EXISTS branches (
-  id TEXT PRIMARY KEY,
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
-  address TEXT,
-  phone TEXT,
-  email TEXT,
-  hours TEXT,
-  region TEXT,
+  address TEXT NOT NULL,
+  phone TEXT NOT NULL,
+  email TEXT NOT NULL,
+  hours TEXT NOT NULL,
+  region TEXT NOT NULL,
+  map_url TEXT,
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
@@ -60,7 +61,33 @@ CREATE TABLE IF NOT EXISTS target_markets (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 5b. Team Members
+-- 5a. Company Stats
+CREATE TABLE IF NOT EXISTS company_stats (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  value TEXT NOT NULL,
+  label TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 5b. Contact Info
+CREATE TABLE IF NOT EXISTS contact_info (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  icon TEXT,
+  label TEXT NOT NULL,
+  value TEXT NOT NULL,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 5c. Socials
+CREATE TABLE IF NOT EXISTS socials (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  name TEXT NOT NULL,
+  href TEXT NOT NULL,
+  icon TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 5d. Team Members
 CREATE TABLE IF NOT EXISTS team_members (
   id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
   name TEXT NOT NULL,
@@ -164,6 +191,31 @@ CREATE TABLE IF NOT EXISTS quote_request_items (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
+-- 14. Blog Posts
+CREATE TABLE IF NOT EXISTS blog_posts (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  content TEXT,
+  excerpt TEXT,
+  image TEXT,
+  author TEXT,
+  published_at DATE DEFAULT CURRENT_DATE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
+-- 15. Gallery Items
+CREATE TABLE IF NOT EXISTS gallery_items (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  title TEXT,
+  type TEXT NOT NULL CHECK (type IN ('image', 'video')),
+  url TEXT NOT NULL,
+  width INTEGER,
+  height INTEGER,
+  caption TEXT,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
+);
+
 -- ==========================================
 -- ROW LEVEL SECURITY (RLS) POLICIES
 -- ==========================================
@@ -174,6 +226,9 @@ ALTER TABLE products ENABLE ROW LEVEL SECURITY;
 ALTER TABLE branches ENABLE ROW LEVEL SECURITY;
 ALTER TABLE company_values ENABLE ROW LEVEL SECURITY;
 ALTER TABLE target_markets ENABLE ROW LEVEL SECURITY;
+ALTER TABLE company_stats ENABLE ROW LEVEL SECURITY;
+ALTER TABLE contact_info ENABLE ROW LEVEL SECURITY;
+ALTER TABLE socials ENABLE ROW LEVEL SECURITY;
 ALTER TABLE team_members ENABLE ROW LEVEL SECURITY;
 ALTER TABLE services ENABLE ROW LEVEL SECURITY;
 ALTER TABLE service_summaries ENABLE ROW LEVEL SECURITY;
@@ -183,6 +238,8 @@ ALTER TABLE calendar_events ENABLE ROW LEVEL SECURITY;
 ALTER TABLE resources ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quote_requests ENABLE ROW LEVEL SECURITY;
 ALTER TABLE quote_request_items ENABLE ROW LEVEL SECURITY;
+ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
+ALTER TABLE gallery_items ENABLE ROW LEVEL SECURITY;
 
 -- Create Policies for Public Read Access (Site Content)
 CREATE POLICY "Public Read Access for Categories" ON categories FOR SELECT USING (true);
@@ -190,6 +247,9 @@ CREATE POLICY "Public Read Access for Products" ON products FOR SELECT USING (tr
 CREATE POLICY "Public Read Access for Branches" ON branches FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Company Values" ON company_values FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Target Markets" ON target_markets FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Company Stats" ON company_stats FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Contact Info" ON contact_info FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Socials" ON socials FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Team Members" ON team_members FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Services" ON services FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Service Summaries" ON service_summaries FOR SELECT USING (true);
@@ -197,6 +257,8 @@ CREATE POLICY "Public Read Access for Alerts" ON alerts FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for News" ON news FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Calendar Events" ON calendar_events FOR SELECT USING (true);
 CREATE POLICY "Public Read Access for Resources" ON resources FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Blog Posts" ON blog_posts FOR SELECT USING (true);
+CREATE POLICY "Public Read Access for Gallery Items" ON gallery_items FOR SELECT USING (true);
 
 -- Create Policies for Quote Submissions (Anyone can submit, but only admins can read)
 CREATE POLICY "Public Insert Quote Requests" ON quote_requests FOR INSERT WITH CHECK (true);
@@ -209,6 +271,9 @@ CREATE POLICY "Temp All Access Products" ON products FOR ALL USING (true);
 CREATE POLICY "Temp All Access Branches" ON branches FOR ALL USING (true);
 CREATE POLICY "Temp All Access Company Values" ON company_values FOR ALL USING (true);
 CREATE POLICY "Temp All Access Target Markets" ON target_markets FOR ALL USING (true);
+CREATE POLICY "Temp All Access Company Stats" ON company_stats FOR ALL USING (true);
+CREATE POLICY "Temp All Access Contact Info" ON contact_info FOR ALL USING (true);
+CREATE POLICY "Temp All Access Socials" ON socials FOR ALL USING (true);
 CREATE POLICY "Temp All Access Team Members" ON team_members FOR ALL USING (true);
 CREATE POLICY "Temp All Access Services" ON services FOR ALL USING (true);
 CREATE POLICY "Temp All Access Service Summaries" ON service_summaries FOR ALL USING (true);
@@ -218,6 +283,8 @@ CREATE POLICY "Temp All Access Calendar Events" ON calendar_events FOR ALL USING
 CREATE POLICY "Temp All Access Resources" ON resources FOR ALL USING (true);
 CREATE POLICY "Temp All Access Quote Requests" ON quote_requests FOR ALL USING (true);
 CREATE POLICY "Temp All Access Quote Request Items" ON quote_request_items FOR ALL USING (true);
+CREATE POLICY "Temp All Access Blog Posts" ON blog_posts FOR ALL USING (true);
+CREATE POLICY "Temp All Access Gallery Items" ON gallery_items FOR ALL USING (true);
 
 -- ==========================================
 -- STORAGE BUCKETS

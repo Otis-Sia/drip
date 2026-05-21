@@ -1,0 +1,52 @@
+[
+  {
+    "id": "e1a1a1a1-1111-1111-1111-111111111111",
+    "title": "Smart Greenhouse Installation in Nairobi",
+    "type": "image",
+    "url": "/smart_greenhouse.png",
+    "width": 800,
+    "height": 1200,
+    "caption": "A fully automated smart greenhouse featuring side-vent netting and precise overhead misting lines. Nairobi county.",
+    "created_at": "2026-05-01T08:00:00Z"
+  },
+  {
+    "id": "e2b2b2b2-2222-2222-2222-222222222222",
+    "title": "Drip Irrigation Setup Demo",
+    "type": "video",
+    "url": "https://assets.mixkit.co/videos/preview/mixkit-farmer-walking-in-a-greenhouse-41584-large.mp4",
+    "width": 1920,
+    "height": 1080,
+    "caption": "Walkthrough of our multi-line drip irrigation grid showing drip tape placement and filtration valves.",
+    "created_at": "2026-05-02T10:00:00Z"
+  },
+  {
+    "id": "e3c3c3c3-3333-3333-3333-333333333333",
+    "title": "Avocado Orchard Micro-Sprinklers",
+    "type": "image",
+    "url": "/avocado_sprinklers.png",
+    "width": 1200,
+    "height": 800,
+    "caption": "Precision micro-sprinklers active in a commercial Hass avocado orchard. Rift Valley region.",
+    "created_at": "2026-05-03T12:00:00Z"
+  },
+  {
+    "id": "e4d4d4d4-4444-4444-4444-444444444444",
+    "title": "Introduction to Afrodrip Technologies",
+    "type": "video",
+    "url": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "width": 16,
+    "height": 9,
+    "caption": "Watch our brief 16:9 intro video detailing how climate-smart agriculture works and the benefits of hydroponics.",
+    "created_at": "2026-05-04T14:00:00Z"
+  },
+  {
+    "id": "e5e5e5e5-5555-5555-5555-555555555555",
+    "title": "Fresh Tomato Harvest under Hydroponics",
+    "type": "image",
+    "url": "/tomato_harvest.png",
+    "width": 1000,
+    "height": 1000,
+    "caption": "Premium, uniform-grade tomato yields harvested from our modern coco-peat hydroponics system in Kiambu.",
+    "created_at": "2026-05-05T16:00:00Z"
+  }
+]

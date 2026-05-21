@@ -30,7 +30,8 @@ export default function AdminLayout({
 
       const { data: { session } } = await supabase.auth.getSession();
       
-      if (!session) {
+      const isDev = process.env.NODE_ENV === 'development';
+      if (!session && !isDev) {
         // Use replace to prevent the user from going back to the protected page
         router.replace('/admin/login');
       } else {

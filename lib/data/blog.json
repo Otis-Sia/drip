@@ -1,0 +1,24 @@
+[
+  {
+    "id": "b1a1a1a1-1111-1111-1111-111111111111",
+    "title": "Maximizing Yield with Drip Irrigation: A Complete Guide",
+    "slug": "maximizing-yield-drip-irrigation-guide",
+    "excerpt": "Learn how precision water delivery through drip irrigation system designs boosts crop health while conserving critical water resources.",
+    "content": "<p>Drip irrigation is one of the most efficient water delivery methods available to modern agriculture. By targeting the crop root zone directly, drip systems reduce water evaporation, minimize weed growth, and ensure consistent soil moisture. In this comprehensive guide, we'll walk through how to design, install, and maintain a high-efficiency drip irrigation system.</p><h2>Why Choose Drip Irrigation?</h2><p>Traditional sprinkler irrigation can lose up to 30-40% of water to evaporation and wind drift. Drip systems, however, operate at over 90% water application efficiency. Key benefits include:</p><ul><li><strong>Precision Watering:</strong> Direct delivery of water and nutrients (fertigation) directly to the crop roots.</li><li><strong>Water Conservation:</strong> Dramatically reduces overall water consumption, vital for arid and semi-arid regions of Kenya.</li><li><strong>Fewer Weeds:</strong> Since only the crops are watered, dry spaces in-between remain weed-free.</li><li><strong>Disease Prevention:</strong> Leaves stay dry, reducing the spread of fungal and bacterial pathogens.</li></ul><h2>Key Components of a Drip System</h2><p>A standard setup requires several specialized pieces of equipment to ensure even pressure and clean flow:</p><ol><li><strong>Water Source:</strong> A borehole, pond, river, or water harvesting tank.</li><li><strong>Filtration System:</strong> Disk or screen filters to prevent sand and organic particles from clogging the emitters.</li><li><strong>Pressure Regulator:</strong> Reduces source pressure to a safe operating level (usually 10-15 PSI).</li><li><strong>Main & Sub-main Lines:</strong> High-density polyethylene (HDPE) or PVC pipes conveying water across the field.</li><li><strong>Drip Tape or Emitters:</strong> Tubes with tiny, pre-spaced laser-cut holes that slowly drip water onto the soil.</li></ol><p>Whether you're cultivation avocados, tomatoes, or herbs, transitioning to climate-smart drip systems is the most reliable way to boost yields and build agricultural resilience.</p>",
+    "image": "/avocado_sprinklers.png",
+    "author": "Joseph Kamau (Irrigation Expert)",
+    "published_at": "2026-05-10",
+    "created_at": "2026-05-10T08:00:00Z"
+  },
+  {
+    "id": "b2b2b2b2-2222-2222-2222-222222222222",
+    "title": "Designing the Perfect Greenhouse for East African Climates",
+    "slug": "designing-perfect-greenhouse-east-africa",
+    "excerpt": "Greenhouse farming is booming in Kenya. Discover how optimal ventilation, UV-treated film, and shading materials protect your investments.",
+    "content": "<p>Greenhouse cultivation offers incredible control over temperature, humidity, and pest infiltration. However, because of East Africa's intense sun and warm equatorial climate, proper design is absolutely essential to prevent heat-stress. Here are the core design strategies for a highly productive greenhouse in Kenya.</p><h2>1. Orientation and Structure Design</h2><p>Positioning your greenhouse East-to-West allows uniform light distribution throughout the day. For hot regions, a curved tunnel or high-vent gable structure works best, encouraging rising hot air to escape through top vents.</p><h2>2. Selecting the Best Greenhouse Film</h2><p>Don't settle for cheap plastic. Always use multi-layer, UV-treated polyethylene film. This special film diffuses harsh direct sunlight, prevents leaf-burn, and blocks harmful insects while retaining heat during cool nights.</p><h2>3. Smart Ventilation Systems</h2><p>Natural ventilation is key to keeping costs down. Large side roll-up vents covered with high-mesh anti-insect netting ensure maximum cross-breeze while keeping whiteflies and thrips out. For larger setups, mechanical extractor fans and wet-pad cooling walls may be considered.</p><p>By building right from the start, you secure year-round tomato, pepper, and cucumber crops regardless of volatile weather patterns outside.</p>",
+    "image": "/smart_greenhouse.png",
+    "author": "Dr. Grace Nyaga (Agronomist)",
+    "published_at": "2026-05-15",
+    "created_at": "2026-05-15T10:30:00Z"
+  }
+]

@@ -43,51 +43,40 @@ export interface TeamMember {
 export const companyValues: CompanyValue[] = [];
 export const targetMarkets: TargetMarket[] = [];
 export const companyStats: CompanyStat[] = [];
-export const aboutStats: [string, string][] = [
-  ['250+', 'Projects Done'],
-  ['15k+', 'Farmers Reached'],
-  ['16+', 'Branches']
-];
-export const socials: SocialLink[] = [
-  {
-    name: "Instagram",
-    href: "https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==",
-    icon: "/instagram.svg"
-  },
-  {
-    name: "Facebook",
-    href: "https://www.facebook.com/share/1CiLi5Nef3/",
-    icon: "/facebook.svg"
-  },
-  {
-    name: "TikTok",
-    href: "https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc",
-    icon: "/tiktok.svg"
-  }
-];
+export const aboutStats: [string, string][] = [];
 
-export const contactInfo: ContactInfoItem[] = [
-  {
-    icon: "/email.svg",
-    label: "Email",
-    value: "info@afrodrip.co.ke"
-  },
-  {
-    icon: "/phone.svg",
-    label: "Phone",
-    value: "+254 711 506 498"
-  },
-  {
-    icon: "/location_pin.svg",
-    label: "Address",
-    value: "Maasai Rd, off Mombasa Rd, Nairobi, Kenya"
-  },
-  {
-    icon: "/clock.svg",
-    label: "Business Hours",
-    value: "Mon–Fri, 8:00 AM – 5:00 PM EAT"
-  }
-];
+export async function getCompanyStats(): Promise<CompanyStat[]> {
+  const { data, error } = await supabase.from('company_stats').select('*').order('created_at', { ascending: true });
+  if (error || !data || data.length === 0) return [
+    { value: '250+', label: 'Projects Done' },
+    { value: '15k+', label: 'Farmers Reached' },
+    { value: '16+', label: 'Branches' }
+  ];
+
+  return data as CompanyStat[];
+}
+export const contactInfo: ContactInfoItem[] = [];
+
+export async function getSocials(): Promise<SocialLink[]> {
+  const { data, error } = await supabase.from('socials').select('*').order('created_at', { ascending: true });
+  if (error || !data || data.length === 0) return [
+    { name: "Instagram", href: "https://www.instagram.com/afrodrip254?igsh=MWwwb3BrazhyaWxrcw==", icon: "/instagram.svg" },
+    { name: "Facebook", href: "https://www.facebook.com/share/1CiLi5Nef3/", icon: "/facebook.svg" },
+    { name: "TikTok", href: "https://www.tiktok.com/@afrodripltd?is_from_webapp=1&sender_device=pc", icon: "/tiktok.svg" }
+  ];
+  return data as SocialLink[];
+}
+
+export async function getContactInfo(): Promise<ContactInfoItem[]> {
+  const { data, error } = await supabase.from('contact_info').select('*').order('created_at', { ascending: true });
+  if (error || !data || data.length === 0) return [
+    { icon: "/email.svg", label: "Email", value: "info@afrodrip.co.ke" },
+    { icon: "/phone.svg", label: "Phone", value: "+254 711 506 498" },
+    { icon: "/location_pin.svg", label: "Address", value: "Maasai Rd, off Mombasa Rd, Nairobi, Kenya" },
+    { icon: "/clock.svg", label: "Business Hours", value: "Mon–Fri, 8:00 AM – 5:00 PM EAT" }
+  ];
+  return data as ContactInfoItem[];
+}
 
 export const teamMembers: TeamMember[] = [];
 

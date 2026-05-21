@@ -3,11 +3,15 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { socials, contactInfo } from '@/lib/company';
 import { usePathname } from 'next/navigation';
 import CheckCircleIcon from '@/components/icons/CheckCircleIcon';
 
-export default function Footer() {
+interface FooterProps {
+  socials: any[];
+  contactInfo: any[];
+}
+
+export default function Footer({ socials = [], contactInfo = [] }: FooterProps) {
   const pathname = usePathname();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [submitted, setSubmitted] = useState(false);
@@ -97,6 +101,8 @@ export default function Footer() {
                   ['/', 'Home'],
                   ['/about', 'Our Story'],
                   ['/services-and-products', 'Expertise & Solutions'],
+                  ['/gallery', 'Gallery'],
+                  ['/blog', 'Blog'],
                   ['/communication', 'News'],
                 ].map(([href, label]) => (
                   <li key={href}>

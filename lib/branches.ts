@@ -9,6 +9,7 @@ export interface Branch {
   email: string;
   hours: string;
   region: Region;
+  map_url?: string;
 }
 
 // Empty fallbacks
