@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { supabase } from '@/lib/supabase';
 import { revalidatePath } from 'next/cache';
+import { randomUUID } from 'crypto';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -143,10 +144,10 @@ export async function PUT(request: Request) {
     } else if (file === 'branches') {
       const branchesData = data.map((b: any) => {
         const item = { ...b };
-        if (b.id && typeof b.id === 'string' && b.id.length > 0) {
+        if (b.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(b.id)) {
           item.id = b.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       });
@@ -181,7 +182,7 @@ export async function PUT(request: Request) {
         if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) {
           item.id = s.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       }));
@@ -189,12 +190,34 @@ export async function PUT(request: Request) {
       revalidatePath('/');
     } else if (file === 'alerts') {
       if (data.alerts) {
-        const r1 = await supabase.from('alerts').upsert(data.alerts);
-        if (r1.error) error = r1.error;
+        const validAlerts = data.alerts.filter((a: any) => typeof a.id === 'number');
+        const newAlerts = data.alerts.filter((a: any) => typeof a.id !== 'number').map((a: any) => {
+          const { id, ...rest } = a;
+          return rest;
+        });
+        if (validAlerts.length > 0) {
+          const r1 = await supabase.from('alerts').upsert(validAlerts);
+          if (r1.error) error = r1.error;
+        }
+        if (newAlerts.length > 0) {
+          const r2 = await supabase.from('alerts').insert(newAlerts);
+          if (r2.error) error = r2.error;
+        }
       }
       if (data.news) {
-        const r2 = await supabase.from('news').upsert(data.news);
-        if (r2.error) error = r2.error;
+        const validNews = data.news.filter((a: any) => typeof a.id === 'number');
+        const newNews = data.news.filter((a: any) => typeof a.id !== 'number').map((a: any) => {
+          const { id, ...rest } = a;
+          return rest;
+        });
+        if (validNews.length > 0) {
+          const r3 = await supabase.from('news').upsert(validNews);
+          if (r3.error) error = r3.error;
+        }
+        if (newNews.length > 0) {
+          const r4 = await supabase.from('news').insert(newNews);
+          if (r4.error) error = r4.error;
+        }
       }
       revalidatePath('/communication');
     } else if (file === 'company') {
@@ -207,6 +230,8 @@ export async function PUT(request: Request) {
           };
           if (v.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(v.id)) {
             item.id = v.id;
+          } else {
+            item.id = randomUUID();
           }
           return item;
         }));
@@ -221,6 +246,8 @@ export async function PUT(request: Request) {
           };
           if (m.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(m.id)) {
             item.id = m.id;
+          } else {
+            item.id = randomUUID();
           }
           return item;
         }));
@@ -250,7 +277,11 @@ export async function PUT(request: Request) {
       if (data.contactInfo) {
         const r4 = await supabase.from('contact_info').upsert(data.contactInfo.map((c: any) => {
           const item: any = { icon: c.icon, label: c.label, value: c.value };
-          if (c.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(c.id)) item.id = c.id;
+          if (c.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(c.id)) {
+            item.id = c.id;
+          } else {
+            item.id = randomUUID();
+          }
           return item;
         }));
         if (r4.error) error = r4.error;
@@ -258,7 +289,11 @@ export async function PUT(request: Request) {
       if (data.socials) {
         const r5 = await supabase.from('socials').upsert(data.socials.map((s: any) => {
           const item: any = { name: s.name, href: s.href, icon: s.icon };
-          if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) item.id = s.id;
+          if (s.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(s.id)) {
+            item.id = s.id;
+          } else {
+            item.id = randomUUID();
+          }
           return item;
         }));
         if (r5.error) error = r5.error;
@@ -277,6 +312,8 @@ export async function PUT(request: Request) {
         };
         if (t.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(t.id)) {
           item.id = t.id;
+        } else {
+          item.id = randomUUID();
         }
         return item;
       });
@@ -289,7 +326,7 @@ export async function PUT(request: Request) {
         if (e.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(e.id)) {
           item.id = e.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       }));
@@ -301,7 +338,7 @@ export async function PUT(request: Request) {
         if (r.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(r.id)) {
           item.id = r.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       }));
@@ -313,7 +350,7 @@ export async function PUT(request: Request) {
         if (p.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(p.id)) {
           item.id = p.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       }));
@@ -325,7 +362,7 @@ export async function PUT(request: Request) {
         if (g.id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(g.id)) {
           item.id = g.id;
         } else {
-          delete item.id;
+          item.id = randomUUID();
         }
         return item;
       }));
