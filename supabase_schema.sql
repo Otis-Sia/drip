@@ -14,7 +14,6 @@ CREATE TABLE IF NOT EXISTS categories (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT timezone('utc'::text, now()) NOT NULL
 );
 
--- 2. Products
 CREATE TABLE IF NOT EXISTS products (
   id TEXT PRIMARY KEY,
   category_id TEXT REFERENCES categories(id) ON DELETE SET NULL,
@@ -23,6 +22,11 @@ CREATE TABLE IF NOT EXISTS products (
   long_description TEXT,
   tags TEXT[],
   features TEXT[],
+  size TEXT,
+  length TEXT,
+  colour_or_type TEXT,
+  thickness TEXT,
+  other_specs TEXT,
   specs JSONB,
   image TEXT,
   images TEXT[],

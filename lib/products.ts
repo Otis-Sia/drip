@@ -7,6 +7,11 @@ export interface Product {
   longDescription: string;
   tags: string[];
   features: string[];
+  size?: string;
+  length?: string;
+  colourOrType?: string;
+  thickness?: string;
+  otherSpecs?: string;
   specs: { label: string; value: string }[];
   useCases: string[];
   image?: string;
@@ -70,6 +75,11 @@ export async function getAllProducts(): Promise<Product[]> {
     ...p,
     category: p.category_id,
     longDescription: p.long_description,
+    colourOrType: p.colour_or_type,
+    otherSpecs: p.other_specs,
+    tags: p.tags || [],
+    features: p.features || [],
+    specs: p.specs || [],
     useCases: p.use_cases || [],
     images: p.images || []
   })) as Product[];
