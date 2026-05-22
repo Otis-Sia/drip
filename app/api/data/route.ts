@@ -114,7 +114,12 @@ export async function PUT(request: Request) {
           specs: p.specs,
           image: p.image || null,
           images: p.images || [],
-          use_cases: p.useCases || []
+          use_cases: p.useCases || [],
+          size: p.size,
+          length: p.length,
+          colour_or_type: p.colour_or_type,
+          thickness: p.thickness,
+          other_specs: p.other_specs
         };
         // Relaxed ID check for TEXT primary key
         if (p.id && typeof p.id === 'string' && p.id.length > 0) {
@@ -122,8 +127,56 @@ export async function PUT(request: Request) {
         }
         return item;
       });
+
+      // Auto-create any new categories before upserting products to satisfy foreign keys
+      const incomingCategoryIds = Array.from(new Set(products.map((p: any) => p.category_id).filter(Boolean)));
+      const { data: existingCats } = await supabase.from('categories').select('id');
+      const existingCatIds = (existingCats || []).map(c => c.id);
+      
+      const newCategoryIds = incomingCategoryIds.filter(id => !existingCatIds.includes(id as string));
+      if (newCategoryIds.length > 0) {
+        const newCategories = newCategoryIds.map(id => {
+          const strId = id as string;
+          // Capitalize the ID to use as title if they typed something like 'new-category'
+          const title = strId.charAt(0).toUpperCase() + strId.slice(1).replace(/[-_]/g, ' ');
+          return { id: strId, title };
+        });
+        await supabase.from('categories').insert(newCategories);
+      }
+
       const result = await supabase.from('products').upsert(products);
       error = result.error;
+      
+      // Delete products that were removed from the array
+      if (!error) {
+        const productIds = products.map((p: any) => p.id).filter(Boolean);
+        if (productIds.length > 0) {
+          const { data: dbItems } = await supabase.from('products').select('id');
+          if (dbItems) {
+            const idsToDelete = dbItems.map(d => d.id).filter(id => !productIds.includes(id));
+            if (idsToDelete.length > 0) {
+              await supabase.from('products').delete().in('id', idsToDelete);
+            }
+          }
+        } else {
+          // If the array is empty, delete all products
+          await supabase.from('products').delete().neq('id', 'DO_NOT_MATCH_ANYTHING');
+        }
+
+        // Clean up categories that have no products
+        const { data: allProducts } = await supabase.from('products').select('category_id');
+        const usedCategoryIds = Array.from(new Set((allProducts || []).map(p => p.category_id).filter(Boolean)));
+        
+        const { data: allCategories } = await supabase.from('categories').select('id');
+        const emptyCategories = (allCategories || [])
+          .map(c => c.id)
+          .filter(id => !usedCategoryIds.includes(id));
+          
+        if (emptyCategories.length > 0) {
+          await supabase.from('categories').delete().in('id', emptyCategories);
+        }
+      }
+      
       revalidatePath('/services-and-products');
       revalidatePath('/services-and-products/catalog');
     } else if (file === 'categories') {

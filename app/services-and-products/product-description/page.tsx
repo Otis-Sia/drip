@@ -118,34 +118,42 @@ function ProductContent() {
             <div className="animate-fadeInUp">
               <div className="badge mb-4">{categoryMap[product.category] || product.category}</div>
               <h1 className="text-3xl md:text-4xl font-black text-fg mb-5 tracking-tight">{product.name}</h1>
-              <p className="text-muted text-lg leading-relaxed">{product.longDescription}</p>
+              {product.longDescription && (
+                <p className="text-muted text-lg leading-relaxed whitespace-pre-line">{product.longDescription}</p>
+              )}
             </div>
 
             {/* Specs */}
-            <div className="animate-fadeInUp delay-100">
-              <h2 className="text-xl font-bold text-fg mb-5">Technical Specifications</h2>
-              <div className="card overflow-hidden !rounded-2xl">
-                {product.specs.map((spec, i) => (
-                  <div key={`${spec.label}-${i}`} className={`flex items-center px-6 py-4 ${i % 2 === 0 ? 'bg-surface-alt' : 'bg-surface'}`}>
-                    <span className="w-1/2 text-sm font-semibold text-fg/80">{spec.label}</span>
-                    <span className="w-1/2 text-sm text-muted">{spec.value}</span>
-                  </div>
-                ))}
+            {product.specs && product.specs.length > 0 && (
+              <div className="animate-fadeInUp delay-100">
+                <h2 className="text-xl font-bold text-fg mb-5">Technical Specifications</h2>
+                <div className="card overflow-hidden !rounded-2xl">
+                  {product.specs.map((spec: any, i) => (
+                    <div key={`${spec.name || spec.label}-${i}`} className={`flex items-center px-6 py-4 ${i % 2 === 0 ? 'bg-surface-alt' : 'bg-surface'}`}>
+                      <span className="w-1/2 text-sm font-semibold text-fg/80">{spec.name || spec.label}</span>
+                      <span className="w-1/2 text-sm text-muted">
+                        {Array.isArray(spec.options) ? spec.options.join(', ') : spec.value}
+                      </span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             {/* Use Cases */}
-            <div className="animate-fadeInUp delay-200">
-              <h2 className="text-xl font-bold text-fg mb-5">Ideal For</h2>
-              <div className="grid sm:grid-cols-2 gap-3">
-                {product.useCases.map((useCase, i) => (
-                  <div key={`${useCase}-${i}`} className="flex items-start gap-3 bg-surface rounded-xl p-4 border border-border">
-                    <CheckCircleIcon size={20} className="text-primary" />
-                    <span className="text-muted text-sm">{useCase}</span>
-                  </div>
-                ))}
+            {product.useCases && product.useCases.length > 0 && (
+              <div className="animate-fadeInUp delay-200">
+                <h2 className="text-xl font-bold text-fg mb-5">Ideal For</h2>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {product.useCases.map((useCase, i) => (
+                    <div key={`${useCase}-${i}`} className="flex items-start gap-3 bg-surface rounded-xl p-4 border border-border">
+                      <CheckCircleIcon size={20} className="text-primary" />
+                      <span className="text-muted text-sm">{useCase}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
           {/* CTA Sidebar */}
@@ -160,14 +168,16 @@ function ProductContent() {
                 Request a Quote
               </Link>
               
-              <div className="mt-7 pt-7 border-t border-gray-100">
-                <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-3">Product Tags</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {product.tags.map((tag, i) => (
-                    <span key={`${tag}-${i}`} className="badge-tag">{tag}</span>
-                  ))}
+              {product.tags && product.tags.length > 0 && (
+                <div className="mt-7 pt-7 border-t border-gray-100">
+                  <p className="text-xs text-gray-400 font-medium uppercase tracking-wider mb-3">Product Tags</p>
+                  <div className="flex flex-wrap gap-1.5">
+                    {product.tags.map((tag, i) => (
+                      <span key={`${tag}-${i}`} className="badge-tag">{tag}</span>
+                    ))}
+                  </div>
                 </div>
-              </div>
+              )}
             </div>
           </div>
         </div>

@@ -235,7 +235,7 @@ export default function AdminPage() {
 
           {/* Editor Area */}
           <div className="flex-1 min-w-0">
-            <div className="bg-surface rounded-2xl shadow-sm border border-border flex flex-col min-h-[700px]">
+            <div className="bg-surface rounded-2xl shadow-sm border border-border flex flex-col h-[calc(100vh-8rem)] min-h-[600px]">
               
               {/* Header */}
               <div className="p-6 border-b border-surface-alt flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -393,6 +393,8 @@ function GuiEditor({ data, onChange, categories, fileId }: { data: any, onChange
 
 function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: { items: any[], onChange: (newItems: any[]) => void, categories?: any[], fileId?: string, embedded?: boolean }) {
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [activeCategory, setActiveCategory] = useState<string>('All');
+  const [searchQuery, setSearchQuery] = useState('');
   const currentItem = items[selectedIndex];
 
   const updateField = (field: string, value: any) => {
@@ -402,12 +404,48 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
   };
 
   const addItem = () => {
-    const newItem = items.length > 0 ? { ...items[0] } : {};
-    // Clear fields
-    Object.keys(newItem).forEach(key => {
-      if (typeof newItem[key] === 'string') newItem[key] = '';
-      if (Array.isArray(newItem[key])) newItem[key] = [];
-    });
+    let newItem: any = {};
+    if (items.length > 0) {
+      newItem = { ...items[0] };
+      // Clear fields
+      Object.keys(newItem).forEach(key => {
+        if (typeof newItem[key] === 'string') newItem[key] = '';
+        if (Array.isArray(newItem[key])) newItem[key] = [];
+      });
+    } else {
+      // Provide default fields based on fileId if items is empty
+      if (fileId === 'products') {
+        newItem = {
+          category: '',
+          name: '',
+          description: '',
+          longDescription: '',
+          tags: [],
+          features: [],
+          specs: [],
+          image: '',
+          images: [],
+          useCases: [],
+          size: '',
+          length: '',
+          colour_or_type: '',
+          thickness: '',
+          other_specs: ''
+        };
+      } else if (fileId === 'categories') {
+        newItem = { title: '', description: '', image: '' };
+      } else if (fileId === 'services') {
+        newItem = { title: '', tagline: '', problem: '', approach: '', features: [], outcomes: [], image: '', icon: '' };
+      } else if (fileId === 'blog') {
+        newItem = { title: '', topic: '', excerpt: '', content: '', image: '', author: '', published_at: '' };
+      } else if (fileId === 'teamMembers') {
+        newItem = { name: '', role: '', department: '', bio: '', image: '' };
+      } else if (fileId === 'gallery') {
+        newItem = { title: '', url: '', type: 'image' };
+      } else {
+        newItem = { name: '' };
+      }
+    }
     // Always ensure an ID is self-generated
     newItem.id = `new-item-${Date.now()}`;
     onChange([...items, newItem]);
@@ -431,27 +469,131 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" /></svg>
           </button>
         </div>
+
+        {/* Search Bar */}
+        <div className="p-2 border-b border-border bg-surface">
+          <div className="relative">
+            <svg className="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+            </svg>
+            <input 
+              type="text" 
+              placeholder="Search..." 
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full pl-9 pr-3 py-2 bg-surface-alt border border-border rounded-lg text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+            />
+          </div>
+        </div>
+
+        {fileId === 'products' && (
+          <div className="flex overflow-x-auto border-b border-surface-alt bg-surface scrollbar-hide">
+            <button
+              onClick={() => setActiveCategory('All')}
+              className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
+                activeCategory === 'All' ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-fg'
+              }`}
+            >
+              All
+            </button>
+            {(() => {
+              const uniqueCats = Array.from(new Set(items.map(item => item.category || 'Uncategorized')));
+              return uniqueCats.map(catId => {
+                const catName = categories?.find(c => c.id === catId)?.title || catId;
+                return (
+                  <button
+                    key={catId}
+                    onClick={() => setActiveCategory(catId)}
+                    className={`px-3 py-2 text-[10px] font-bold uppercase tracking-wider whitespace-nowrap border-b-2 transition-colors ${
+                      activeCategory === catId ? 'border-primary text-primary' : 'border-transparent text-muted hover:text-fg'
+                    }`}
+                  >
+                    {catName}
+                  </button>
+                );
+              });
+            })()}
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto p-2 space-y-1">
-          {items.map((item, idx) => (
-            <div key={idx} className="group relative">
-              <button
-                onClick={() => setSelectedIndex(idx)}
-                className={`w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition-all truncate pr-10 ${
-                  selectedIndex === idx ? 'bg-surface text-primary shadow-sm ring-1 ring-border' : 'text-muted hover:bg-surface/50'
-                }`}
-              >
-                {item.name || item.title || item.label || `Item ${idx + 1}`}
-              </button>
-              {items.length > 1 && (
-                <button 
-                  onClick={() => removeItem(idx)}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+          {(() => {
+            if (fileId === 'products') {
+              const groups: Record<string, {item: any, originalIndex: number}[]> = {};
+              items.forEach((item, idx) => {
+                const cat = item.category || 'Uncategorized';
+                if (!groups[cat]) groups[cat] = [];
+                groups[cat].push({ item, originalIndex: idx });
+              });
+
+              return Object.entries(groups)
+                .filter(([catId]) => activeCategory === 'All' || activeCategory === catId)
+                .map(([catId, groupItems]) => {
+                const catName = categories?.find(c => c.id === catId)?.title || catId;
+                
+                return (
+                  <div key={catId} className="mb-4">
+                    {activeCategory === 'All' && (
+                      <h4 className="px-2 py-1 text-[10px] font-black text-gray-400 uppercase tracking-widest">{catName}</h4>
+                    )}
+                    <div className="space-y-1 mt-1">
+                      {groupItems.map(({ item, originalIndex: idx }) => {
+                        const searchableText = (item.name || item.title || item.label || '').toLowerCase();
+                        if (searchQuery && !searchableText.includes(searchQuery.toLowerCase())) return null;
+
+                        return (
+                        <div key={idx} className="group relative">
+                          <button
+                            onClick={() => setSelectedIndex(idx)}
+                            className={`w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition-all truncate pr-10 ${
+                              selectedIndex === idx ? 'bg-surface text-primary shadow-sm ring-1 ring-border' : 'text-muted hover:bg-surface/50'
+                            }`}
+                          >
+                            {item.name || item.title || item.label || `Item ${idx + 1}`}
+                          </button>
+                          {items.length > 1 && (
+                            <button 
+                              onClick={() => removeItem(idx)}
+                              className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                            >
+                              <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                            </button>
+                          )}
+                        </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                );
+              });
+            }
+
+            return items.map((item, idx) => {
+              const searchableText = (item.name || item.title || item.label || '').toLowerCase();
+              if (searchQuery && !searchableText.includes(searchQuery.toLowerCase())) return null;
+
+              return (
+              <div key={idx} className="group relative">
+                <button
+                  onClick={() => setSelectedIndex(idx)}
+                  className={`w-full text-left px-4 py-3 rounded-xl text-xs font-medium transition-all truncate pr-10 ${
+                    selectedIndex === idx ? 'bg-surface text-primary shadow-sm ring-1 ring-border' : 'text-muted hover:bg-surface/50'
+                  }`}
                 >
-                  <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  {item.name || item.title || item.label || `Item ${idx + 1}`}
                 </button>
-              )}
-            </div>
-          ))}
+                {items.length > 1 && (
+                  <button 
+                    onClick={() => removeItem(idx)}
+                    className="absolute right-2 top-1/2 -translate-y-1/2 p-1.5 text-gray-300 hover:text-red-500 opacity-0 group-hover:opacity-100 transition-all"
+                  >
+                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" /></svg>
+                  </button>
+                )}
+              </div>
+              );
+            });
+          })()}
         </div>
       </div>
 
@@ -461,9 +603,10 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
           <div className="max-w-2xl space-y-6">
             {Object.entries({
               ...currentItem,
-              ...(fileId === 'blog' && !('topic' in currentItem) ? { topic: currentItem.topic || '' } : {})
+              ...(fileId === 'blog' && !('topic' in currentItem) ? { topic: currentItem.topic || '' } : {}),
+              ...(fileId === 'products' ? { specs: Array.isArray(currentItem.specs) ? currentItem.specs : [] } : {})
             }).map(([key, value]) => {
-              if (key === 'id' || key === 'width' || key === 'height' || key === 'created_at' || key === 'createdAt') return null;
+              if (key === 'id') return null;
               
               const isImageField = typeof value === 'string' && (
                 key.toLowerCase().includes('image') ||
@@ -479,6 +622,101 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                 <label className="text-xs font-bold text-gray-400 uppercase ml-1">{key.replace(/([A-Z])/g, ' $1')}</label>
                 
                 {Array.isArray(value) ? (
+                  key === 'specs' && fileId === 'products' ? (
+                    <div className="space-y-4">
+                      {value.map((spec: any, sIdx: number) => {
+                        // Handle case where old data might be just strings
+                        const isObject = typeof spec === 'object' && spec !== null;
+                        const name = isObject ? spec.name || '' : spec;
+                        const options = isObject && Array.isArray(spec.options) ? spec.options : [];
+                        
+                        return (
+                          <div key={sIdx} className="p-4 border border-border rounded-xl space-y-3 bg-surface-alt/50">
+                            <div className="flex items-center gap-2">
+                              <input
+                                type="text"
+                                list="spec-names-list"
+                                placeholder="Property Name (e.g. Size, Length)"
+                                value={name}
+                                onChange={(e) => {
+                                  const newSpecs = [...value];
+                                  newSpecs[sIdx] = { name: e.target.value, options };
+                                  updateField(key, newSpecs);
+                                }}
+                                className="flex-1 px-3 py-2 bg-surface border border-border rounded-lg text-sm font-bold focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                              />
+                              <datalist id="spec-names-list">
+                                <option value="Size" />
+                                <option value="Length" />
+                                <option value="Width" />
+                                <option value="Height" />
+                                <option value="Colour or Type" />
+                                <option value="Thickness" />
+                                <option value="Other Specs" />
+                              </datalist>
+                              <button 
+                                onClick={() => {
+                                  const newSpecs = [...value];
+                                  newSpecs.splice(sIdx, 1);
+                                  updateField(key, newSpecs);
+                                }} 
+                                className="p-2 text-red-500 hover:text-red-600 bg-red-50 rounded-lg transition-colors"
+                              >
+                                <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                              </button>
+                            </div>
+                            <div className="space-y-2 pl-3 border-l-2 border-primary/20">
+                              {options.map((opt: string, oIdx: number) => (
+                                <div key={oIdx} className="flex items-center gap-2">
+                                  <input
+                                    type="text"
+                                    placeholder="Option value (e.g. Small, 2m)"
+                                    value={opt}
+                                    onChange={(e) => {
+                                      const newSpecs = [...value];
+                                      const newOptions = [...options];
+                                      newOptions[oIdx] = e.target.value;
+                                      newSpecs[sIdx] = { name, options: newOptions };
+                                      updateField(key, newSpecs);
+                                    }}
+                                    className="flex-1 px-3 py-1.5 bg-surface border border-border rounded-lg text-xs focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                                  />
+                                  <button 
+                                    onClick={() => {
+                                      const newSpecs = [...value];
+                                      const newOptions = [...options];
+                                      newOptions.splice(oIdx, 1);
+                                      newSpecs[sIdx] = { name, options: newOptions };
+                                      updateField(key, newSpecs);
+                                    }} 
+                                    className="p-1.5 text-gray-400 hover:text-red-500 transition-colors"
+                                  >
+                                    <svg className="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
+                                  </button>
+                                </div>
+                              ))}
+                              <button 
+                                onClick={() => {
+                                  const newSpecs = [...value];
+                                  newSpecs[sIdx] = { name, options: [...options, ''] };
+                                  updateField(key, newSpecs);
+                                }} 
+                                className="text-[10px] font-bold text-primary hover:underline uppercase tracking-wider"
+                              >
+                                + Add Option
+                              </button>
+                            </div>
+                          </div>
+                        );
+                      })}
+                      <button 
+                        onClick={() => updateField(key, [...value, { name: '', options: [''] }])}
+                        className="w-full py-3 border border-dashed border-primary/30 rounded-xl text-xs font-bold text-primary hover:bg-primary/5 transition-colors uppercase tracking-wider"
+                      >
+                        + Add New Property (Size, Length, etc.)
+                      </button>
+                    </div>
+                  ) : (
                   <div className="space-y-2">
                     {value.map((val, vIdx) => {
                       const isArrImageField = typeof val === 'string' && (
@@ -518,11 +756,12 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                       + Add Item
                     </button>
                   </div>
+                  )
                 ) : key === 'category' && fileId === 'products' ? (
                   <>
                     <input
                       list="categories-list"
-                      value={value as string}
+                      value={value as string || ''}
                       onChange={(e) => updateField(key, e.target.value)}
                       placeholder="Select or type a category"
                       className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"

@@ -71,16 +71,29 @@ export async function getAllProducts(): Promise<Product[]> {
     return !duplicate;
   });
 
-  return uniqueData.map(p => ({
-    ...p,
-    category: p.category_id,
-    longDescription: p.long_description,
-    colourOrType: p.colour_or_type,
-    otherSpecs: p.other_specs,
-    tags: p.tags || [],
-    features: p.features || [],
-    specs: p.specs || [],
-    useCases: p.use_cases || [],
-    images: p.images || []
-  })) as Product[];
+  return uniqueData.map(p => {
+    let combinedSpecs = (Array.isArray(p.specs) ? p.specs : []).map((s: any) => {
+      if (typeof s === 'string') return { label: 'Specification', value: s };
+      return s;
+    });
+    
+    if (p.size) combinedSpecs.push({ label: 'Size', value: p.size });
+    if (p.length) combinedSpecs.push({ label: 'Length', value: p.length });
+    if (p.colour_or_type) combinedSpecs.push({ label: 'Colour/Type', value: p.colour_or_type });
+    if (p.thickness) combinedSpecs.push({ label: 'Thickness', value: p.thickness });
+    if (p.other_specs) combinedSpecs.push({ label: 'Other Specs', value: p.other_specs });
+
+    return {
+      ...p,
+      category: p.category_id,
+      longDescription: p.long_description || p.description || '',
+      colourOrType: p.colour_or_type,
+      otherSpecs: p.other_specs,
+      tags: Array.isArray(p.tags) ? p.tags : [],
+      features: Array.isArray(p.features) ? p.features : [],
+      specs: combinedSpecs,
+      useCases: Array.isArray(p.use_cases) ? p.use_cases : [],
+      images: Array.isArray(p.images) ? p.images : []
+    };
+  }) as Product[];
 }
