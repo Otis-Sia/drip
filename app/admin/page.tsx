@@ -608,13 +608,13 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
             }).map(([key, value]) => {
               if (key === 'id') return null;
               
-              const isImageField = typeof value === 'string' && (
+              const isImageField = (typeof value === 'string' || value == null) && (
                 key.toLowerCase().includes('image') ||
                 key.toLowerCase().includes('photo') ||
                 key.toLowerCase().includes('avatar') ||
                 key.toLowerCase() === 'logo' ||
                 (key === 'url' && currentItem?.type === 'image') ||
-                /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(value)
+                (typeof value === 'string' && /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(value))
               );
 
               return (
@@ -719,12 +719,12 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                   ) : (
                   <div className="space-y-2">
                     {value.map((val, vIdx) => {
-                      const isArrImageField = typeof val === 'string' && (
+                      const isArrImageField = (typeof val === 'string' || val == null) && (
                         key.toLowerCase().includes('image') ||
                         key.toLowerCase().includes('photo') ||
                         key.toLowerCase().includes('avatar') ||
                         key.toLowerCase() === 'gallery' ||
-                        /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(val)
+                        (typeof val === 'string' && /\.(jpeg|jpg|gif|png|webp|svg)(\?.*)?$/i.test(val))
                       );
                       return (
                       <div key={vIdx} className="space-y-2">
@@ -739,9 +739,16 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                           }}
                           className="flex-1 px-4 py-2.5 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
                         />
+                        {isArrImageField && (
+                          <ImageUploadButton onUpload={(url) => {
+                            const newArr = [...value];
+                            newArr[vIdx] = url;
+                            updateField(key, newArr);
+                          }} />
+                        )}
                         <button 
                             onClick={() => updateField(key, value.filter((_, i) => i !== vIdx))}
-                            className="p-2.5 text-gray-300 hover:text-red-500 transition-colors"
+                            className="p-2.5 text-gray-300 hover:text-red-500 transition-colors bg-surface-alt border border-border rounded-xl flex items-center justify-center shrink-0"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
                           </button>
@@ -818,15 +825,20 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                     className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none resize-y"
                   />
                 ) : (
-                  <>
-                    <input
-                      type={typeof value === 'number' ? 'number' : 'text'}
-                      value={(value as string) ?? ''}
-                      onChange={(e) => updateField(key, e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
-                    />
+                  <div className="space-y-2">
+                    <div className="flex gap-2">
+                      <input
+                        type={typeof value === 'number' ? 'number' : 'text'}
+                        value={(value as string) ?? ''}
+                        onChange={(e) => updateField(key, e.target.value)}
+                        className="flex-1 px-4 py-3 bg-surface-alt border border-border rounded-xl text-sm focus:ring-2 focus:ring-primary/20 focus:border-primary focus:outline-none"
+                      />
+                      {isImageField && (
+                        <ImageUploadButton onUpload={(url) => updateField(key, url)} />
+                      )}
+                    </div>
                     {isImageField && value && <ImagePreview src={value as string} />}
-                  </>
+                  </div>
                 )}
               </div>
             ); })}
@@ -900,6 +912,73 @@ function ImagePreview({ src }: { src: string }) {
           <span className="text-[10px] font-bold text-red-400 tracking-wider">CANNOT LOAD IMAGE</span>
         )}
       </div>
+    </div>
+  );
+}
+
+function ImageUploadButton({ onUpload }: { onUpload: (url: string) => void }) {
+  const [uploading, setUploading] = useState(false);
+
+  async function uploadImage(event: React.ChangeEvent<HTMLInputElement>) {
+    try {
+      setUploading(true);
+      if (!event.target.files || event.target.files.length === 0) {
+        return;
+      }
+
+      const file = event.target.files[0];
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Date.now()}-${Math.random().toString(36).substring(2, 9)}.${fileExt}`;
+      const filePath = `uploads/${fileName}`;
+
+      const { error: uploadError } = await supabase.storage
+        .from('afrodrip_assets')
+        .upload(filePath, file);
+
+      if (uploadError) {
+        throw uploadError;
+      }
+
+      const { data } = supabase.storage
+        .from('afrodrip_assets')
+        .getPublicUrl(filePath);
+
+      onUpload(data.publicUrl);
+    } catch (error: any) {
+      alert('Error uploading image: ' + error.message);
+    } finally {
+      setUploading(false);
+      event.target.value = '';
+    }
+  }
+
+  return (
+    <div className="relative inline-flex items-center shrink-0 h-full">
+      <input
+        type="file"
+        accept="image/*"
+        onChange={uploadImage}
+        disabled={uploading}
+        className="absolute inset-0 w-full h-full opacity-0 cursor-pointer disabled:cursor-not-allowed z-10"
+        title="Upload Image"
+      />
+      <button
+        type="button"
+        disabled={uploading}
+        className="px-4 h-full bg-surface-alt border border-border rounded-xl text-sm font-bold text-primary hover:bg-primary/10 transition-colors disabled:opacity-50 whitespace-nowrap flex items-center justify-center gap-2"
+      >
+        {uploading ? (
+          <>
+            <div className="animate-spin h-4 w-4 border-2 border-primary/20 border-t-primary rounded-full" />
+            Uploading...
+          </>
+        ) : (
+          <>
+            <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" /></svg>
+            Upload
+          </>
+        )}
+      </button>
     </div>
   );
 }

@@ -74,6 +74,7 @@ export const metadata: Metadata = {
 };
 
 import { getSocials, getContactInfo } from '@/lib/company';
+import FloatingActionButtons from '@/components/FloatingActionButtons';
 
 export default async function RootLayout({
   children,
@@ -94,6 +95,7 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer socials={socials} contactInfo={contactInfo} />
+          <FloatingActionButtons />
         </CartProvider>
       </body>
     </html>
