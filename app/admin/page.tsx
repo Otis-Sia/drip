@@ -454,6 +454,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
 
   const removeItem = (index: number) => {
     if (items.length <= 1) return;
+    if (!window.confirm("Are you sure you want to delete this item?")) return;
     const newItems = items.filter((_, i) => i !== index);
     onChange(newItems);
     setSelectedIndex(Math.max(0, index - 1));
@@ -656,6 +657,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                               </datalist>
                               <button 
                                 onClick={() => {
+                                  if (!window.confirm("Are you sure you want to delete this item?")) return;
                                   const newSpecs = [...value];
                                   newSpecs.splice(sIdx, 1);
                                   updateField(key, newSpecs);
@@ -683,6 +685,7 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                                   />
                                   <button 
                                     onClick={() => {
+                                      if (!window.confirm("Are you sure you want to delete this item?")) return;
                                       const newSpecs = [...value];
                                       const newOptions = [...options];
                                       newOptions.splice(oIdx, 1);
@@ -747,7 +750,10 @@ function ArrayEditor({ items, onChange, categories, fileId, embedded = false }: 
                           }} />
                         )}
                         <button 
-                            onClick={() => updateField(key, value.filter((_, i) => i !== vIdx))}
+                            onClick={() => {
+                              if (!window.confirm("Are you sure you want to delete this item?")) return;
+                              updateField(key, value.filter((_: any, i: number) => i !== vIdx));
+                            }}
                             className="p-2.5 text-gray-300 hover:text-red-500 transition-colors bg-surface-alt border border-border rounded-xl flex items-center justify-center shrink-0"
                           >
                             <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" /></svg>
