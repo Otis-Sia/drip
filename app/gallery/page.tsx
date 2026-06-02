@@ -173,6 +173,8 @@ export default function GalleryPage() {
         )}
       </div>
 
+
+
       {/* Lightbox Modal */}
       {activeItem && lightboxIndex !== null && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-gray-950/95 backdrop-blur-md transition-all duration-300 animate-fadeIn">
